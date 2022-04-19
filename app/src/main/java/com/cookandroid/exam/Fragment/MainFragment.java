@@ -2,6 +2,7 @@ package com.cookandroid.exam.Fragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.cookandroid.exam.Activity.ScheduleCheckAcitivity;
 import com.cookandroid.exam.Adapter.CalendarAdapter;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.Keys;
@@ -38,6 +41,18 @@ public class MainFragment extends Fragment {
         initView(rootView);
         initSet();
         setRecycler();
+
+        Button button = (Button) rootView.findViewById(R.id.button); //fragment에서 findViewByid는 view.을 이용해서 사용
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScheduleCheckAcitivity.class); //fragment라서 activity intent와는 다른 방식
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
