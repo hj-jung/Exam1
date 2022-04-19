@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11.5"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/MYSONGe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/app_real"
+            android:textColor="#FFE70D"
+            android:textSize="48dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="160dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/song1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.5"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_message2"
+            android:textColor="#000000"
+            android:textSize="21dp" />
+
+        <EditText
+            android:id="@+id/chName"
+            android:layout_width="245dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:minHeight="40dp"
+            android:drawableRight="@drawable/ic_baseline_person_24"/>
+
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="245dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/edit_message1"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:drawableRight="@drawable/ic_baseline_email_24"/>
+
+        <android.widget.Button
+            android:id="@+id/start"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_start"
+            android:text="Start"
+            android:textSize="16sp"
+            android:textStyle="normal|bold"/>
+    </LinearLayout>
+
+</LinearLayout>

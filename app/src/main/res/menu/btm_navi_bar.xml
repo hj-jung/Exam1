@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_main"
+        android:icon="@drawable/icon_main"
+        android:title="Main"/>
+
+    <item
+        android:id="@+id/tab_daily"
+        android:icon="@drawable/icon_daily"
+        android:title="Daily"/>
+
+    <item
+        android:id="@+id/tab_routine"
+        android:icon="@drawable/icon_routine"
+        android:title="Routine"/>
+
+    <item
+        android:id="@+id/tab_mypage"
+        android:icon="@drawable/ic_baseline_perm_identity_24"
+        android:title="My Page"/>
+</menu>
