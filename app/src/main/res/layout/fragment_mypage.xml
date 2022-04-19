@@ -19,6 +19,7 @@
             android:layout_weight="4"
             android:layout_margin="10dp"
             android:id="@+id/mypagetitle"
+            android:textColor="@color/black"
             android:text="My Page"
             android:textStyle="bold"
             android:textSize="30sp" />
@@ -56,14 +57,16 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/round_border_shadow">
+        android:background="@drawable/round_border_shadow_mypage">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:text="일정을 잘 지키자"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
     </LinearLayout>

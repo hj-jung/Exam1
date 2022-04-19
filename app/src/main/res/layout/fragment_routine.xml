@@ -21,6 +21,7 @@
             android:id="@+id/routinetitle"
             android:text="For your \nsuccessful day"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="25sp"/>
 
         <ImageButton
@@ -63,6 +64,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
+            android:textColor="@color/black"
             android:text="@string/routine_achivement_rate"
             android:textSize="20sp"/>
 
