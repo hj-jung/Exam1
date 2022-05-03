@@ -1,11 +1,13 @@
 package com.cookandroid.exam.Activity;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -40,6 +42,8 @@ public class ScheduleUpdateActivity extends FragmentActivity {
 
         TextView eventStartTime = findViewById(R.id.event_start_time);
         TextView eventEndTime = findViewById(R.id.event_end_time);
+        TextView eventStartDay = findViewById(R.id.event_start_day);
+        TextView eventEndDay = findViewById(R.id.event_end_day);
 
         //현재 시간 정보 불러오기
         long now_Time = System.currentTimeMillis();
@@ -51,8 +55,14 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
 
+        String strCurYear = curYearFormat.format(date);
+        String strCurMonth = curMonthFormat.format(date);
+        String strCurDay = curDayFormat.format(date);
         String strCurHour = CurHourFormat.format(date);
         String strCurMinute = CurMinuteFormat.format(date);
+
+        eventStartDay.setText(strCurYear + "." + strCurMonth + "." + strCurDay + ".");
+        eventEndDay.setText(strCurYear + "." + strCurMonth + "." + strCurDay + ".");
 
         int curHour = Integer.parseInt(strCurHour);
         int startHour, endHour;
@@ -88,6 +98,35 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                 eventEndTime.setText(endHour + ":" + curMinute + " " + curAmPm);
             }
         }
+
+        //datepicker StartDay
+        eventStartDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, R.style.MyDatePickerStyle, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        eventStartDay.setText(year + "." + monthOfYear + "." + dayOfMonth);
+                    }
+                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth), Integer.parseInt(strCurDay));
+                dialog.show();
+            }
+        });
+
+        //datepicker endDay
+        eventEndDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        eventEndDay.setText(year + "." + monthOfYear + "." + dayOfMonth);
+                    }
+                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth), Integer.parseInt(strCurDay));
+                dialog.show();
+            }
+        });
+
 
         //timepicker startTime
         eventStartTime.setOnClickListener(new View.OnClickListener() {

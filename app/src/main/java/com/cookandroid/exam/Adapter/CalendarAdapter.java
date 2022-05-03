@@ -16,9 +16,7 @@ import com.cookandroid.exam.Model.EmptyDay;
 import com.cookandroid.exam.Model.RedDay;
 import com.cookandroid.exam.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter {
@@ -33,7 +31,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
     private List<Object> mCalendarList;
 
     public CalendarAdapter(List<Object> calendarList){
-
         mCalendarList = calendarList;
     }
 
@@ -47,7 +44,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         Object item = mCalendarList.get(position);
 
-        //GregorianCalendar daycheck = new GregorianCalendar(year, month, item.getDay());
         if(item instanceof String){
             sun++;
             return EMPTY_TYPE;
@@ -60,7 +56,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                 Log.d(TAG, Integer.toString(sun));
                 return DAY_RED_TYPE;
             }
-
             return DAY_TYPE;
         }
     }
