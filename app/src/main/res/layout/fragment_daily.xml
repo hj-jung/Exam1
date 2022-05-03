@@ -17,7 +17,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/weekday"
+            android:id="@+id/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
@@ -26,32 +26,6 @@
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apr "
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="16, "
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2022"
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
 
         <ImageButton
             android:id="@+id/daily_plus"
