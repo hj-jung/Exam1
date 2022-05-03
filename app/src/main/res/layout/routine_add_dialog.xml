@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/routine_add_dialog"
@@ -67,82 +67,87 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:layout_marginLeft="20dp"
             android:textSize="15sp"
             android:text="Repeat" />
 
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="50dp"
             android:layout_margin="20dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_sun"
-                android:background="@drawable/left_round_border"
-                android:text="S"
+                android:background="@drawable/left_onoff_color"
+                android:textOn="S"
+                android:textOff="S"
                 android:textColor="#FF0000" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_mon"
-                android:background="@drawable/button_stroke"
-                android:text="M" />
+                android:background="@drawable/onoff_color"
+                android:textOn="M"
+                android:textOff="M" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_tue"
-                android:background="@drawable/button_stroke"
-                android:text="T" />
+                android:background="@drawable/onoff_color"
+                android:textOn="T"
+                android:textOff="T" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_wed"
-                android:background="@drawable/button_stroke"
-                android:text="W" />
+                android:background="@drawable/onoff_color"
+                android:textOn="W"
+                android:textOff="W" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_thu"
-                android:background="@drawable/button_stroke"
-                android:text="T" />
+                android:background="@drawable/onoff_color"
+                android:textOn="T"
+                android:textOff="T" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_Fri"
-                android:background="@drawable/button_stroke"
-                android:text="F" />
+                android:background="@drawable/onoff_color"
+                android:textOn="F"
+                android:textOff="F" />
 
-            <Button
+            <ToggleButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/repeat_sat"
-                android:background="@drawable/right_round_border"
-                android:text="S" />
+                android:background="@drawable/right_onoff_color"
+                android:textOn="S"
+                android:textOff="S" />
 
         </LinearLayout>
 
@@ -163,24 +168,28 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center_vertical"
             android:text="Alert Time"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1.5"
+            android:layout_gravity="center_vertical">
 
-            <TimePicker
+            <TextView
+                android:id="@+id/routine_time"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:timePickerMode="spinner"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                android:theme="@style/CustomTimePicker"/>
-
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:background="@drawable/round_border_yellow_box"
+                android:text="Time"
+                android:textSize="25sp"
+                android:clickable="true" />
         </LinearLayout>
 
 

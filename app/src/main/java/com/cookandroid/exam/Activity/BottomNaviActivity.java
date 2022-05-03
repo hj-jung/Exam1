@@ -1,10 +1,15 @@
 package com.cookandroid.exam.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.os.IResultReceiver;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -46,4 +51,30 @@ public class BottomNaviActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.btmnavi_frame, new MypageFragment(), "tag");
+        Log.d("tag", "===requestCode===" + requestCode);
+        if (requestCode == 2) {
+            if (data != null) {
+
+            }
+        }
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("editMypage", "onActivityResult()");
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.mypageFragment);
+        if (fragment != null) {
+            (fragment).onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }
+

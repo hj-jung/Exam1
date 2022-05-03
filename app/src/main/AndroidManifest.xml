@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.cookandroid.exam">
 
     <application
@@ -11,7 +12,7 @@
         android:theme="@style/Theme.Exam">
         <activity
             android:name=".Activity.SetCharacterActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +22,16 @@
         <activity android:name=".Activity.BottomNaviActivity" />
         <activity
             android:name=".Activity.ScheduleCheckAcitivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
             android:name=".Activity.ScheduleUpdateActivity"
-            android:theme="@style/DialogTheme.Exam"/>
+            android:theme="@style/DialogTheme.Exam" />
         <activity
             android:name=".Activity.AddRoutineActivity"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Activity.EditMypageActivity"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
-
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.cookandroid.exam.Activity;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,6 +14,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import androidx.annotation.Nullable;
 
@@ -56,5 +62,68 @@ public class AddRoutineActivity extends Activity {
             }
         });
 
+        TextView routineTime = findViewById(R.id.routine_time);
+
+        //현재 시간 정보 불러오기
+        long now_Time = System.currentTimeMillis();
+        Date date = new Date(now_Time);
+
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+
+        String strCurHour = CurHourFormat.format(date);
+        String strCurMinute = CurMinuteFormat.format(date);
+
+        int curHour = Integer.parseInt(strCurHour);
+        int curMinute = Integer.parseInt(strCurMinute);
+
+        if (curHour < 12) {
+            routineTime.setText(curHour + ":" + curMinute + " AM");
+        }
+        else {
+            int curHour2 = curHour - 12;
+            routineTime.setText(curHour2 + ":" + curMinute + " PM");
+        }
+
+        //timepicker
+        int finalCurHour = curHour;
+        routineTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog dialog = new TimePickerDialog(AddRoutineActivity.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        routineTime.setTextSize(20);
+                        int routineHour = hourOfDay;
+                        String AM_PM;
+                        if(hourOfDay < 12) {
+                            AM_PM = "AM";
+                        } else {
+                            AM_PM = "PM";
+                            routineHour = hourOfDay - 12;
+                        }
+                        if (routineHour < 10) {
+                            if (minute < 10) {
+                                routineTime.setText("0" + routineHour + ":" + "0" + minute + " " + AM_PM);
+                            }
+                            else {
+                                routineTime.setText("0" + routineHour + ":" + minute + " " + AM_PM);
+                            }
+                        }
+                        else {
+                            if (minute < 10) {
+                                routineTime.setText(routineHour + ":" + "0" + minute + " " + AM_PM);
+                            }
+                            else {
+                                routineTime.setText(routineHour + ":" + minute + " " + AM_PM);
+                            }
+                        }
+                    }
+                }, curHour, curMinute, false);
+                dialog.setTitle("Alert Time");
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog.show();
+            }
+        });
     }
 }

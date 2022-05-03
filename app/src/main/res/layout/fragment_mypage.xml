@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.MypageFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/mypageFragment" >
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -40,14 +41,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        android:layout_margin="10dp">
+        android:layout_weight="5"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/song1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Mypage test"
-            android:textSize="25sp" />
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="김눈송"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:id="@+id/mypageName" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Lv.1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -64,10 +92,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:text="일정을 잘 지키자"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp"
+            android:id="@+id/mypageMessage" />
 
     </LinearLayout>
 
