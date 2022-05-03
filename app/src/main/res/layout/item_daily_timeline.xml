@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:gravity="center_horizontal">
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/time"
@@ -21,12 +21,5 @@
         android:textSize="10dp"
         android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/line"
-        android:layout_width="285dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/stroke_top"
-        android:layout_marginLeft="5dp"/>
 
 </LinearLayout>

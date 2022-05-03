@@ -38,13 +38,11 @@ public class TimelineAdapter extends BaseAdapter {
 
         TextView timeTextView = (TextView) convertView.findViewById(R.id.time);
         TextView apTextView = (TextView) convertView.findViewById(R.id.ampm);
-        TextView lineTextView = (TextView) convertView.findViewById(R.id.line);
 
         TimelineItem timelineItem = timelineItemList.get(position);
 
         timeTextView.setText(timelineItem.getTime());
         apTextView.setText(timelineItem.getAP());
-        lineTextView.setText(timelineItem.getLine());
 
         return convertView;
     }
@@ -59,12 +57,11 @@ public class TimelineAdapter extends BaseAdapter {
         return timelineItemList.get(i);
     }
 
-    public void addItem(String time, String ap, String line){
+    public void addItem(String time, String ap){
         TimelineItem item = new TimelineItem();
 
         item.setTime(time);
         item.setAP(ap);
-        item.setLine(line);
 
         timelineItemList.add(item);
     }

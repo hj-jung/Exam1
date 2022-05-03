@@ -38,8 +38,7 @@ public class MypageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Intent intent = new Intent(getActivity(), EditMypageActivity.class);
-                startActivityForResult(new Intent(getContext(), EditMypageActivity.class), 2);
-
+                getActivity().startActivityForResult(new Intent(getContext(), EditMypageActivity.class), 2);
             }
         });
 
@@ -47,8 +46,8 @@ public class MypageFragment extends Fragment {
             String name = getArguments().getString("name");
             String message = getArguments().getString("message");
             mypageName.setText(name);
+            mypageMessage.setTextSize(20);
             mypageMessage.setText(message);
-            Log.e("테스트", getArguments().getString("name"));
         }
 
         return view;

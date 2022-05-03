@@ -75,18 +75,36 @@ public class AddRoutineActivity extends Activity {
         String strCurMinute = CurMinuteFormat.format(date);
 
         int curHour = Integer.parseInt(strCurHour);
+        int curHour2;
         int curMinute = Integer.parseInt(strCurMinute);
+        String curAmPm;
 
         if (curHour < 12) {
-            routineTime.setText(curHour + ":" + curMinute + " AM");
+            curAmPm = "AM";
+            curHour2 = curHour;
         }
         else {
-            int curHour2 = curHour - 12;
-            routineTime.setText(curHour2 + ":" + curMinute + " PM");
+            curHour2 = curHour - 12;
+            curAmPm = "PM";
+        }
+        if (curHour2 < 10) {
+            if (curMinute < 10) {
+                routineTime.setText("0" + curHour2 + ":" + "0" + curMinute + " " + curAmPm);
+            }
+            else {
+                routineTime.setText("0" + curHour2 + ":" + curMinute + " " + curAmPm);
+            }
+        }
+        else {
+            if (curMinute < 10) {
+                routineTime.setText(curHour2 + ":" + "0" + curMinute + " " + curAmPm);
+            }
+            else {
+                routineTime.setText(curHour2 + ":" + curMinute + " " + curAmPm);
+            }
         }
 
         //timepicker
-        int finalCurHour = curHour;
         routineTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

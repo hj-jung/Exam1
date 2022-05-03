@@ -80,14 +80,6 @@ public class EditMypageActivity extends Activity {
                 returnIntent.putExtra("message", inputMessage);
                 setResult(Activity.RESULT_OK, returnIntent);
 
-                //Bundle bundle = new Bundle();
-                //bundle.putString("name", inputName);
-                //bundle.putString("message", inputMessage);
-
-                //MypageFragment mypageFragment = new MypageFragment();
-                //mypageFragment.setArguments(bundle);
-                //FragmentManager().beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
-
                 finish();
             }
         });

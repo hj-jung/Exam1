@@ -52,29 +52,25 @@ public class BottomNaviActivity extends AppCompatActivity {
         });
     }
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.btmnavi_frame, new MypageFragment(), "tag");
         Log.d("tag", "===requestCode===" + requestCode);
         if (requestCode == 2) {
             if (data != null) {
+                String name = data.getStringExtra("name");
+                String message = data.getStringExtra("message");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("message", message);
+
+                MypageFragment mypageFragment = new MypageFragment();
+                mypageFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
 
             }
         }
-    }*/
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("editMypage", "onActivityResult()");
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.mypageFragment);
-        if (fragment != null) {
-            (fragment).onActivityResult(requestCode, resultCode, data);
-        }
     }
-
 }
 
