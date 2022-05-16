@@ -1,5 +1,7 @@
 package com.cookandroid.exam.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.cookandroid.exam.Activity.ScheduleUpdateActivity;
+import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Model.CalendarHeader;
 import com.cookandroid.exam.Model.Day;
 import com.cookandroid.exam.Model.EmptyDay;
@@ -25,6 +29,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
     private final int DAY_RED_TYPE= 2;
     private final int HEADER_TYPE = 3;
     int sun = 0;
+    Context context;
 
     private static final String TAG = "CalenderAdpater";
 
@@ -49,6 +54,8 @@ public class CalendarAdapter extends RecyclerView.Adapter {
             return EMPTY_TYPE;
         }
         else if(item instanceof Long) return HEADER_TYPE;
+        else    return DAY_TYPE;
+        /*일요일 빨간날 표시
         else    {
             if((position - sun)%7==0)   {
                 int a = (position-sun) % 7;
@@ -57,7 +64,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                 return DAY_RED_TYPE;
             }
             return DAY_TYPE;
-        }
+        }*/
     }
 
     //ViewHolder 생성
@@ -77,10 +84,10 @@ public class CalendarAdapter extends RecyclerView.Adapter {
         }
         else {
             HeaderViewHolder viewHolder = new HeaderViewHolder(inflater.inflate(R.layout.item_header, parent, false));
-
             StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
             params.setFullSpan((true));
             viewHolder.itemView.setLayoutParams(params);
+            context = parent.getContext();
 
             return viewHolder;
         }
@@ -171,6 +178,20 @@ public class CalendarAdapter extends RecyclerView.Adapter {
         public DayViewHolder(@NonNull View itemView) {
             super(itemView);
             initView(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Log.d("위치확인",""+mCalendarList.get(pos).getClass().toString());
+                    Intent intent = new Intent(context, ScheduleUpdateActivity.class);
+                    String key = mCalendarList.get(pos).getClass().toString();
+                    if(pos != RecyclerView.NO_POSITION){
+                        intent.putExtra("key", key);
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
         }
         public void initView(View v){

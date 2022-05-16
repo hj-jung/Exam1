@@ -13,6 +13,8 @@ import com.cookandroid.exam.R;
 
 public class SetCharacterActivity extends AppCompatActivity {
     String name, intro;
+    Button btn_start;
+    EditText chName, message;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,15 +22,16 @@ public class SetCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setcharacter);
 
         //닉네임, 한줄소개입력
-        EditText chName=(EditText)findViewById(R.id.chName);
-        EditText message=(EditText)findViewById(R.id.message);
-        //닉네임, 한줄소개 DB로 보내기
+        chName=(EditText)findViewById(R.id.chName);
+        message=(EditText)findViewById(R.id.message);
+        btn_start=(Button)findViewById(R.id.start);
+
+        //닉네임, 한줄소개 값 얻어오기
         name=chName.getText().toString();
         intro=message.getText().toString();
 
-        //->메인페이지로 이동
-        Button start=(Button)findViewById(R.id.start);
-        start.setOnClickListener(new View.OnClickListener() {
+        //->메인페이지로 이동 && 닉네임과 한줄소개 DB로 보내기
+        btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BottomNaviActivity.class);

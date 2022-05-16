@@ -20,6 +20,7 @@ import com.cookandroid.exam.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ScheduleUpdateActivity extends FragmentActivity {
 
@@ -103,26 +104,26 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         eventStartDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, R.style.MyDatePickerStyle, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        eventStartDay.setText(year + "." + monthOfYear + "." + dayOfMonth);
+                        eventStartDay.setText(year + "." + (monthOfYear+1) + "." + dayOfMonth);
                     }
-                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth), Integer.parseInt(strCurDay));
+                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth)-1, Integer.parseInt(strCurDay));
                 dialog.show();
             }
         });
 
-        //datepicker endDay
+        //datepicker EndDay
         eventEndDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        eventEndDay.setText(year + "." + monthOfYear + "." + dayOfMonth);
+                        eventEndDay.setText(year + "." + (monthOfYear+1) + "." + dayOfMonth);
                     }
-                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth), Integer.parseInt(strCurDay));
+                }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth)-1, Integer.parseInt(strCurDay));
                 dialog.show();
             }
         });
@@ -209,7 +210,4 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         });
 
     }
-
-
-
 }

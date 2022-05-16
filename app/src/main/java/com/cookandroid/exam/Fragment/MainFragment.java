@@ -37,27 +37,16 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main, container, false);
-        initView(rootView);
+        View view = (ViewGroup)inflater.inflate(R.layout.fragment_main, container, false);
+        initView(view);
         initSet();
         setRecycler();
 
-        Button button = (Button) rootView.findViewById(R.id.button); //fragment에서 findViewByid는 view.을 이용해서 사용
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ScheduleCheckAcitivity.class); //fragment라서 activity intent와는 다른 방식
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-            }
-        });
-
-        return rootView;
+        return view;
     }
 
     public void initView(View v){
-        textView = (TextView)v.findViewById(R.id.header); //이거 textView채워주기
+        textView = (TextView)v.findViewById(R.id.header); //달력 YYYY DD 표시
         recyclerView = (RecyclerView)v.findViewById(R.id.calendar);
     }
 
