@@ -18,12 +18,20 @@ import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Fragment.MypageFragment;
 import com.cookandroid.exam.Fragment.RoutineFragment;
 import com.cookandroid.exam.R;
+import com.cookandroid.exam.Util.RoutineList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class BottomNaviActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView; //바텀 네비게이션 뷰
-    private FragmentManager fm = getSupportFragmentManager();   //fragmentManager생성
+    private FragmentManager fm = getSupportFragmentManager(); //fragmentManager생성
+
+    public ArrayList<RoutineList> routineListArrayList;
+
+    private boolean isText = false;
+    private String firstroutine = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,33 @@ public class BottomNaviActivity extends AppCompatActivity {
                 MypageFragment mypageFragment = new MypageFragment();
                 mypageFragment.setArguments(bundle);
                 fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
+
+            }
+        }
+
+        if (requestCode == 3) {
+            if (data != null) {
+
+                Bundle bundle = new Bundle();
+
+                if (!isText) {
+                    firstroutine = data.getStringExtra("Routine");
+                    bundle.putString("Routine", firstroutine);
+                    bundle.putBoolean("isText", isText);
+                    isText = true;
+                }
+                else {
+                    String routine = data.getStringExtra("Routine");
+                    bundle.putString("FirstRoutine", firstroutine);
+                    bundle.putString("Routine", routine);
+                    bundle.putBoolean("isText", isText);
+                }
+
+
+
+                RoutineFragment routineFragment = new RoutineFragment();
+                routineFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.btmnavi_frame, routineFragment).commit();
 
             }
         }
