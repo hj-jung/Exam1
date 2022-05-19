@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.cookandroid.exam.Activity.ScheduleCheckAcitivity;
 import com.cookandroid.exam.Activity.ScheduleUpdateActivity;
 import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Model.CalendarHeader;
@@ -184,7 +185,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     Log.d("위치확인",""+mCalendarList.get(pos).getClass().toString());
-                    Intent intent = new Intent(context, ScheduleUpdateActivity.class);
+                    Intent intent = new Intent(context, ScheduleCheckAcitivity.class);
                     String key = mCalendarList.get(pos).getClass().toString();
                     if(pos != RecyclerView.NO_POSITION){
                         intent.putExtra("key", key);

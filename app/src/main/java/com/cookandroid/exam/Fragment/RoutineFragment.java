@@ -16,12 +16,11 @@ import android.widget.TextView;
 
 import com.cookandroid.exam.Activity.AddRoutineActivity;
 import com.cookandroid.exam.Activity.EditMypageActivity;
-import com.cookandroid.exam.Adapter.RoutineAdapter;
 import com.cookandroid.exam.Model.RetrofitClient;
 import com.cookandroid.exam.Model.RoutineService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.Routine;
-import com.cookandroid.exam.Util.RoutineList;
+
 
 import org.w3c.dom.Text;
 

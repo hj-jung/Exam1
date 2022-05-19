@@ -34,8 +34,6 @@ import com.cookandroid.exam.Model.RetrofitClient;
 import com.cookandroid.exam.Model.RoutineService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.Routine;
-import com.cookandroid.exam.Util.RoutineList;
-import com.cookandroid.exam.Util.RoutineTime;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,8 +47,6 @@ public class AddRoutineActivity extends Activity {
 
     EditText routineName;
     EditText routineContent;
-
-    public ArrayList<RoutineList> routineListArrayList;
 
     private int curHour2;
     private String strCurMinute;
@@ -99,7 +95,6 @@ public class AddRoutineActivity extends Activity {
             }
         });
 
-        routineListArrayList = new ArrayList<>();
         routineName = (EditText) findViewById(R.id.routine_name);
 
         TextView routineTime = findViewById(R.id.routine_time);
