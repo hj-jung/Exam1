@@ -17,8 +17,8 @@ import retrofit2.http.Path;
 
 public interface RoutineService {
 
-    @GET("/routines/{day}")
-    Call<List<Routine>> getRoutine(@Path("day") String post);
+    @GET("/routine/today")
+    Call<List<Routine>> getRoutine();
 
     @POST("/routine")
     Call<Routine> addRoutine(@Body Routine routine);

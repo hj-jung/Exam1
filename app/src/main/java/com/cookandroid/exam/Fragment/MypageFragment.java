@@ -25,6 +25,9 @@ import com.cookandroid.exam.Util.ActivityResultEvent;
 
 
 public class MypageFragment extends Fragment {
+
+    private int characterID;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,17 +40,24 @@ public class MypageFragment extends Fragment {
         EditMypagebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getActivity(), EditMypageActivity.class);
-                getActivity().startActivityForResult(new Intent(getContext(), EditMypageActivity.class), 2);
+                Intent intent = new Intent(getContext(), EditMypageActivity.class);
+                intent.putExtra("id", characterID);
+                getActivity().startActivityForResult(intent, 2);
             }
         });
 
         if (getArguments() != null) {
             String name = getArguments().getString("name");
             String message = getArguments().getString("message");
+            characterID = getArguments().getInt("id");
+
+            System.out.println("name = " + name);
+            System.out.println("message = " + message);
+
             mypageName.setText(name);
             mypageMessage.setTextSize(20);
             mypageMessage.setText(message);
+
         }
 
         return view;

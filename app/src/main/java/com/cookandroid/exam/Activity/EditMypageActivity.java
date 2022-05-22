@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -21,18 +22,36 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cookandroid.exam.Fragment.MypageFragment;
+import com.cookandroid.exam.Model.CharacterService;
+import com.cookandroid.exam.Model.RetrofitClient;
 import com.cookandroid.exam.R;
+import com.cookandroid.exam.Util.Character;
+import com.cookandroid.exam.Util.GetCharacter;
 
 import java.util.Set;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditMypageActivity extends Activity {
 
     EditText editName;
     EditText editMessage;
 
+    private CharacterService characterService;
+
+    private int characterID;
+
+    //private FragmentManager fm = FragmentManager();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        characterID = intent.getIntExtra("id", 0);
+        System.out.println("EditMyPage id = " + characterID);
 
         //다이얼로그 팝업창 검정색 배경 없애기
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
@@ -72,16 +91,58 @@ public class EditMypageActivity extends Activity {
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String inputName = editName.getText().toString(); //editName에 입력한 문자열을 얻어온다.
+                /*String inputName = editName.getText().toString(); //editName에 입력한 문자열을 얻어온다.
                 String inputMessage = editMessage.getText().toString(); //editMessgae에 입력한 문자열을 얻어온다.
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("name", inputName);
                 returnIntent.putExtra("message", inputMessage);
-                setResult(Activity.RESULT_OK, returnIntent);
+                setResult(Activity.RESULT_OK, returnIntent);*/
 
+                updateCharacter();
                 finish();
             }
         });
+
+        characterService = RetrofitClient.getClient().create(CharacterService.class);
+
     }
+
+    private void updateCharacter() {
+
+        editName = findViewById(R.id.editName);
+        editMessage = findViewById(R.id.editMessage);
+
+        //닉네임, 한줄소개 값 얻어오기
+        String inputName = editName.getText().toString(); //editName에 입력한 문자열을 얻어온다.
+        String inputMessage = editMessage.getText().toString(); //editMessgae에 입력한 문자열을 얻어온다.
+
+        Character character = new Character(inputName, inputMessage);
+
+        Call<Character> call = characterService.updateCharacter(characterID, character);
+        call.enqueue(new Callback<Character>() {
+            @Override
+            public void onResponse(Call<Character> call, Response<Character> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("MainActivity", String.valueOf(response.code()));
+                    return;
+                }
+
+                Character getCharacterResponse = response.body();
+
+                Log.d("TAG", getCharacterResponse.getName());
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("name", getCharacterResponse.getName());
+                returnIntent.putExtra("message", getCharacterResponse.getQuote());
+                setResult(Activity.RESULT_OK, returnIntent);
+            }
+
+            @Override
+            public void onFailure(Call<Character> call, Throwable t) {
+                Log.d("getCharacter=", t.getMessage());
+            }
+        });
+    }
+
 }

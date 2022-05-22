@@ -4,140 +4,165 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Routine {
-        @SerializedName("achieve")
-        @Expose
-        private Boolean achieve;
-        @SerializedName("context")
-        @Expose
-        private String context;
-        @SerializedName("friday")
-        @Expose
-        private Boolean friday;
-        @SerializedName("monday")
-        @Expose
-        private Boolean monday;
-        @SerializedName("name")
-        @Expose
-        private String name;
-        @SerializedName("routineTime")
-        @Expose
-        private String routineTime;
-        @SerializedName("saturday")
-        @Expose
-        private Boolean saturday;
-        @SerializedName("sunday")
-        @Expose
-        private Boolean sunday;
-        @SerializedName("thursday")
-        @Expose
-        private Boolean thursday;
-        @SerializedName("tuesday")
-        @Expose
-        private Boolean tuesday;
-        @SerializedName("wednesday")
-        @Expose
-        private Boolean wednesday;
 
-        public Boolean getAchieve() {
-            return achieve;
-        }
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("user")
+    @Expose
+    private Object user;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("sunday")
+    @Expose
+    private Integer sunday;
+    @SerializedName("monday")
+    @Expose
+    private Integer monday;
+    @SerializedName("tuesday")
+    @Expose
+    private Integer tuesday;
+    @SerializedName("wednesday")
+    @Expose
+    private Integer wednesday;
+    @SerializedName("thursday")
+    @Expose
+    private Integer thursday;
+    @SerializedName("friday")
+    @Expose
+    private Integer friday;
+    @SerializedName("saturday")
+    @Expose
+    private Integer saturday;
+    @SerializedName("routineTime")
+    @Expose
+    private String routineTime;
+    @SerializedName("context")
+    @Expose
+    private String context;
+    @SerializedName("achieve")
+    @Expose
+    private Boolean achieve;
 
-        public void setAchieve(Boolean achieve) {
-            this.achieve = achieve;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        public String getContext() {
-            return context;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public void setContext(String context) {
-            this.context = context;
-        }
+    public Object getUser() {
+        return user;
+    }
 
-        public Boolean getFriday() {
-            return friday;
-        }
+    public void setUser(Object user) {
+        this.user = user;
+    }
 
-        public void setFriday(Boolean friday) {
-            this.friday = friday;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public Boolean getMonday() {
-            return monday;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setMonday(Boolean monday) {
-            this.monday = monday;
-        }
+    public Integer getSunday() {
+        return sunday;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setSunday(Integer sunday) {
+        this.sunday = sunday;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public Integer getMonday() {
+        return monday;
+    }
 
-        public String getRoutineTime() {
-            return routineTime;
-        }
+    public void setMonday(Integer monday) {
+        this.monday = monday;
+    }
 
-        public void setRoutineTime(String routineTime) {
-            this.routineTime = routineTime;
-        }
+    public Integer getTuesday() {
+        return tuesday;
+    }
 
-        public Boolean getSaturday() {
-            return saturday;
-        }
+    public void setTuesday(Integer tuesday) {
+        this.tuesday = tuesday;
+    }
 
-        public void setSaturday(Boolean saturday) {
-            this.saturday = saturday;
-        }
+    public Integer getWednesday() {
+        return wednesday;
+    }
 
-        public Boolean getSunday() {
-            return sunday;
-        }
+    public void setWednesday(Integer wednesday) {
+        this.wednesday = wednesday;
+    }
 
-        public void setSunday(Boolean sunday) {
-            this.sunday = sunday;
-        }
+    public Integer getThursday() {
+        return thursday;
+    }
 
-        public Boolean getThursday() {
-            return thursday;
-        }
+    public void setThursday(Integer thursday) {
+        this.thursday = thursday;
+    }
 
-        public void setThursday(Boolean thursday) {
-            this.thursday = thursday;
-        }
+    public Integer getFriday() {
+        return friday;
+    }
 
-        public Boolean getTuesday() {
-            return tuesday;
-        }
+    public void setFriday(Integer friday) {
+        this.friday = friday;
+    }
 
-        public void setTuesday(Boolean tuesday) {
-            this.tuesday = tuesday;
-        }
+    public Integer getSaturday() {
+        return saturday;
+    }
 
-        public Boolean getWednesday() {
-            return wednesday;
-        }
+    public void setSaturday(Integer saturday) {
+        this.saturday = saturday;
+    }
 
-        public void setWednesday(Boolean wednesday) {
-            this.wednesday = wednesday;
-        }
+    public String getRoutineTime() {
+        return routineTime;
+    }
 
-        public Routine(Boolean achieve, String context, boolean friday, boolean monday, String name, String routineTime, boolean saturday, boolean sunday, boolean thursday, boolean tuesday, boolean wednesday) {
-            this.achieve = achieve;
-            this.context = context;
-            this.friday = friday;
-            this.monday = monday;
-            this.name = name;
-            this.routineTime = routineTime;
-            this.saturday = saturday;
-            this.sunday = sunday;
-            this.thursday = thursday;
-            this.tuesday = tuesday;
-            this.wednesday = wednesday;
-        }
+    public void setRoutineTime(String routineTime) {
+        this.routineTime = routineTime;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    public Boolean getAchieve() {
+        return achieve;
+    }
+
+    public void setAchieve(Boolean achieve) {
+        this.achieve = achieve;
+    }
+
+    public Routine(Boolean achieve, String context, int friday, int monday, String name, String routineTime, int saturday, int sunday, int thursday, int tuesday, int wednesday) {
+        this.achieve = achieve;
+        this.context = context;
+        this.friday = friday;
+        this.monday = monday;
+        this.name = name;
+        this.routineTime = routineTime;
+        this.saturday = saturday;
+        this.sunday = sunday;
+        this.thursday = thursday;
+        this.tuesday = tuesday;
+        this.wednesday = wednesday;
+    }
 
 }
+
+

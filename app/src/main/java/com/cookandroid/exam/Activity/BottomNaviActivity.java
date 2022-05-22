@@ -2,6 +2,7 @@ package com.cookandroid.exam.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.os.IResultReceiver;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,26 +18,52 @@ import com.cookandroid.exam.Fragment.DailyFragment;
 import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Fragment.MypageFragment;
 import com.cookandroid.exam.Fragment.RoutineFragment;
+import com.cookandroid.exam.Model.CharacterService;
+import com.cookandroid.exam.Model.RetrofitClient;
+import com.cookandroid.exam.Model.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.RoutineList;
+import com.cookandroid.exam.Util.Character;
+import com.cookandroid.exam.Util.GetCharacter;
+import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.Util.RoutineData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BottomNaviActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView; //바텀 네비게이션 뷰
     private FragmentManager fm = getSupportFragmentManager(); //fragmentManager생성
 
-    public ArrayList<RoutineList> routineListArrayList;
-
     private boolean isText = false;
     private String firstroutine = null;
+
+    private String characterNAme = "hi";
+
+    private CharacterService characterService;
+    private RoutineService routineService;
+
+    private int characterid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottomnavi);
+
+        Intent intent = getIntent(); //전달할 데이터를 받을 Intent
+        // text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
+
+        if (intent != null) {
+            characterid = intent.getIntExtra("characterID", 0);
+            System.out.println(characterid);
+        }
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         fm.beginTransaction().add(R.id.btmnavi_frame, new MainFragment()).commit(); //첫 fragment 화면 설정
@@ -51,11 +78,88 @@ public class BottomNaviActivity extends AppCompatActivity {
                     case R.id.tab_daily:
                         ft.replace(R.id.btmnavi_frame, new DailyFragment()).commit(); break;
                     case R.id.tab_routine:
+                        getRoutine();
                         ft.replace(R.id.btmnavi_frame, new RoutineFragment()).commit(); break;
                     case R.id.tab_mypage:
+                        getCharacter();
                         ft.replace(R.id.btmnavi_frame, new MypageFragment()).commit(); break;
                 }
                 return true;
+            }
+        });
+
+        characterService = RetrofitClient.getClient().create(CharacterService.class);
+        routineService = RetrofitClient.getClient().create(RoutineService.class);
+        getCharacter();
+    }
+
+    private void getCharacter() {
+        Call<GetCharacter> call = characterService.getCharacter(characterid);
+        call.enqueue(new Callback<GetCharacter>() {
+            @Override
+            public void onResponse(Call<GetCharacter> call, Response<GetCharacter> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("MainActivity", String.valueOf(response.code()));
+                    return;
+                }
+
+                GetCharacter getCharacterResponse = response.body();
+
+                Log.d("TAG", getCharacterResponse.getName());
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",characterid);
+                bundle.putString("name", getCharacterResponse.getName());
+                bundle.putString("message", getCharacterResponse.getQuote());
+
+                MypageFragment mypageFragment = new MypageFragment();
+                mypageFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
+
+            }
+
+            @Override
+            public void onFailure(Call<GetCharacter> call, Throwable t) {
+                Log.d("getCharacter=", t.getMessage());
+            }
+        });
+    }
+
+    private void getRoutine() {
+        Call<List<Routine>> call = routineService.getRoutine();
+        call.enqueue(new Callback<List<Routine>>() {
+            @Override
+            public void onResponse(Call<List<Routine>> call, Response<List<Routine>> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("MainActivity", String.valueOf(response.code()));
+                    return;
+                }
+                List<Routine> routineList = response.body();
+
+                Bundle bundle = new Bundle();
+                ArrayList<RoutineData> routineDataArrayList = new ArrayList<RoutineData>();
+
+                for (Routine routine : routineList ) {
+                    routineDataArrayList.add(new RoutineData(routine.getName(), routine.getRoutineTime(), routine.getContext(), routine.getAchieve()));
+                }
+
+                bundle.putParcelableArrayList("routineList", (ArrayList<? extends Parcelable>) routineDataArrayList);
+
+                if (routineDataArrayList.isEmpty()) System.out.println("routineDataArrayList is empty");
+                else {
+                    for (RoutineData routineData : routineDataArrayList) {
+                        System.out.println(routineData.routineName);
+                    }
+                }
+
+                RoutineFragment routineFragment = new RoutineFragment();
+                routineFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.btmnavi_frame, routineFragment).commit();
+            }
+
+            @Override
+            public void onFailure(Call<List<Routine>> call, Throwable t) {
+                Log.d("getCharacter=", t.getMessage());
             }
         });
     }
@@ -76,12 +180,13 @@ public class BottomNaviActivity extends AppCompatActivity {
                 MypageFragment mypageFragment = new MypageFragment();
                 mypageFragment.setArguments(bundle);
                 fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
-
             }
         }
 
         if (requestCode == 3) {
             if (data != null) {
+
+                getRoutine();
 
                 Bundle bundle = new Bundle();
 

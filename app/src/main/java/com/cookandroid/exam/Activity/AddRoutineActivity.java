@@ -16,9 +16,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import java.sql.Array;
 import java.text.SimpleDateFormat;
@@ -45,8 +47,17 @@ public class AddRoutineActivity extends Activity {
 
     private String repeatTime = "00:00 AM ";
 
-    EditText routineName;
-    EditText routineContent;
+    EditText routineName, routineContent;
+    ToggleButton sunButton, monButton, tueButton, wedButton, thuButton, friButton, satButton;
+    int sun = 0;
+    int mon = 0;
+    int tue = 0;
+    int wed = 0;
+    int thu = 0;
+    int fri = 0;
+    int sat = 0;
+
+    private int routineID;
 
     private int curHour2;
     private String strCurMinute;
@@ -57,8 +68,6 @@ public class AddRoutineActivity extends Activity {
 
     private RoutineService routineService;
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +106,66 @@ public class AddRoutineActivity extends Activity {
 
         routineName = (EditText) findViewById(R.id.routine_name);
 
+        //반복 요일 설정
+        sunButton = (ToggleButton) findViewById(R.id.repeat_sun);
+        monButton = (ToggleButton) findViewById(R.id.repeat_mon);
+        tueButton = (ToggleButton) findViewById(R.id.repeat_tue);
+        wedButton = (ToggleButton) findViewById(R.id.repeat_wed);
+        thuButton = (ToggleButton) findViewById(R.id.repeat_thu);
+        friButton = (ToggleButton) findViewById(R.id.repeat_fri);
+        satButton = (ToggleButton) findViewById(R.id.repeat_sat);
+
+        sunButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) sun = 1;
+            }
+        });
+
+        monButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) mon = 2;
+            }
+        });
+
+        tueButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) tue = 3;
+            }
+        });
+
+        wedButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) wed = 4;
+            }
+        });
+
+        thuButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) thu = 5;
+            }
+        });
+
+        friButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) fri = 6;
+            }
+        });
+
+        satButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) sat = 7;
+            }
+        });
+
+
+        //시간 설정
         TextView routineTime = findViewById(R.id.routine_time);
 
         //현재 시간 정보 불러오기
@@ -121,26 +190,11 @@ public class AddRoutineActivity extends Activity {
             curHour2 = curHour - 12;
             curAmPm = "PM";
         }
-        routine_hour = String.valueOf(curHour);
-        routine_min = strCurMinute;
-        repeatTime = String.valueOf(curHour2);
-        repeatTime = repeatTime.concat(":"+curMinute+" "+curAmPm+" ");
-        if (curHour2 < 10) {
-            if (curMinute < 10) {
-                routineTime.setText("0" + curHour2 + ":" + "0" + curMinute + " " + curAmPm);
-            }
-            else {
-                routineTime.setText("0" + curHour2 + ":" + curMinute + " " + curAmPm);
-            }
-        }
-        else {
-            if (curMinute < 10) {
-                routineTime.setText(curHour2 + ":" + "0" + curMinute + " " + curAmPm);
-            }
-            else {
-                routineTime.setText(curHour2 + ":" + curMinute + " " + curAmPm);
-            }
-        }
+
+        routine_hour = String.format("%02d", curHour2);
+        routine_min = String.format("%02d", curMinute);
+
+        routineTime.setText(routine_hour + ":" + routine_min + " " + curAmPm);
 
         //timepicker
         routineTime.setOnClickListener(new View.OnClickListener() {
@@ -158,32 +212,12 @@ public class AddRoutineActivity extends Activity {
                             AM_PM = "PM";
                             routineHour = hourOfDay - 12;
                         }
-                        repeatTime = String.valueOf(routineHour);
-                        routineMin = String.valueOf(minute);
-                        repeatTime = repeatTime.concat(":");
-                        repeatTime = repeatTime.concat(routineMin);
-                        repeatTime = repeatTime.concat(" ");
-                        repeatTime = repeatTime.concat(AM_PM);
-                        repeatTime = repeatTime.concat(" ");
 
-                        routine_hour = String.valueOf(hourOfDay);
-                        routine_min = String.valueOf(minute);
-                        if (routineHour < 10) {
-                            if (minute < 10) {
-                                routineTime.setText("0" + routineHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                routineTime.setText("0" + routineHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
-                        else {
-                            if (minute < 10) {
-                                routineTime.setText(routineHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                routineTime.setText(routineHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
+                        routine_hour = String.format("%02d", hourOfDay);
+                        routine_min = String.format("%02d", minute);
+                        String routine_Hour = String.format("%02d", routineHour);
+
+                        routineTime.setText(routine_hour + ":" + routine_min + " " + AM_PM);
                     }
                 }, curHour, curMinute, false);
                 dialog.setTitle("Alert Time");
@@ -213,7 +247,7 @@ public class AddRoutineActivity extends Activity {
         String routine_name = routineName.getText().toString();
         String routine_content = routineContent.getText().toString();
         String routine_ttime = routine_hour.concat(":"+routine_min);
-        Routine routine = new Routine(false, routine_content, false, true, routine_name, routine_ttime, true, false, false, false, false);
+        Routine routine = new Routine(false, routine_content, fri, mon, routine_name, routine_ttime, sat, sun, thu, tue, wed);
 
         Call<Routine> call = routineService.addRoutine(routine);
         call.enqueue(new Callback<Routine>() {
@@ -224,7 +258,9 @@ public class AddRoutineActivity extends Activity {
                     return;
                 }
                 Routine routineResponse = response.body();
-                System.out.println(routineResponse.getName());
+                routineID = Integer.parseInt(response.toString());
+                System.out.println("routineID = " + routineID);
+                System.out.println("routineReponse = " + routineResponse);
             }
 
             @Override
