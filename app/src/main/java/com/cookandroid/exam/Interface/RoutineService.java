@@ -1,6 +1,6 @@
-package com.cookandroid.exam.Model;
+package com.cookandroid.exam.Interface;
 
-import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.DTO.Routine;
 
 import java.util.List;
 

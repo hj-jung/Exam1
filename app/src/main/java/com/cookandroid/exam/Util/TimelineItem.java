@@ -4,6 +4,8 @@ public class TimelineItem {
     private String timeStr;
     private String apStr;
     private String lineStr;
+    private String titleStr;
+    private String colorStr;
 
     public void setTime(String time) {
         timeStr = time;
@@ -17,6 +19,12 @@ public class TimelineItem {
         lineStr = line;
     }
 
+    public void setTitle(String title)  {
+        titleStr = title; }
+
+    public void setColor(String color)  {
+        colorStr = color;}
+
     public String getTime() {
         return this.timeStr;
     }
@@ -27,6 +35,14 @@ public class TimelineItem {
 
     public String getLine() {
         return this.lineStr;
+    }
+
+    public String getTitle(){
+        return this.titleStr;
+    }
+
+    public String getColor() {
+        return this.colorStr;
     }
 
 }

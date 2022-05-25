@@ -1,6 +1,5 @@
 package com.cookandroid.exam.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +10,10 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cookandroid.exam.Model.CharacterService;
-import com.cookandroid.exam.Model.RetrofitClient;
-import com.cookandroid.exam.Model.RoutineService;
+import com.cookandroid.exam.Interface.CharacterService;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.Character;
-import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.DTO.Character;
 
 import retrofit2.Call;
 import retrofit2.Callback;

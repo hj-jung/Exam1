@@ -1,4 +1,4 @@
-package com.cookandroid.exam.Util;
+package com.cookandroid.exam.DTO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

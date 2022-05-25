@@ -1,4 +1,4 @@
-package com.cookandroid.exam.Model;
+package com.cookandroid.exam.Retrofit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // server의 url을 적어준다
-    private static final String URL = "https://7956-112-150-87-106.jp.ngrok.io";
+    private static final String URL = "https://16b7-110-12-7-108.ngrok.io";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

@@ -1,9 +1,7 @@
-package com.cookandroid.exam.Model;
+package com.cookandroid.exam.Interface;
 
-import com.cookandroid.exam.Util.Character;
-import com.cookandroid.exam.Util.GetCharacter;
-
-import java.util.List;
+import com.cookandroid.exam.DTO.Character;
+import com.cookandroid.exam.DTO.GetCharacter;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

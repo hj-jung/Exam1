@@ -34,7 +34,7 @@ public class DailyFragment extends Fragment {
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
         TextView day = (TextView) view.findViewById(R.id.day);
 
-        //상단 현재 날짜
+        //상단 오늘 날짜로 설정
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy. MM. dd", Locale.getDefault());
         String strday = format.format(date);
@@ -45,6 +45,7 @@ public class DailyFragment extends Fragment {
         int dayofWeekNumber = calendar.get(Calendar.DAY_OF_WEEK);
         String weekday="SUN";
 
+        //상단 요일
         switch (dayofWeekNumber){
             case 1: weekday="SUN";    break;
             case 2: weekday="MON";    break;
@@ -56,7 +57,6 @@ public class DailyFragment extends Fragment {
         }
 
         day.setText(strday+"  "+weekday);
-
 
         //->일정등록페이지로 이동
         plus.setOnClickListener(new View.OnClickListener() {

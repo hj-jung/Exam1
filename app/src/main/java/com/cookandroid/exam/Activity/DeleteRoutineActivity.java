@@ -3,23 +3,18 @@ package com.cookandroid.exam.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.cookandroid.exam.Fragment.RoutineFragment;
-import com.cookandroid.exam.Model.RetrofitClient;
-import com.cookandroid.exam.Model.RoutineService;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.Util.RoutineData;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 

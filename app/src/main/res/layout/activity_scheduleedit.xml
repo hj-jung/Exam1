@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="550dp"
@@ -19,7 +18,7 @@
         android:layout_weight="0.8">
 
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/btn_put"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,14 +28,14 @@
             android:minHeight="0dp"
             android:paddingLeft="10dp"
             android:paddingTop="4dp"
-            android:text="Cancel"
-            android:textColor="#FF0606"
+            android:text="SET"
+            android:textColor="#000000"
             android:textSize="16dp"
             android:typeface="monospace"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,9 +44,8 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingRight="10dp"
-
-            android:text="Add"
-            android:textColor="#000000"
+            android:text="DELETE"
+            android:textColor="#FF0606"
             android:textSize="16dp"
             android:typeface="monospace"
             tools:ignore="TouchTargetSizeCheck" />
@@ -73,7 +71,7 @@
             android:weightSum="11">
 
             <EditText
-                android:id="@+id/schedule_name"
+                android:id="@+id/schedule_edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -92,41 +90,41 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/color1"
+                    android:id="@+id/colorr"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:background="#FF0606"/>
 
                 <Button
-                    android:id="@+id/color2"
+                    android:id="@+id/coloro"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:background="#F0CA00"/>
 
                 <Button
-                    android:id="@+id/color3"
+                    android:id="@+id/colorg"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:background="#66CC00"/>
 
                 <Button
-                    android:id="@+id/color4"
+                    android:id="@+id/colorb"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:background="#0038FF"/>
 
                 <Button
-                    android:id="@+id/color5"
+                    android:id="@+id/colorp"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
                     android:background="#E200CC"/>
 
                 <Button
-                    android:id="@+id/color6"
+                    android:id="@+id/colorbl"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
@@ -166,7 +164,7 @@
                     android:text="Starts"/>
 
                 <TextView
-                    android:id="@+id/event_start_day"
+                    android:id="@+id/event_edit_start_day"
                     android:layout_width="105dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="48dp"
@@ -179,7 +177,7 @@
                     android:clickable="true" />
 
                 <TextView
-                    android:id="@+id/event_start_time"
+                    android:id="@+id/event_edit_start_time"
                     android:layout_width="75dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="7dp"
@@ -209,7 +207,7 @@
                     android:text="Ends"/>
 
                 <TextView
-                    android:id="@+id/event_end_day"
+                    android:id="@+id/event_edit_end_day"
                     android:layout_width="105dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="48dp"
@@ -222,7 +220,7 @@
                     android:clickable="true" />
 
                 <TextView
-                    android:id="@+id/event_end_time"
+                    android:id="@+id/event_edit_end_time"
                     android:layout_width="75dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="7dp"
@@ -258,7 +256,7 @@
                 android:background="#000000"/>
 
             <EditText
-                android:id="@+id/location"
+                android:id="@+id/edit_location"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1.1"
@@ -275,7 +273,7 @@
                 android:background="#000000"/>
 
             <EditText
-                android:id="@+id/context"
+                android:id="@+id/edit_context"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
@@ -291,6 +289,5 @@
 
 
     </LinearLayout>
-
 
 </LinearLayout>

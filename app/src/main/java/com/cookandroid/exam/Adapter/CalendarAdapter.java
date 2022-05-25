@@ -180,6 +180,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
             super(itemView);
             initView(itemView);
 
+            //리사이클러뷰 아이템 선택
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

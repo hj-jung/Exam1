@@ -16,12 +16,12 @@ import com.cookandroid.exam.Fragment.DailyFragment;
 import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Fragment.MypageFragment;
 import com.cookandroid.exam.Fragment.RoutineFragment;
-import com.cookandroid.exam.Model.CharacterService;
-import com.cookandroid.exam.Model.RetrofitClient;
-import com.cookandroid.exam.Model.RoutineService;
+import com.cookandroid.exam.Interface.CharacterService;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.GetCharacter;
-import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.DTO.GetCharacter;
+import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.Util.RoutineData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

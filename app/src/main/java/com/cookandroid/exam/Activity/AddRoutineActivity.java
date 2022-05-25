@@ -22,20 +22,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-import java.sql.Array;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
-import com.cookandroid.exam.Model.RetrofitClient;
-import com.cookandroid.exam.Model.RoutineService;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.Routine;
+import com.cookandroid.exam.DTO.Routine;
 
 import retrofit2.Call;
 import retrofit2.Callback;

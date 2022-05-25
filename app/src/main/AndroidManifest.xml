@@ -29,6 +29,10 @@
         <activity
             android:name=".Activity.ScheduleUpdateActivity"
             android:theme="@style/DialogTheme.Exam" />
+        <activity android:name=".Activity.ScheduleInfoActivity"/>
+        <activity
+            android:name=".Activity.ScheduleEditActivity"
+            android:theme="@style/DialogTheme.Exam"/>
         <activity
             android:name=".Activity.AddRoutineActivity"
             android:theme="@android:style/Theme.Dialog" />
