@@ -3,47 +3,46 @@ package com.cookandroid.exam.Util;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalTime;
+
 public class Routine {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("user")
+    @SerializedName("achieve")
     @Expose
-    private Object user;
-    @SerializedName("name")
+    private Boolean achieve;
+    @SerializedName("context")
     @Expose
-    private String name;
-    @SerializedName("sunday")
+    private String context;
+    @SerializedName("friday")
     @Expose
-    private Integer sunday;
+    private Integer friday;
     @SerializedName("monday")
     @Expose
     private Integer monday;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("routineTime")
+    @Expose
+    private String routineTime;
+    @SerializedName("saturday")
+    @Expose
+    private Integer saturday;
+    @SerializedName("sunday")
+    @Expose
+    private Integer sunday;
+    @SerializedName("thursday")
+    @Expose
+    private Integer thursday;
     @SerializedName("tuesday")
     @Expose
     private Integer tuesday;
     @SerializedName("wednesday")
     @Expose
     private Integer wednesday;
-    @SerializedName("thursday")
-    @Expose
-    private Integer thursday;
-    @SerializedName("friday")
-    @Expose
-    private Integer friday;
-    @SerializedName("saturday")
-    @Expose
-    private Integer saturday;
-    @SerializedName("routineTime")
-    @Expose
-    private String routineTime;
-    @SerializedName("context")
-    @Expose
-    private String context;
-    @SerializedName("achieve")
-    @Expose
-    private Boolean achieve;
 
     public Integer getId() {
         return id;
@@ -51,14 +50,6 @@ public class Routine {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Object getUser() {
-        return user;
-    }
-
-    public void setUser(Object user) {
-        this.user = user;
     }
 
     public String getName() {
@@ -125,14 +116,6 @@ public class Routine {
         this.saturday = saturday;
     }
 
-    public String getRoutineTime() {
-        return routineTime;
-    }
-
-    public void setRoutineTime(String routineTime) {
-        this.routineTime = routineTime;
-    }
-
     public String getContext() {
         return context;
     }
@@ -147,6 +130,14 @@ public class Routine {
 
     public void setAchieve(Boolean achieve) {
         this.achieve = achieve;
+    }
+
+    public String getRoutineTime() {
+        return routineTime;
+    }
+
+    public void setRoutineTime(String routineTime) {
+        this.routineTime = routineTime;
     }
 
     public Routine(Boolean achieve, String context, int friday, int monday, String name, String routineTime, int saturday, int sunday, int thursday, int tuesday, int wednesday) {

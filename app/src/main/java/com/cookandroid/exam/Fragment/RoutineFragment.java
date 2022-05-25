@@ -1,39 +1,28 @@
 package com.cookandroid.exam.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.cookandroid.exam.Activity.AddRoutineActivity;
-import com.cookandroid.exam.Activity.EditMypageActivity;
+import com.cookandroid.exam.Activity.DeleteRoutineActivity;
 import com.cookandroid.exam.Adapter.RoutineListAdapter;
-import com.cookandroid.exam.Model.RetrofitClient;
-import com.cookandroid.exam.Model.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.Routine;
 import com.cookandroid.exam.Util.RoutineData;
 
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RoutineFragment extends Fragment {
 
@@ -42,6 +31,8 @@ public class RoutineFragment extends Fragment {
     private RecyclerView recyclerView;
     private RoutineListAdapter adapter;
     private ArrayList<RoutineData> list = new ArrayList<RoutineData>();
+
+    private int deleteId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,14 +50,11 @@ public class RoutineFragment extends Fragment {
                 getActivity().startActivityForResult(new Intent(getContext(), AddRoutineActivity.class), 3);
                 if (getArguments() != null) {
                     list = getArguments().getParcelableArrayList("routineList");
-
                     recyclerView.setHasFixedSize(true);
                     adapter = new RoutineListAdapter(getActivity(), list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     recyclerView.setAdapter(adapter);
                 }
-
-                System.out.println("list.isEmpty is " + list.isEmpty());
                 //startActivity(intent);
             }
         });
@@ -78,6 +66,21 @@ public class RoutineFragment extends Fragment {
             adapter = new RoutineListAdapter(getActivity(), list);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
+
+            adapter.setOnItemClickListener(new RoutineListAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int pos) {
+                    Intent intent = new Intent(getContext(), DeleteRoutineActivity.class);
+                    deleteId = list.get(pos).routineId;
+                    intent.putExtra("deleteID", deleteId);
+                    getActivity().startActivityForResult(intent, 4);
+
+                }
+            });
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+
         }
 
         return rootView;

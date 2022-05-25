@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.RoutineData;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineListAdapter.
     public RoutineListAdapter(Context context, List<RoutineData> list) {
         this.context = context;
         this.list = list;
-        System.out.println(list.isEmpty());
     }
 
     @NonNull
@@ -44,7 +44,7 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineListAdapter.
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list == null?0:list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,6 +57,28 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineListAdapter.
             routineCheck = (CheckBox) view.findViewById(R.id.routine_check);
             routineTime = (TextView) view.findViewById(R.id.routine_list_time);
             routineName = (TextView) view.findViewById(R.id.routine_list_name);
+
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onItemClick(view, pos);
+                        }
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int pos);
+    }
+
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener= listener;
     }
 }

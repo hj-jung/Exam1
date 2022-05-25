@@ -62,9 +62,10 @@ public class AddRoutineActivity extends Activity {
     private int curHour2;
     private String strCurMinute;
     private int routineHour;
-    private String routineMin;
     private String routine_hour;
     private String routine_min;
+
+    private LocalTime routineLocal;
 
     private RoutineService routineService;
 
@@ -172,6 +173,10 @@ public class AddRoutineActivity extends Activity {
         long now_Time = System.currentTimeMillis();
         Date date = new Date(now_Time);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            routineLocal = LocalTime.now();
+        }
+
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
 
@@ -213,6 +218,10 @@ public class AddRoutineActivity extends Activity {
                             routineHour = hourOfDay - 12;
                         }
 
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            routineLocal = LocalTime.of(hourOfDay, minute);
+                        }
+
                         routine_hour = String.format("%02d", hourOfDay);
                         routine_min = String.format("%02d", minute);
                         String routine_Hour = String.format("%02d", routineHour);
@@ -246,8 +255,7 @@ public class AddRoutineActivity extends Activity {
         routineContent = (EditText) findViewById(R.id.routine_context);
         String routine_name = routineName.getText().toString();
         String routine_content = routineContent.getText().toString();
-        String routine_ttime = routine_hour.concat(":"+routine_min);
-        Routine routine = new Routine(false, routine_content, fri, mon, routine_name, routine_ttime, sat, sun, thu, tue, wed);
+        Routine routine = new Routine(false, routine_content, fri, mon, routine_name, routineLocal.toString(), sat, sun, thu, tue, wed);
 
         Call<Routine> call = routineService.addRoutine(routine);
         call.enqueue(new Callback<Routine>() {

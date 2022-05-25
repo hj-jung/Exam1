@@ -5,12 +5,14 @@ import android.os.Parcelable;
 
 public class RoutineData implements Parcelable {
 
+    public Integer routineId;
     public String routineName;
     public String routineTime;
     public String rourintContext;
     public boolean routineAchieve;
 
-    public RoutineData(String routineName, String routineTime, String routineContext, Boolean routineAchive) {
+    public RoutineData(Integer routineId, String routineName, String routineTime, String routineContext, Boolean routineAchive) {
+        this.routineId = routineId;
         this.routineName = routineName;
         this.routineTime = routineTime;
         this.rourintContext = routineContext;
@@ -18,6 +20,7 @@ public class RoutineData implements Parcelable {
     }
 
     protected RoutineData(Parcel in) {
+        routineId = in.readInt();
         routineName = in.readString();
         routineTime = in.readString();
         rourintContext = in.readString();
@@ -43,6 +46,7 @@ public class RoutineData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(routineId);
         parcel.writeString(routineName);
         parcel.writeString(routineTime);
         parcel.writeString(rourintContext);

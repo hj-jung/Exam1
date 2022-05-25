@@ -3,14 +3,12 @@ package com.cookandroid.exam.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.os.IResultReceiver;
 import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,13 +20,13 @@ import com.cookandroid.exam.Model.CharacterService;
 import com.cookandroid.exam.Model.RetrofitClient;
 import com.cookandroid.exam.Model.RoutineService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.Character;
 import com.cookandroid.exam.Util.GetCharacter;
 import com.cookandroid.exam.Util.Routine;
 import com.cookandroid.exam.Util.RoutineData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Array;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +138,15 @@ public class BottomNaviActivity extends AppCompatActivity {
                 ArrayList<RoutineData> routineDataArrayList = new ArrayList<RoutineData>();
 
                 for (Routine routine : routineList ) {
-                    routineDataArrayList.add(new RoutineData(routine.getName(), routine.getRoutineTime(), routine.getContext(), routine.getAchieve()));
+                    System.out.println(routine.getId());
+                    String routineStrTime = routine.getRoutineTime();
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                        LocalTime localTime= LocalTime.parse(routineStrTime, formatter);
+                        System.out.println(localTime);
+                    }
+
+                    routineDataArrayList.add(new RoutineData(routine.getId(), routine.getName(), routine.getRoutineTime(), routine.getContext(), routine.getAchieve()));
                 }
 
                 bundle.putParcelableArrayList("routineList", (ArrayList<? extends Parcelable>) routineDataArrayList);
@@ -184,32 +190,14 @@ public class BottomNaviActivity extends AppCompatActivity {
         }
 
         if (requestCode == 3) {
-            if (data != null) {
-
-                getRoutine();
-
-                Bundle bundle = new Bundle();
-
-                if (!isText) {
-                    firstroutine = data.getStringExtra("Routine");
-                    bundle.putString("Routine", firstroutine);
-                    bundle.putBoolean("isText", isText);
-                    isText = true;
-                }
-                else {
-                    String routine = data.getStringExtra("Routine");
-                    bundle.putString("FirstRoutine", firstroutine);
-                    bundle.putString("Routine", routine);
-                    bundle.putBoolean("isText", isText);
-                }
-
-
-
-                RoutineFragment routineFragment = new RoutineFragment();
-                routineFragment.setArguments(bundle);
-                fm.beginTransaction().replace(R.id.btmnavi_frame, routineFragment).commit();
-
-            }
+            getRoutine();
+            RoutineFragment routineFragment = new RoutineFragment();
+            fm.beginTransaction().replace(R.id.btmnavi_frame, routineFragment).commit();
+        }
+        if (requestCode == 4) {
+            getRoutine();
+            RoutineFragment routineFragment = new RoutineFragment();
+            fm.beginTransaction().replace(R.id.btmnavi_frame, routineFragment).commit();
         }
     }
 }
