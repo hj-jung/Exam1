@@ -52,6 +52,44 @@
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/layout/item_header.xml" value="0.4" />
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/layout/routine_add_dialog.xml" value="0.23521505376344087" />
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/menu/btm_navi_bar.xml" value="0.15833333333333333" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/btn_start.xml" value="0.185" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/button_stroke.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/button_stroke_on.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.185" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.163" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.163" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/left_onoff_color.xml" value="0.1425" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/left_round_border_on.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/onoff_color.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/rectangle1.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/right_onoff_color.xml" value="0.1425" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/right_round_border.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/right_round_border_on.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border_shadow.xml" value="0.185" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border_shadow_mypage.xml" value="0.185" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border_yellow_box.xml" value="0.18" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_stroke.xml" value="0.188" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activiey_delete_routine.xml" value="0.33" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_bottomnavi.xml" value="0.2609375" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_detail_page.xml" value="0.33" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_edit_mypage.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_schedulecheck.xml" value="0.5112299465240642" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleupdate.xml" value="0.33" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_setcharacter.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_daily.xml" value="0.30925925925925923" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_main.xml" value="0.1757852077001013" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_mypage.xml" value="0.17721518987341772" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_routine.xml" value="0.1" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_timeline.xml" value="0.2421875" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_daily_timeline.xml" value="0.2421875" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/routine_add_dialog.xml" value="0.24705882352941178" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/routine_listview_item.xml" value="0.25" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/menu/btm_navi_bar.xml" value="0.2609375" />
+>>>>>>> 4d92a7d9caf9780d4238bdf1dc7194e51cd2bf9a
       </map>
     </option>
   </component>

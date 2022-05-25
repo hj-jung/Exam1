@@ -42,6 +42,7 @@
         <activity
             android:name=".Activity.DeleteRoutineActivity"
             android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".Activity.WeatherNMapActivity" />
     </application>
 
 </manifest>
