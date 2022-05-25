@@ -192,6 +192,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                     String key = mCalendarList.get(pos).getClass().toString();
                     if(pos != RecyclerView.NO_POSITION){
                         intent.putExtra("key", key);
+                        intent.putExtra("int", pos);
                         context.startActivity(intent);
                     }
                 }

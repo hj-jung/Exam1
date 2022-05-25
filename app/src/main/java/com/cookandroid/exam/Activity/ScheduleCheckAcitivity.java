@@ -35,15 +35,32 @@ public class ScheduleCheckAcitivity extends Activity {
     String today, color, title, time;
     private static final String TAG = "ScheduleCheckActivity";
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedulecheck);
         Intent intent = getIntent();
+        int daypos = intent.getIntExtra("int", -1);
 
         //상단 해당 날짜로 설정
         day = (TextView) findViewById(R.id.day);
         today = "2022-05-26";
+
+        if (daypos == 10328) today = "2022-05-01";
+        else if (daypos > 10328 & daypos < 10360) {
+            int dayNum = daypos - 10328 + 1;
+            String.format("%02d", dayNum);
+            today = "2022-05-" + dayNum;
+        }
+        else if (daypos == 10363) today = "2022-06-01";
+        else if (daypos > 10363 & daypos < 10393) {
+            int dayNum = daypos - 10363 + 1;
+            String.format("%02d", dayNum);
+            today = "2022-06-" + dayNum;
+        }
+
         day.setText(today);
 
         //리스트뷰 참조
