@@ -14,13 +14,17 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ScheduleService {
-    //GET방식으로 오늘의 일정 반환 - 날짜를 LocalTime으로 받아 오늘 날짜가 캘린더 일정의 start~end사이에 있으면 반환
+    //GET방식으로 오늘의 일정 조회 - 날짜를 LocalTime으로 받아 오늘 날짜가 캘린더 일정의 start~end사이에 있으면 반환
     @GET("/calendar/today")
     Call<List<Schedule>> today();
 
+    //GET방식으로 해당 날짜 일정 조회
+    @GET("/calendar/{startYmd}")
+    Call<List<Schedule>> date(@Path("startYmd") String startYmd);
+
     //GET방식으로 전체 캘린더 일정 조회
     @GET("/calendars")
-    Call<List<Schedule>> all(@Query("startYmd")String startYmd);
+    Call<List<Schedule>> all();
 
     //POST방식으로 일정 등록
     @POST("/calendar")

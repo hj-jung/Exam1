@@ -29,7 +29,7 @@ public class ScheduleCheckAcitivity extends Activity {
     TextView day;
     ListView schedule_list;
     ScheduleAdapter adapter;
-    String today, color, title, time, button;
+    String today, color, title, time;
     private static final String TAG = "ScheduleCheckActivity";
 
     @Override
@@ -39,7 +39,7 @@ public class ScheduleCheckAcitivity extends Activity {
 
         //상단 해당 날짜로 설정
         day = (TextView) findViewById(R.id.day);
-        today = "2022-05-25";
+        today = "2022-05-26";
         day.setText(today);
 
         //Adapter 생성
@@ -53,7 +53,7 @@ public class ScheduleCheckAcitivity extends Activity {
         //해당 날짜 일정 GET
         //Retrofit 인터페이스 객체 구현
         ScheduleService scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
-        Call<List<Schedule>> call = scheduleService.all(today);
+        Call<List<Schedule>> call = scheduleService.date(today);
         call.enqueue(new Callback<List<Schedule>>() {
             @Override
             public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
