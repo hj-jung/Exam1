@@ -18,7 +18,9 @@ import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Util.ScheduleItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +31,7 @@ public class ScheduleCheckAcitivity extends Activity {
     TextView day;
     ListView schedule_list;
     ScheduleAdapter adapter;
+    List<ScheduleItem> scheduleItems;
     String today, color, title, time;
     private static final String TAG = "ScheduleCheckActivity";
 
@@ -36,18 +39,19 @@ public class ScheduleCheckAcitivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedulecheck);
+        Intent intent = getIntent();
 
         //상단 해당 날짜로 설정
         day = (TextView) findViewById(R.id.day);
         today = "2022-05-26";
         day.setText(today);
 
-        //Adapter 생성
-        adapter = new ScheduleAdapter();
-        adapter.addItem("하이", "23:00~23:30", "RED");
-
-        //리스트뷰 참조 및 Adapter 달기
+        //리스트뷰 참조
         schedule_list = (ListView) findViewById(R.id.schedule_list);
+        scheduleItems = new ArrayList<ScheduleItem>();
+
+        //Adapter 생성
+        adapter = new ScheduleAdapter(getApplicationContext(), scheduleItems);
         schedule_list.setAdapter(adapter);
 
         //해당 날짜 일정 GET
@@ -70,8 +74,10 @@ public class ScheduleCheckAcitivity extends Activity {
                     System.out.println(schedule.getTitle());
                     System.out.println(color+title+time);
                 }
+
                 //GET한 DATA 리스트뷰에 추가
-                adapter.addItem(title, time, color);
+                ScheduleItem scheduleItem = new ScheduleItem(title, time, color);
+                scheduleItems.add(scheduleItem);
                 adapter.notifyDataSetChanged();
             }
 

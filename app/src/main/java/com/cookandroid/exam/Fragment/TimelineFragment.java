@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TimelineFragment extends ListFragment {
+public class TimelineFragment extends ListFragment {/*
     TimelineAdapter adapter;
     private int time;
     private String color, title, startH, AMPM;
@@ -71,19 +71,11 @@ public class TimelineFragment extends ListFragment {
                             AMPM = "AM";
                         }
                     }
-                    for(int i=1; i<25; i++){
-                        if(i==time){
-                            strings[i][0] = startH;
-                            strings[i][1] = AMPM;
-                            strings[i][2] = title;
-                            strings[i][3] = color;
-                        }
-                        else{
-                            for(int j=0; j<4; j++) {
-                                strings[i][j]=null;
-                            }
-                        }
-                    }
+                    strings[time][0] = startH;
+                    strings[time][1] = AMPM;
+                    strings[time][2] = title;
+                    strings[time][3] = color;
+
                     System.out.println(title+startH+color);
                 }
             }
@@ -96,17 +88,14 @@ public class TimelineFragment extends ListFragment {
 
         //해당 시간대에 일치하는 일정 DailyList에 띄우기
         for(int i=1; i<25; i++){
-            for(int j=0; j<4; j++){
-                if(strings[i][0]!=null){
-                    adapter.addItem(strings[i][0],strings[i][1], strings[i][2],strings[i][3]);
-                }
-                else{
-                    if(i>12) {
-                        adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE");
-                    }
-                    else{
-                        adapter.addItem(String.valueOf(i), "AM", "", "WHITE");
-                    }
+            if(strings[i][0]!=null){
+                adapter.addItem(strings[i][0],strings[i][1], strings[i][2],strings[i][3]);
+            }
+            else {
+                if (i > 12) {
+                    adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE");
+                } else {
+                    adapter.addItem(String.valueOf(i), "AM", "", "WHITE");
                 }
             }
         }
@@ -119,5 +108,5 @@ public class TimelineFragment extends ListFragment {
         Intent intent = new Intent(getActivity(), ScheduleInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-    }
+    }*/
 }

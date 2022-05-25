@@ -1,48 +1,48 @@
 package com.cookandroid.exam.Util;
 
 public class TimelineItem {
-    private String timeStr;
-    private String apStr;
-    private String lineStr;
-    private String titleStr;
-    private String colorStr;
-
-    public void setTime(String time) {
-        timeStr = time;
-    }
-
-    public void setAP(String ap) {
-        apStr = ap;
-    }
-
-    public void setLine(String line) {
-        lineStr = line;
-    }
-
-    public void setTitle(String title)  {
-        titleStr = title; }
-
-    public void setColor(String color)  {
-        colorStr = color;}
+    String time;
+    String ap;
+    String title;
+    String color;
 
     public String getTime() {
-        return this.timeStr;
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getAP() {
-        return this.apStr;
+        return ap;
     }
 
-    public String getLine() {
-        return this.lineStr;
+    public void setAP(String ap) {
+        this.ap = ap;
     }
 
-    public String getTitle(){
-        return this.titleStr;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getColor() {
-        return this.colorStr;
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public TimelineItem(String time, String ap, String title, String color){
+        this.time = time;
+        this.ap = ap;
+        this.title = title;
+        this.color = color;
     }
 
 }

@@ -4,7 +4,6 @@ public class ScheduleItem {
     String title;
     String time;
     String color;
-    String button;
 
     public String getTitle() {
         return title;
@@ -30,11 +29,9 @@ public class ScheduleItem {
         this.color = color;
     }
 
-    public String getButton() {
-        return button;
-    }
-
-    public void setButton(String button) {
-        this.button = button;
+    public ScheduleItem(String title, String time, String color){
+        this.time = time;
+        this.title = title;
+        this.color = color;
     }
 }

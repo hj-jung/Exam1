@@ -13,15 +13,19 @@ import android.widget.TextView;
 import com.cookandroid.exam.Activity.ScheduleEditActivity;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.ScheduleItem;
+import com.cookandroid.exam.Util.TimelineItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleAdapter extends BaseAdapter {
 
-    private ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+    private Context context;
+    private List<ScheduleItem> scheduleItems;
 
-    public ScheduleAdapter(){
-
+    public ScheduleAdapter(Context context, List<ScheduleItem> scheduleItems){
+        this.context = context;
+        this.scheduleItems = scheduleItems;
     }
 
     @Override
@@ -31,13 +35,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
-        final Context context = parent.getContext();
 
-        if(convertView==null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_schedule_listview, parent, false);
-        }
+        View v = View.inflate(context, R.layout.item_schedule_listview, null);
 
         TextView color = (TextView) convertView.findViewById(R.id.color);
         TextView title = (TextView) convertView.findViewById(R.id.title);
@@ -75,16 +74,6 @@ public class ScheduleAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
-    }
-
-    public void addItem(String title, String time, String color){
-        ScheduleItem item = new ScheduleItem();
-
-        item.setColor(color);
-        item.setTitle(title);
-        item.setTime(time);
-
-        scheduleItems.add(item);
     }
 
 }

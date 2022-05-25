@@ -30,10 +30,12 @@ public class CalendarAdapter extends RecyclerView.Adapter {
     private final int DAY_RED_TYPE= 2;
     private final int HEADER_TYPE = 3;
     int sun = 0;
-    Context context;
+
 
     private static final String TAG = "CalenderAdpater";
 
+
+    private Context context;
     private List<Object> mCalendarList;
 
     public CalendarAdapter(List<Object> calendarList){
