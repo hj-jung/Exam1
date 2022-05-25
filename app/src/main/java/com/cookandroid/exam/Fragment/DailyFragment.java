@@ -2,6 +2,7 @@ package com.cookandroid.exam.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cookandroid.exam.Activity.DeleteRoutineActivity;
 import com.cookandroid.exam.Activity.ScheduleCheckAcitivity;
 import com.cookandroid.exam.Activity.ScheduleUpdateActivity;
+import com.cookandroid.exam.Activity.WeatherNMapActivity;
 import com.cookandroid.exam.R;
 
 import org.w3c.dom.Text;
@@ -31,8 +34,16 @@ public class DailyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_daily, container, false);
 
+        ImageButton tempbtn = (ImageButton) view.findViewById(R.id.weather_page_go);
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
         TextView day = (TextView) view.findViewById(R.id.day);
+
+        tempbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivityForResult(new Intent(getContext(), WeatherNMapActivity.class), 5);
+            }
+        });
 
         //상단 오늘 날짜로 설정
         Date date = Calendar.getInstance().getTime();
