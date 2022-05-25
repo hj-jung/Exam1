@@ -16,12 +16,10 @@ import java.util.List;
 
 public class TimelineAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<TimelineItem> timelineItemList;
+    private ArrayList<TimelineItem> timelineItemList = new ArrayList<TimelineItem>();
 
-    public TimelineAdapter(Context context, ArrayList<TimelineItem> timelineItemList){
-        this.context = context;
-        this.timelineItemList = timelineItemList;
+    public TimelineAdapter(){
+
     }
 
     @Override
@@ -35,17 +33,20 @@ public class TimelineAdapter extends BaseAdapter {
         final int pos = position;
         final Context context = parent.getContext();
 
+        if(convertView==null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.item_daily_timeline, parent, false);
+        }
 
-        View v = View.inflate(context,R.layout.item_daily_timeline, null);
-        TextView timeTextView = (TextView) v.findViewById(R.id.time);
-        TextView apTextView = (TextView) v.findViewById(R.id.ampm);
-        TextView title = (TextView) v.findViewById(R.id.daily);
+        TextView timeTextView = (TextView) convertView.findViewById(R.id.time);
+        TextView apTextView = (TextView) convertView.findViewById(R.id.ampm);
+        TextView title = (TextView) convertView.findViewById(R.id.daily);
 
         TimelineItem timelineItem = timelineItemList.get(position);
 
         timeTextView.setText(timelineItem.getTime());
         apTextView.setText(timelineItem.getAP());
-        title.setText(timelineItem.getTitle());
+
         if(timelineItem.getColor()=="RED")  title.setBackgroundColor(Color.RED);
         if(timelineItem.getColor()=="ORANGE")  title.setBackgroundColor(Color.parseColor("#F0CA00"));
         if(timelineItem.getColor()=="GREEN")  title.setBackgroundColor(Color.GREEN);
@@ -54,8 +55,9 @@ public class TimelineAdapter extends BaseAdapter {
         if(timelineItem.getColor()=="BLACK")  title.setBackgroundColor(Color.BLACK);
         if(timelineItem.getColor()=="WHITE")  title.setBackgroundColor(Color.WHITE);
 
+        title.setText(timelineItem.getTitle());
 
-        return v;
+        return convertView;
     }
 
     @Override
@@ -68,5 +70,15 @@ public class TimelineAdapter extends BaseAdapter {
         return timelineItemList.get(i);
     }
 
+    public void addItem(String time, String ap, String title, String color){
+        TimelineItem item = new TimelineItem();
+
+        item.setTime(time);
+        item.setAP(ap);
+        item.setTitle(title);
+        item.setColor(color);
+
+        timelineItemList.add(item);
+    }
 
 }

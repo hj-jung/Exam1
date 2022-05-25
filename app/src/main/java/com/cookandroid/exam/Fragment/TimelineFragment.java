@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TimelineFragment extends ListFragment {/*
+public class TimelineFragment extends ListFragment {
     TimelineAdapter adapter;
     private int time;
     private String color, title, startH, AMPM;
@@ -108,5 +108,5 @@ public class TimelineFragment extends ListFragment {/*
         Intent intent = new Intent(getActivity(), ScheduleInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-    }*/
+    }
 }

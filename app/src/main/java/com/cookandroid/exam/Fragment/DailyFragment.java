@@ -48,12 +48,10 @@ public class DailyFragment extends Fragment {
     private TimelineAdapter adapter;
     private List<TimelineItem> timelineItemList;
 
-    private static final String TAG = "DailyFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_daily, container, false);
-        //Intent intent = getActivity().getIntent();
 
         ImageButton tempbtn = (ImageButton) view.findViewById(R.id.weather_page_go);
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
@@ -88,48 +86,6 @@ public class DailyFragment extends Fragment {
             case 7: weekday="SAT";    break;
         }
         day.setText(strday+"  "+weekday);
-
-        //ListView 띄우기 제발
-        //listView = (ListView) view.findViewById(R.id.dailylistView);
-        timelineItemList = new ArrayList<TimelineItem>();
-
-        adapter = new TimelineAdapter(getActivity().getApplicationContext(), (ArrayList<TimelineItem>) timelineItemList);
-        listView.setAdapter(adapter);
-
-        //Retrofit
-        ScheduleService scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
-        Call<List<Schedule>> call = scheduleService.today();
-        call.enqueue(new Callback<List<Schedule>>() {
-            @Override
-            public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
-                if(!response.isSuccessful()){
-                    Log.d(TAG, String.valueOf(response.code()));
-                    return;
-                }
-                Log.d(TAG, "Schedule Response Success");
-                List<Schedule> scheduleResponse = response.body();
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Schedule>> call, Throwable t) {
-
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
 
         //->일정등록페이지로 이동
         plus.setOnClickListener(new View.OnClickListener() {
