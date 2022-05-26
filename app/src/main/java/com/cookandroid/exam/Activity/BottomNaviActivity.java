@@ -26,6 +26,7 @@ import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.DTO.GetCharacter;
 import com.cookandroid.exam.DTO.Routine;
+import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,11 +45,6 @@ public class BottomNaviActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView; //바텀 네비게이션 뷰
     private FragmentManager fm = getSupportFragmentManager(); //fragmentManager생성
-
-    private boolean isText = false;
-    private String firstroutine = null;
-
-    private String characterNAme = "hi";
 
     private CharacterService characterService;
     private RoutineService routineService;
@@ -95,7 +91,6 @@ public class BottomNaviActivity extends AppCompatActivity {
 
         characterService = RetrofitClient.getClient().create(CharacterService.class);
         routineService = RetrofitClient.getClient().create(RoutineService.class);
-        getCharacter();
     }
 
     private void getCharacter() {
