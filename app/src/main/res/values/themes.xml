@@ -18,7 +18,7 @@
     </style>
 
     <!--팝업창 테마-->
-    <style name="DialogTheme.Exam" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="DialogTheme.Exam" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/dialogColor</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>

@@ -30,17 +30,35 @@ import retrofit2.Response;
 
 
 public class TimelineFragment extends ListFragment {
+
     TimelineAdapter adapter;
     private int time;
     private String color, title, startH, AMPM;
+    private String[][] strings = new String[25][4];
+
     private static final String TAG = "DailyFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // return inflater.inflate(R.layout.fragment_daily, container, false);
-        String[][] strings = new String[25][4];
+        String[][] times = new String[25][4];
         adapter = new TimelineAdapter();
         setListAdapter(adapter);
+
+        //해당 시간대에 일치하는 일정 DailyList에 띄우기
+        for(int i=1; i<25; i++){
+            if(strings[i][0]!=null){
+                adapter.addItem(strings[i][0],strings[i][1], strings[i][2],strings[i][3]);
+            }
+            else {
+                if (i > 12) {
+                    adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE");
+                } else {
+                    adapter.addItem(String.valueOf(i), "AM", "", "WHITE");
+                }
+            }
+        }
+
 
         //오늘 날짜 일정 GET
         ScheduleService scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
@@ -77,6 +95,9 @@ public class TimelineFragment extends ListFragment {
                     strings[time][3] = color;
 
                     System.out.println(title+startH+color);
+
+                    adapter.addItem(strings[time][0],strings[time][1], strings[time][2],strings[time][3]);
+
                 }
             }
 
@@ -86,19 +107,8 @@ public class TimelineFragment extends ListFragment {
             }
         });
 
-        //해당 시간대에 일치하는 일정 DailyList에 띄우기
-        for(int i=1; i<25; i++){
-            if(strings[i][0]!=null){
-                adapter.addItem(strings[i][0],strings[i][1], strings[i][2],strings[i][3]);
-            }
-            else {
-                if (i > 12) {
-                    adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE");
-                } else {
-                    adapter.addItem(String.valueOf(i), "AM", "", "WHITE");
-                }
-            }
-        }
+
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -109,4 +119,5 @@ public class TimelineFragment extends ListFragment {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
+
 }

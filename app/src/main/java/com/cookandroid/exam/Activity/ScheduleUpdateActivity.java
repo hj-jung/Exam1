@@ -296,15 +296,16 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             }
         });
 
-        /*
+
         //-> Location클릭 시 장소 검색 페이지로 이동
+        scheduleLocation = (EditText) findViewById(R.id.location);
         scheduleLocation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
 
         //Retrofit 인스턴스 생성
@@ -346,6 +347,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                 }
                 Toast.makeText(getApplicationContext(), "일정등록성공", Toast.LENGTH_SHORT).show();
                 Schedule scheduleResponse = response.body();
+
                 System.out.println(scheduleResponse.getTitle());
             }
 
