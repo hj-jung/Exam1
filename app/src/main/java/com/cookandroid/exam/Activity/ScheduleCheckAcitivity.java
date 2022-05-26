@@ -36,7 +36,6 @@ public class ScheduleCheckAcitivity extends Activity {
     private static final String TAG = "ScheduleCheckActivity";
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,7 @@ public class ScheduleCheckAcitivity extends Activity {
         day = (TextView) findViewById(R.id.day);
         today = "2022-05-26";
 
-        if (daypos == 10328) today = "2022-05-01";
+       if (daypos == 10328) today = "2022-05-01";
         else if (daypos > 10328 & daypos < 10360) {
             int dayNum = daypos - 10328 + 1;
             String.format("%02d", dayNum);
@@ -90,12 +89,12 @@ public class ScheduleCheckAcitivity extends Activity {
                     time = schedule.getStartYmd() + "~" + schedule.getEndYmd();
                     System.out.println(schedule.getTitle());
                     System.out.println(color+title+time);
+                    //GET한 DATA 리스트뷰에 추가
+                    ScheduleItem scheduleItem = new ScheduleItem(title, time, color);
+                    scheduleItems.add(scheduleItem);
+                    adapter.notifyDataSetChanged();
                 }
 
-                //GET한 DATA 리스트뷰에 추가
-                ScheduleItem scheduleItem = new ScheduleItem(title, time, color);
-                scheduleItems.add(scheduleItem);
-                adapter.notifyDataSetChanged();
             }
 
             @Override

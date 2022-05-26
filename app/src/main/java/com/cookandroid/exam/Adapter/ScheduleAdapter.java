@@ -51,6 +51,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
         ScheduleItem scheduleItem = scheduleItems.get(position);
 
+        System.out.println("먕"+scheduleItem.getColor());
+
         if(scheduleItem.getColor()=="RED")  color.setBackgroundColor(Color.RED);
         if(scheduleItem.getColor()=="ORANGE")  color.setBackgroundColor(Color.parseColor("#F0CA00"));
         if(scheduleItem.getColor()=="GREEN")  color.setBackgroundColor(Color.GREEN);
