@@ -296,6 +296,17 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             }
         });
 
+        /*
+        //-> Location클릭 시 장소 검색 페이지로 이동
+        scheduleLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
+
         //Retrofit 인스턴스 생성
         scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
 

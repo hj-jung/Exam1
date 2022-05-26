@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_detail_page.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_edit_mypage.xml" value="0.109375" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_location.xml" value="0.2" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_schedulecheck.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleedit.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleinfl.xml" value="0.24947916666666667" />
@@ -14,6 +15,7 @@
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/fragment_routine.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/fragment_timeline.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/item_daily_timeline.xml" value="0.24947916666666667" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/item_location_list.xml" value="0.4" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/item_schedule_listview.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/routine_listview_item.xml" value="0.109375" />
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1815" />

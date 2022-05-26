@@ -36,7 +36,13 @@ public class ScheduleAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = View.inflate(context, R.layout.item_schedule_listview, null);
+        final int pos = position;
+        final Context context = parent.getContext();
+
+        if(convertView==null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.item_schedule_listview, parent, false);
+        }
 
         TextView color = (TextView) convertView.findViewById(R.id.color);
         TextView title = (TextView) convertView.findViewById(R.id.title);

@@ -1,8 +1,12 @@
 package com.cookandroid.exam.Activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -25,6 +29,8 @@ import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.Util.RoutineData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -48,6 +54,7 @@ public class BottomNaviActivity extends AppCompatActivity {
     private RoutineService routineService;
 
     private int characterid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

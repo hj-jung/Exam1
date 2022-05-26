@@ -5,14 +5,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+public class LocationRetrofitClient {
 
-    // server의 url을 적어준다
-    private static final String URL = "https://3796-112-150-87-106.jp.ngrok.io";
-    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://dapi.kakao.com/";
+    private static Retrofit retrofit;
 
-    public static Retrofit getClient() {
-        if (retrofit == null) {
+    public static Retrofit getClient(){
+        if(retrofit == null){
 
             // 네트워크 통신 로그(서버로 보내는 파라미터 및 받는 파라미터) 보기
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -21,12 +20,10 @@ public class RetrofitClient {
 
             // Retrofit 객체 초기화
             retrofit = new Retrofit.Builder()
-                    .baseUrl(URL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
                     .build();
         }
-        return retrofit;
+        return  retrofit;
     }
-
 }
