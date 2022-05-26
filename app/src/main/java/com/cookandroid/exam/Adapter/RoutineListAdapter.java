@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.RoutineData;
 
@@ -40,6 +41,7 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineListAdapter.
     public void onBindViewHolder(@NonNull RoutineListAdapter.ViewHolder holder, int position) {
         holder.routineName.setText(list.get(position).routineName);
         holder.routineTime.setText(list.get(position).routineTime);
+        holder.routineCheck.setChecked(list.get(position).routineAchieve);
     }
 
     @Override
@@ -69,11 +71,26 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineListAdapter.
                     }
                 }
             });
+
+            routineCheck.setOnClickListener(new CheckBox.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onCheckClick(view, pos, routineCheck.isChecked());
+                            System.out.println("checkbox isChecked" + routineCheck.isChecked());
+                            System.out.println("checkbox clicked" + pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
     public interface OnItemClickListener {
         void onItemClick(View view, int pos);
+        void onCheckClick(View view, int pos, boolean isChecked);
     }
 
     private OnItemClickListener mListener = null;

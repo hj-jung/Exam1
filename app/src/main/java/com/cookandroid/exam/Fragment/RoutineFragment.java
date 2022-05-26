@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +18,18 @@ import android.widget.ImageButton;
 import com.cookandroid.exam.Activity.AddRoutineActivity;
 import com.cookandroid.exam.Activity.DeleteRoutineActivity;
 import com.cookandroid.exam.Adapter.RoutineListAdapter;
+import com.cookandroid.exam.DTO.Routine;
+import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
 
-
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RoutineFragment extends Fragment {
 
@@ -32,11 +39,18 @@ public class RoutineFragment extends Fragment {
     private RoutineListAdapter adapter;
     private ArrayList<RoutineData> list = new ArrayList<RoutineData>();
 
-    private int deleteId;
+    RoutineService routineService;
+
+    private int deleteId, checkId;
+    private boolean routineIsChecked;
+
+    private String routineAchive;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_routine, container, false);
+
+        routineService = RetrofitClient.getClient().create(RoutineService.class);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
@@ -76,6 +90,14 @@ public class RoutineFragment extends Fragment {
                     getActivity().startActivityForResult(intent, 4);
 
                 }
+
+                @Override
+                public void onCheckClick(View v, int pos, boolean isChecked) {
+                    checkId = list.get(pos).routineId;
+                    routineIsChecked = isChecked;
+                    checkRoutine();
+                    getAchieve();
+                }
             });
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -84,5 +106,46 @@ public class RoutineFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    private void checkRoutine() {
+        RoutineAchive routineAchive = new RoutineAchive(routineIsChecked);
+        Call<Routine> call = routineService.checkRoutine(checkId, routineAchive);
+        call.enqueue(new Callback<Routine>() {
+            @Override
+            public void onResponse(Call<Routine> call, Response<Routine> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("TAG", String.valueOf(response.code()));
+                    return;
+                }
+                Routine routineResponse = response.body();
+                System.out.println(routineResponse.toString());
+            }
+
+            @Override
+            public void onFailure(Call<Routine> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+            }
+        });
+    }
+
+    private void getAchieve() {
+        Call<String> call = routineService.getAchieve();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("TAG", String.valueOf(response.code()));
+                    return;
+                }
+                routineAchive = response.body();
+                System.out.println(routineAchive);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+            }
+        });
     }
 }
