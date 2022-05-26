@@ -89,7 +89,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="2.5"
                         android:layout_marginRight="10dp"
                         android:gravity="center_horizontal" >
 
@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:text="℃"
                             android:textStyle="bold"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
@@ -181,7 +181,7 @@
                         android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="3" >
+                        android:layout_weight="4.5" >
 
                         <TextView
                             android:layout_width="wrap_content"
