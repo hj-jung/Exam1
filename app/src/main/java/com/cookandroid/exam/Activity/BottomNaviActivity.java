@@ -16,11 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.Fragment.DailyFragment;
 import com.cookandroid.exam.Fragment.MainFragment;
 import com.cookandroid.exam.Fragment.MypageFragment;
 import com.cookandroid.exam.Fragment.RoutineFragment;
+import com.cookandroid.exam.Fragment.TimelineFragment;
 import com.cookandroid.exam.Interface.CharacterService;
+import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Interface.RoutineService;
 import com.cookandroid.exam.R;
@@ -28,10 +31,12 @@ import com.cookandroid.exam.DTO.GetCharacter;
 import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
+import com.cookandroid.exam.Util.ScheduleData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -52,6 +57,10 @@ public class BottomNaviActivity extends AppCompatActivity {
     private int characterid;
 
 
+    private int time;
+    private String color, title, startH, AMPM;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +71,6 @@ public class BottomNaviActivity extends AppCompatActivity {
 
         if (intent != null) {
             characterid = intent.getIntExtra("characterID", 0);
-            System.out.println(characterid);
         }
 
 
@@ -77,6 +85,7 @@ public class BottomNaviActivity extends AppCompatActivity {
                     case R.id.tab_main:
                         ft.replace(R.id.btmnavi_frame, new MainFragment()).commit(); break;
                     case R.id.tab_daily:
+                        getDailySchedule();
                         ft.replace(R.id.btmnavi_frame, new DailyFragment()).commit(); break;
                     case R.id.tab_routine:
                         getRoutine();
@@ -168,6 +177,58 @@ public class BottomNaviActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Routine>> call, Throwable t) {
                 Log.d("getCharacter=", t.getMessage());
+            }
+        });
+    }
+
+    private void getDailySchedule() {
+
+        //오늘 날짜 일정 GET
+        ScheduleService scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
+        Call<List<Schedule>> call = scheduleService.today();
+        call.enqueue(new Callback<List<Schedule>>() {
+            @Override
+            public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
+                if(!response.isSuccessful()){
+                    Log.d("TAG", String.valueOf(response.code()));
+                    return;
+                }
+                Log.d("TAG", "Schedule Response Success");
+                List<Schedule> scheduleResponse = response.body();
+
+                Bundle bundle = new Bundle();
+                ArrayList<ScheduleData> scheduleData = new ArrayList<>();
+
+                for(Schedule schedule : scheduleResponse){
+                    color = schedule.getColor();
+                    title = schedule.getTitle();
+                    String startTime = schedule.getStartHms();
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                        LocalTime localTime= LocalTime.parse(startTime, formatter);
+                        time = Integer.valueOf(localTime.getHour());
+                        if(localTime.getHour()>12){
+                            startH = String.valueOf(localTime.getHour()-12);
+                            AMPM = "PM";
+                        }
+                        else{
+                            startH = String.valueOf(localTime.getHour());
+                            AMPM = "AM";
+                        }
+                    }
+                    scheduleData.add(new ScheduleData(schedule.getColor(), schedule.getContext(), schedule.getEndHms(), schedule.getLocation(), schedule.getStartHms(), schedule.getStartYmd(), startH, schedule.getTitle(), time, AMPM));
+                }
+
+                bundle.putParcelableArrayList("TodaySchedule", (ArrayList<? extends Parcelable>) scheduleData);
+
+                TimelineFragment timelineFragment = new TimelineFragment();
+                timelineFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.timelineView, timelineFragment).commit();
+            }
+
+            @Override
+            public void onFailure(Call<List<Schedule>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
             }
         });
     }

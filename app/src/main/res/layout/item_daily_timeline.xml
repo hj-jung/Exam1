@@ -21,11 +21,33 @@
         android:textSize="10dp"
         android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/daily"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="ScheduleTitle" />
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:id="@+id/timeline_event" >
+
+        <TextView
+            android:id="@+id/timeline_event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:text="ScheduleTitle"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/timeline_event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:text="ScheduleTime"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

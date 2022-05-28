@@ -1,6 +1,5 @@
 package com.cookandroid.exam.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.cookandroid.exam.Activity.AddRoutineActivity;
 import com.cookandroid.exam.Activity.DeleteRoutineActivity;
@@ -24,6 +24,8 @@ import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -41,10 +43,12 @@ public class RoutineFragment extends Fragment {
 
     RoutineService routineService;
 
+    TextView routineRate;
+
     private int deleteId, checkId;
     private boolean routineIsChecked;
 
-    private String routineAchive;
+    private String routineAchive = "NaN";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class RoutineFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
         ImageButton Routinebtn = (ImageButton) rootView.findViewById(R.id.addRoutine);
+        routineRate = (TextView) rootView.findViewById(R.id.routine_rate);
 
         Routinebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +73,7 @@ public class RoutineFragment extends Fragment {
                     adapter = new RoutineListAdapter(getActivity(), list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     recyclerView.setAdapter(adapter);
+                    getAchieve();
                 }
                 //startActivity(intent);
             }
@@ -139,7 +145,8 @@ public class RoutineFragment extends Fragment {
                     return;
                 }
                 routineAchive = response.body();
-                System.out.println(routineAchive);
+                if (routineAchive.equals("NaN")) routineRate.setText("등록된 루틴이 없습니다");
+                else routineRate.setText(routineAchive + "%");
             }
 
             @Override

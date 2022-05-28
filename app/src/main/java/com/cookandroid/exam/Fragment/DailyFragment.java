@@ -26,10 +26,12 @@ import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Util.ScheduleData;
 import com.cookandroid.exam.Util.TimelineItem;
 
 import org.w3c.dom.Text;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +50,8 @@ public class DailyFragment extends Fragment {
     private TimelineAdapter adapter;
     private List<TimelineItem> timelineItemList;
 
+    ArrayList<ScheduleData> list = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class DailyFragment extends Fragment {
         ImageButton tempbtn = (ImageButton) view.findViewById(R.id.weather_page_go);
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
         TextView day = (TextView) view.findViewById(R.id.day);
+        listView = (ListView) view.findViewById(R.id.timelinelist);
 
         tempbtn.setOnClickListener(new View.OnClickListener() {
             @Override

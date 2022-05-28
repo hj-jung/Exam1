@@ -1,16 +1,18 @@
 package com.cookandroid.exam.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.cookandroid.exam.DTO.Dust.PmInfo;
-import com.cookandroid.exam.DTO.Dust.Response;
 import com.cookandroid.exam.DTO.Weather.Item;
 import com.cookandroid.exam.DTO.Weather.Result;
 import com.cookandroid.exam.Interface.DustService;
@@ -18,9 +20,14 @@ import com.cookandroid.exam.Interface.WeatherService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.DustRetrofitClient;
 import com.cookandroid.exam.Retrofit.WeatherRetrofitClient;
+import com.cookandroid.exam.Util.ScheduleData;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +38,7 @@ public class WeatherNMapActivity extends Activity {
 
     private TextView tvTmp, tvRain, tvWind, tvDust;
     private ImageView weatherImg;
+    private ImageButton backButton;
 
     private String MyKey = "3QkdRZx/R+OBMH+5QoKu7iRbyDkdjaO0nMixw6RktnNL74/9rWajdRkCmtRfYxxYrWv8OABBzFaEY5h6WqwJFA==";
     private String DustKey = "+WSXT9nqJHijeDm0+DfSdKPLPcMLKnfHaJ6XU7N2hq0VkI3x+NM7Yc4Bgbkbok08RCFQEIgd0W/LpiVOg2j3Ow==";
@@ -48,22 +56,51 @@ public class WeatherNMapActivity extends Activity {
 
     private String dustValue, dustGrade;
 
+    private ArrayList<ScheduleData> list = new ArrayList<>();
+    private int pos;
+    private String base_date, base_time, dust_daytime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            list = intent.getParcelableArrayListExtra("scheduleList");
+            pos = intent.getIntExtra("pos", -1);
+            pos = pos + 1;
+        }
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //레이아웃 xml 지정
         setContentView(R.layout.activity_detail_page);
 
+        for (ScheduleData scheduleData : list) {
+            if (Integer.parseInt(scheduleData.getStartH()) == pos) {
+                Date date = Calendar.getInstance().getTime();
+                SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+                base_date = format.format(date);
+                base_time = String.format("%02d",pos);
+                dust_daytime = scheduleData.getStartYmd() + " " + base_time + ":00";
+                base_time = base_time.concat("00");
+            }
+        }
+
         //UI 객체 설정
+        backButton = (ImageButton) findViewById(R.id.detail_back);
         tvTmp = (TextView) findViewById(R.id.weather_temperature);
         tvRain = (TextView) findViewById(R.id.weather_rainpercent);
         tvWind = (TextView) findViewById(R.id.weather_windspeed);
         tvDust = (TextView) findViewById(R.id.weather_dust);
         weatherImg = (ImageView) findViewById(R.id.weather_image);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         weatherService = WeatherRetrofitClient.getClient().create(WeatherService.class);
 
@@ -71,8 +108,8 @@ public class WeatherNMapActivity extends Activity {
                 "1",
                 "10",
                 "JSON",
-                "20220526",
-                "1200",
+                base_date,
+                base_time,
                 "60",
                 "126").enqueue(new Callback<Result>() {
             @Override
@@ -138,6 +175,7 @@ public class WeatherNMapActivity extends Activity {
             }
         });
 
+
         dustService = DustRetrofitClient.getClient().create(DustService.class);
 
         dustService.getDust("용산구", "json", "daily", 1, 10, DustKey).enqueue(new Callback<PmInfo>() {
@@ -147,7 +185,7 @@ public class WeatherNMapActivity extends Activity {
                 dustItemList = dustResponse.getResponse().getBody().getItems();
 
                 for(com.cookandroid.exam.DTO.Dust.Item item : dustItemList) {
-                    if (item.getDataTime().equals("2022-05-26 12:00")) {
+                    if (item.getDataTime().equals(dust_daytime)) {
                         dustValue = item.getPm10Grade();
                         System.out.println(dustValue);
                     }

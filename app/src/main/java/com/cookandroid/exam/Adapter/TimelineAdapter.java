@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cookandroid.exam.DTO.Schedule;
+import com.cookandroid.exam.Util.ScheduleData;
 import com.cookandroid.exam.Util.TimelineItem;
 import com.cookandroid.exam.R;
 
@@ -17,6 +20,9 @@ import java.util.List;
 public class TimelineAdapter extends BaseAdapter {
 
     private ArrayList<TimelineItem> timelineItemList = new ArrayList<TimelineItem>();
+    private ArrayList<ScheduleData> timelineScheduleList = new ArrayList<>();
+
+    private int tListCnt = 0;
 
     public TimelineAdapter(){
 
@@ -24,7 +30,7 @@ public class TimelineAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return timelineItemList.size();
+        return tListCnt;
     }
 
 
@@ -40,22 +46,27 @@ public class TimelineAdapter extends BaseAdapter {
 
         TextView timeTextView = (TextView) convertView.findViewById(R.id.time);
         TextView apTextView = (TextView) convertView.findViewById(R.id.ampm);
-        TextView title = (TextView) convertView.findViewById(R.id.daily);
+        TextView title = (TextView) convertView.findViewById(R.id.timeline_event_name);
+        TextView time = (TextView) convertView.findViewById(R.id.timeline_event_time);
+        LinearLayout timelineevent = (LinearLayout) convertView.findViewById(R.id.timeline_event);
 
         TimelineItem timelineItem = timelineItemList.get(position);
 
         timeTextView.setText(timelineItem.getTime());
         apTextView.setText(timelineItem.getAP());
 
-        if(timelineItem.getColor()=="RED")  title.setBackgroundColor(Color.RED);
-        if(timelineItem.getColor()=="ORANGE")  title.setBackgroundColor(Color.parseColor("#F0CA00"));
-        if(timelineItem.getColor()=="GREEN")  title.setBackgroundColor(Color.GREEN);
-        if(timelineItem.getColor()=="BLUE") title.setBackgroundColor(Color.BLUE);
-        if(timelineItem.getColor()=="PURPLE")  title.setBackgroundColor(Color.parseColor("#E200CC"));
-        if(timelineItem.getColor()=="BLACK")  title.setBackgroundColor(Color.BLACK);
-        if(timelineItem.getColor()=="WHITE")  title.setBackgroundColor(Color.WHITE);
+        switch (timelineItem.getColor()) {
+            case ("RED") : title.setBackgroundColor(Color.RED); break;
+            case ("ORANGE") : title.setBackgroundColor(Color.parseColor("#F0CA00")); break;
+            case ("GREEN") : title.setBackgroundColor(Color.GREEN); break;
+            case ("BLUE") : timelineevent.setBackgroundColor(Color.BLUE); break;
+            case ("PURPLE") : timelineevent.setBackgroundColor(Color.parseColor("#E200CC")); break;
+            case ("BLACK") : title.setBackgroundColor(Color.BLACK);
+            case ("WHITE") : title.setBackgroundColor(Color.WHITE);
+        }
 
         title.setText(timelineItem.getTitle());
+        time.setText(timelineItem.getTime());
 
         return convertView;
     }
@@ -71,6 +82,7 @@ public class TimelineAdapter extends BaseAdapter {
     }
 
     public void addItem(String time, String ap, String title, String color){
+
         TimelineItem item = new TimelineItem();
 
         item.setTime(time);
@@ -79,6 +91,10 @@ public class TimelineAdapter extends BaseAdapter {
         item.setColor(color);
 
         timelineItemList.add(item);
+        tListCnt = timelineItemList.size();
+
+
+        this.notifyDataSetChanged();
     }
 
 }

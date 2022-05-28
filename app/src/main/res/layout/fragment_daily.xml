@@ -58,9 +58,13 @@
 
             <fragment
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.cookandroid.exam.Fragment.TimelineFragment">
-            </fragment>
+                android:layout_height="300dp"
+                android:name="com.cookandroid.exam.Fragment.TimelineFragment" />
+
+            <ListView
+                android:id="@+id/timelinelist"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
         </FrameLayout>
 

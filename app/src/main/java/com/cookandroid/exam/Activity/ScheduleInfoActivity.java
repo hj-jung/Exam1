@@ -11,6 +11,6 @@ public class ScheduleInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scheduleinfo);
+        setContentView(R.layout.activity_detail_page);
     }
 }
