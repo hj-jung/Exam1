@@ -20,7 +20,6 @@ import java.util.List;
 public class TimelineAdapter extends BaseAdapter {
 
     private ArrayList<TimelineItem> timelineItemList = new ArrayList<TimelineItem>();
-    private ArrayList<ScheduleData> timelineScheduleList = new ArrayList<>();
 
     private int tListCnt = 0;
 
@@ -93,8 +92,6 @@ public class TimelineAdapter extends BaseAdapter {
 
         timelineItemList.add(item);
         tListCnt = timelineItemList.size();
-
-
         this.notifyDataSetChanged();
     }
 

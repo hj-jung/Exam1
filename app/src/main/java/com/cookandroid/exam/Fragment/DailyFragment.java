@@ -60,7 +60,6 @@ public class DailyFragment extends Fragment {
         ImageButton tempbtn = (ImageButton) view.findViewById(R.id.weather_page_go);
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
         TextView day = (TextView) view.findViewById(R.id.day);
-        listView = (ListView) view.findViewById(R.id.timelinelist);
 
         tempbtn.setOnClickListener(new View.OnClickListener() {
             @Override

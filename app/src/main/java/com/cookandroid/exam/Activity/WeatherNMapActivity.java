@@ -36,8 +36,8 @@ public class WeatherNMapActivity extends Activity {
 
     private static final String TAG = "DetailPageActivity";
 
-    private TextView tvDay, tvEventName, tvEventTime, tvTmp, tvRain, tvWind, tvDust;
-    private ImageView weatherImg;
+    private TextView tvDay, tvEventName, tvEventTime, tvTmp, tvRain, tvWind, tvDust, tvRec;
+    private ImageView weatherImg, dressImg1, dressImg2;
     private ImageButton backButton;
 
     private String MyKey = "3QkdRZx/R+OBMH+5QoKu7iRbyDkdjaO0nMixw6RktnNL74/9rWajdRkCmtRfYxxYrWv8OABBzFaEY5h6WqwJFA==";
@@ -58,7 +58,7 @@ public class WeatherNMapActivity extends Activity {
 
     private ArrayList<ScheduleData> list = new ArrayList<>();
     ScheduleData data;
-    private int pos;
+    private int pos, dressTem;
     private String base_date, base_time, dust_daytime, strMonth;
 
     @Override
@@ -77,10 +77,11 @@ public class WeatherNMapActivity extends Activity {
         //레이아웃 xml 지정
         setContentView(R.layout.activity_detail_page);
 
+        System.out.println(list);
         for (ScheduleData scheduleData : list) {
             if (Integer.parseInt(scheduleData.getStartH()) == pos) {
                 data = scheduleData;
-                base_time = String.format("%02d",pos);
+                base_time = String.format("%02d", pos);
             }
         }
 
@@ -92,40 +93,78 @@ public class WeatherNMapActivity extends Activity {
 
         //상단 월
         switch (strCurMonth) {
-            case "01" : strMonth = "Jan"; break;
-            case "02" : strMonth = "Feb"; break;
-            case "03" : strMonth = "Mar"; break;
-            case "04" : strMonth = "Apr"; break;
-            case "05" : strMonth = "May"; break;
-            case "06" : strMonth = "Jun"; break;
-            case "07" : strMonth = "Jul"; break;
-            case "08" : strMonth = "Aug"; break;
-            case "09" : strMonth = "Sep"; break;
-            case "10" : strMonth = "Oct"; break;
-            case "11" : strMonth = "Nov"; break;
-            case "12" : strMonth = "Dec"; break;
+            case "01":
+                strMonth = "Jan";
+                break;
+            case "02":
+                strMonth = "Feb";
+                break;
+            case "03":
+                strMonth = "Mar";
+                break;
+            case "04":
+                strMonth = "Apr";
+                break;
+            case "05":
+                strMonth = "May";
+                break;
+            case "06":
+                strMonth = "Jun";
+                break;
+            case "07":
+                strMonth = "Jul";
+                break;
+            case "08":
+                strMonth = "Aug";
+                break;
+            case "09":
+                strMonth = "Sep";
+                break;
+            case "10":
+                strMonth = "Oct";
+                break;
+            case "11":
+                strMonth = "Nov";
+                break;
+            case "12":
+                strMonth = "Dec";
+                break;
         }
 
         Date current = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(current);
         int dayofWeekNumber = calendar.get(Calendar.DAY_OF_WEEK);
-        String weekday="SUN";
+        String weekday = "SUN";
 
         //상단 요일
-        switch (dayofWeekNumber){
-            case 1: weekday="Sunday";    break;
-            case 2: weekday="Monday";    break;
-            case 3: weekday="Tuesday";    break;
-            case 4: weekday="Wednesday";    break;
-            case 5: weekday="Thursday";    break;
-            case 6: weekday="Friday";    break;
-            case 7: weekday="Saturday";    break;
+        switch (dayofWeekNumber) {
+            case 1:
+                weekday = "Sunday";
+                break;
+            case 2:
+                weekday = "Monday";
+                break;
+            case 3:
+                weekday = "Tuesday";
+                break;
+            case 4:
+                weekday = "Wednesday";
+                break;
+            case 5:
+                weekday = "Thursday";
+                break;
+            case 6:
+                weekday = "Friday";
+                break;
+            case 7:
+                weekday = "Saturday";
+                break;
         }
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         base_date = format.format(date);
-        dust_daytime = data.getStartYmd() + " " + base_time + ":00";
+        //dust_daytime = data.getStartYmd() + " " + base_time + ":00";
         base_time = base_time.concat("00");
 
         //UI 객체 설정
@@ -137,7 +176,10 @@ public class WeatherNMapActivity extends Activity {
         tvRain = (TextView) findViewById(R.id.weather_rainpercent);
         tvWind = (TextView) findViewById(R.id.weather_windspeed);
         tvDust = (TextView) findViewById(R.id.weather_dust);
+        tvRec = (TextView) findViewById(R.id.dress_recommendation);
         weatherImg = (ImageView) findViewById(R.id.weather_image);
+        dressImg1 = (ImageView) findViewById(R.id.dress_1);
+        dressImg2 = (ImageView) findViewById(R.id.dress_2);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,26 +209,25 @@ public class WeatherNMapActivity extends Activity {
                 for (Item item : weatherItemList) {
                     String str = item.getCategory();
 
-                    switch(str) {
-                        case "POP" : {
+                    switch (str) {
+                        case "POP": {
                             //rainPercent = Integer.parseInt(item.getObsrValue());
                             rainPercent = item.getObsrValue();
                             break;
                         }
-                        case "PTY" : {
+                        case "PTY": {
                             if (item.getObsrValue().equals("0")) {
                                 rainPercent = "0";
                                 weatherCode = item.getObsrValue();
-                            }
-                            else if (item.getObsrValue().equals("1")) rainPercent = "100";
+                            } else if (item.getObsrValue().equals("1")) rainPercent = "100";
                             break;
                         }
-                        case "WSD" : {
+                        case "WSD": {
                             //windSpeed = Double.parseDouble(item.getObsrValue());
                             windSpeed = item.getObsrValue();
                             break;
                         }
-                        case "T1H" : {
+                        case "T1H": {
                             Double temDouble = Double.parseDouble(item.getObsrValue());
                             int tem = (int) Math.round(temDouble);
                             System.out.println(item.getCategory());
@@ -194,7 +235,7 @@ public class WeatherNMapActivity extends Activity {
                             temperature = String.valueOf(tem);
                             break;
                         }
-                        case "TMP" : {
+                        case "TMP": {
                             Double temDouble = Double.parseDouble(item.getObsrValue());
                             int tem = (int) Math.round(temDouble);
                             System.out.println(item.getCategory());
@@ -209,12 +250,56 @@ public class WeatherNMapActivity extends Activity {
                 System.out.println(windSpeed);
 
                 switch (weatherCode) {
-                    case "0" : weatherImg.setImageResource(R.drawable.weather_sunny);
+                    case "0":
+                        weatherImg.setImageResource(R.drawable.weather_sunny);
                 }
 
                 tvTmp.setText(temperature);
                 tvRain.setText(rainPercent);
                 tvWind.setText(windSpeed);
+
+                dressTem = Integer.parseInt(temperature);
+
+                if (dressTem >= 27) {
+                    tvRec.setText("나시티, 반바지, 민소매 원피스");
+                    dressImg1.setImageResource(R.drawable.dress_sleeveless);
+                    dressImg2.setImageResource(R.drawable.dress_shorts);
+                }
+                else if (dressTem >= 23 && dressTem <= 26) {
+                    tvRec.setText("반팔, 얇은 셔츠, 얇은 긴팔, 반바지, 면바지");
+                    dressImg1.setImageResource(R.drawable.dress_short_sleeve);
+                    dressImg2.setImageResource(R.drawable.dress_shirt);
+                }
+                else if (dressTem >= 20) {
+                    tvRec.setText("긴팔티, 가디건, 후드티, 면바지, 슬랙스, 스키니");
+                    dressImg1.setImageResource(R.drawable.dress_jean);
+                    dressImg2.setImageResource(R.drawable.dress_long_sleeve);
+                }
+                else if (dressTem >= 17) {
+                    tvRec.setText("니트, 가디건, 후드티, 맨투맨, 청바지, 슬랙스");
+                    dressImg1.setImageResource(R.drawable.dress_hoodie);
+                    dressImg2.setImageResource(R.drawable.dress_sleeve);
+                }
+                else if (dressTem >= 12) {
+                    tvRec.setText("자켓, 셔츠, 가디건, 간절기 야상");
+                    dressImg1.setImageResource(R.drawable.dress_jacket);
+                    dressImg2.setImageResource(R.drawable.dress_long_shirt);
+                }
+                else if (dressTem >= 10) {
+                    tvRec.setText("트렌치코트, 간절기 야상, 여러겹 껴입기");
+                    dressImg1.setImageResource(R.drawable.dress_trench);
+                    dressImg2.setImageResource(R.drawable.dress_knit);
+                }
+                else if (dressTem >= 6) {
+                    tvRec.setText("코트, 가죽자켓");
+                    dressImg1.setImageResource(R.drawable.dress_coat);
+                    dressImg2.setImageResource(R.drawable.dress_sweater_winter);
+                }
+                else {
+                    tvRec.setText("겨울 옷(야상, 패딩, 목도리 등)");
+                    dressImg1.setImageResource(R.drawable.dress_puffer_coat);
+                    dressImg2.setImageResource(R.drawable.dress_scarf);
+                }
             }
 
             @Override
@@ -232,7 +317,9 @@ public class WeatherNMapActivity extends Activity {
                 PmInfo dustResponse = response.body();
                 dustItemList = dustResponse.getResponse().getBody().getItems();
 
-                for(com.cookandroid.exam.DTO.Dust.Item item : dustItemList) {
+                dustValue = "0";
+
+                for (com.cookandroid.exam.DTO.Dust.Item item : dustItemList) {
                     if (item.getDataTime().equals(dust_daytime)) {
                         dustValue = item.getPm10Grade();
                         System.out.println(dustValue);
@@ -240,10 +327,16 @@ public class WeatherNMapActivity extends Activity {
                 }
 
                 switch (dustValue) {
-                    case "1" : dustGrade = "좋음";
-                    case "2" : dustGrade = "보통";
-                    case "3" : dustGrade = "나쁨";
-                    case "4" : dustGrade = "매우나쁨";
+                    case "0":
+                        dustGrade = "-";
+                    case "1":
+                        dustGrade = "좋음";
+                    case "2":
+                        dustGrade = "보통";
+                    case "3":
+                        dustGrade = "나쁨";
+                    case "4":
+                        dustGrade = "매우나쁨";
                 }
 
                 tvDust.setText(dustGrade);
@@ -254,6 +347,8 @@ public class WeatherNMapActivity extends Activity {
                 Log.d("retrofit", t.getMessage());
             }
         });
+
     }
+
 
 }

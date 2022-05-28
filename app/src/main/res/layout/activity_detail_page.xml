@@ -25,7 +25,7 @@
             android:id="@+id/detail_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="상세페이지"
+            android:text="No Event"
             android:textSize="25sp"
             android:textStyle="bold"/>
 
@@ -59,7 +59,7 @@
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:background="@drawable/round_border_shadow"
             android:orientation="horizontal" >
 
@@ -73,7 +73,7 @@
                     android:layout_margin="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/weather_cloudy" />
+                    android:src="@drawable/image_not_applicable" />
 
             </LinearLayout>
 
@@ -101,7 +101,7 @@
                             android:id="@+id/weather_temperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8"
+                            android:text="-"
                             android:textStyle="bold"
                             android:textSize="35sp" />
 
@@ -137,7 +137,7 @@
                                 android:id="@+id/weather_rainpercent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="-"
                                 android:textStyle="bold"
                                 android:textSize="13sp" />
 
@@ -166,7 +166,7 @@
                                 android:id="@+id/weather_windspeed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="-"
                                 android:textStyle="bold"
                                 android:textSize="13sp" />
 
@@ -198,7 +198,7 @@
                             android:id="@+id/weather_dust"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="좋음"
+                            android:text="-"
                             android:textStyle="bold"
                             android:textSize="13sp" />
 
@@ -210,21 +210,46 @@
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" >
+                    android:layout_weight="1.5" >
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:text="착장 추천 : 코트, 가죽자켓" />
+                        android:text="착장 추천 : " />
+
+                    <TextView
+                        android:id="@+id/dress_recommendation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:text="코트, 가죽자켓" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2" />
+                    android:layout_weight="3" >
+
+                    <ImageView
+                        android:id="@+id/dress_1"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/image_not_applicable" />
+
+                    <ImageView
+                        android:id="@+id/dress_2"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/image_not_applicable" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

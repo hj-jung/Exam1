@@ -48,7 +48,6 @@ public class TimelineFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // return inflater.inflate(R.layout.fragment_daily, container, false);
-        String[][] times = new String[25][4];
         adapter = new TimelineAdapter();
         setListAdapter(adapter);
 
@@ -85,6 +84,8 @@ public class TimelineFragment extends ListFragment {
                 }
             }
         }
+
+        adapter.notifyDataSetChanged();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
