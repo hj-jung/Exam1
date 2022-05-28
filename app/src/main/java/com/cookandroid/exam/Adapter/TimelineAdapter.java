@@ -56,17 +56,17 @@ public class TimelineAdapter extends BaseAdapter {
         apTextView.setText(timelineItem.getAP());
 
         switch (timelineItem.getColor()) {
-            case ("RED") : title.setBackgroundColor(Color.RED); break;
-            case ("ORANGE") : title.setBackgroundColor(Color.parseColor("#F0CA00")); break;
-            case ("GREEN") : title.setBackgroundColor(Color.GREEN); break;
+            case ("RED") : timelineevent.setBackgroundColor(Color.RED); break;
+            case ("ORANGE") : timelineevent.setBackgroundColor(Color.parseColor("#F0CA00")); break;
+            case ("GREEN") : timelineevent.setBackgroundColor(Color.GREEN); break;
             case ("BLUE") : timelineevent.setBackgroundColor(Color.BLUE); break;
             case ("PURPLE") : timelineevent.setBackgroundColor(Color.parseColor("#E200CC")); break;
-            case ("BLACK") : title.setBackgroundColor(Color.BLACK);
-            case ("WHITE") : title.setBackgroundColor(Color.WHITE);
+            case ("BLACK") : timelineevent.setBackgroundColor(Color.BLACK); break;
+            case ("WHITE") : timelineevent.setBackgroundColor(Color.WHITE); break;
         }
 
         title.setText(timelineItem.getTitle());
-        time.setText(timelineItem.getTime());
+        time.setText(timelineItem.getTimeEvent());
 
         return convertView;
     }
@@ -81,7 +81,7 @@ public class TimelineAdapter extends BaseAdapter {
         return timelineItemList.get(i);
     }
 
-    public void addItem(String time, String ap, String title, String color){
+    public void addItem(String time, String ap, String title, String color, String timeEvent){
 
         TimelineItem item = new TimelineItem();
 
@@ -89,6 +89,7 @@ public class TimelineAdapter extends BaseAdapter {
         item.setAP(ap);
         item.setTitle(title);
         item.setColor(color);
+        item.setTimeEvent(timeEvent);
 
         timelineItemList.add(item);
         tListCnt = timelineItemList.size();

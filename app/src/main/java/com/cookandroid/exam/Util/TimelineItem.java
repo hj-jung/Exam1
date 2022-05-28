@@ -7,6 +7,16 @@ public class TimelineItem {
     private String titleStr;
     private String colorStr;
 
+    public String getTimeEvent() {
+        return timeEvent;
+    }
+
+    public void setTimeEvent(String timeEvent) {
+        this.timeEvent = timeEvent;
+    }
+
+    private String timeEvent;
+
     public void setTime(String time) {
         timeStr = time;
     }
@@ -44,5 +54,7 @@ public class TimelineItem {
     public String getColor() {
         return this.colorStr;
     }
+
+
 
 }

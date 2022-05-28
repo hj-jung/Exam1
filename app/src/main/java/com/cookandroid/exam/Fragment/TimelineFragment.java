@@ -39,11 +39,11 @@ public class TimelineFragment extends ListFragment {
 
     private static final String TAG = "DailyFragment";
 
-    private String[][] strings = new String[25][4];
+    private String[][] strings = new String[25][5];
     private ArrayList<ScheduleData> scheduleDataArrayList = new ArrayList<>();
 
     private int time;
-    private String color, title, startH, AMPM;
+    private String color, title, eventTime, AMPM, startH;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class TimelineFragment extends ListFragment {
         for (ScheduleData scheduleData : scheduleDataArrayList) {
             time = scheduleData.getTime();
             startH = scheduleData.getStartH();
+            eventTime = scheduleData.getStartHms() + " - " + scheduleData.getEndHms();
             color = scheduleData.getColor();
             title = scheduleData.getTitle();
             AMPM = scheduleData.getAMPM();
@@ -67,19 +68,20 @@ public class TimelineFragment extends ListFragment {
             strings[time][1] = AMPM;
             strings[time][2] = title;
             strings[time][3] = color;
+            strings[time][4] = eventTime;
         }
 
         //해당 시간대에 일치하는 일정 DailyList에 띄우기
         for(int i=1; i<25; i++){
             if(strings[i][0]!=null){
-                System.out.println(i + " = " + strings[i][0] + strings[i][1] + strings[i][2] + strings[i][3]);
-                adapter.addItem(strings[i][0],strings[i][1], strings[i][2],strings[i][3]);
+                System.out.println(i + " = " + strings[i][0] + strings[i][1] + strings[i][2] + strings[i][3] + strings[i][4]);
+                adapter.addItem(strings[i][0],strings[i][1], strings[i][2], strings[i][3], strings[i][4]);
             }
             else {
                 if (i > 12) {
-                    adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE");
+                    adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE", "");
                 } else {
-                    adapter.addItem(String.valueOf(i), "AM", "", "WHITE");
+                    adapter.addItem(String.valueOf(i), "AM", "", "WHITE", "");
                 }
             }
         }

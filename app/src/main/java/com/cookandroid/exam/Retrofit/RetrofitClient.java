@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // server의 url을 적어준다
-    private static final String URL = "https://555a-120-142-255-39.ngrok.io";
+    private static final String URL = "https://6c0e-218-152-204-99.ngrok.io";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

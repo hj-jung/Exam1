@@ -22,10 +22,11 @@
             android:background="#00ffffff" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/detail_day"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="상세페이지"
-            android:textSize="40sp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -42,6 +43,7 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event name"
@@ -49,6 +51,7 @@
             android:textSize="25sp"/>
 
         <TextView
+            android:id="@+id/event_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Time"

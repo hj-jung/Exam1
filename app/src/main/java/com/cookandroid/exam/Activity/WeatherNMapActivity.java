@@ -36,7 +36,7 @@ public class WeatherNMapActivity extends Activity {
 
     private static final String TAG = "DetailPageActivity";
 
-    private TextView tvTmp, tvRain, tvWind, tvDust;
+    private TextView tvDay, tvEventName, tvEventTime, tvTmp, tvRain, tvWind, tvDust;
     private ImageView weatherImg;
     private ImageButton backButton;
 
@@ -57,8 +57,9 @@ public class WeatherNMapActivity extends Activity {
     private String dustValue, dustGrade;
 
     private ArrayList<ScheduleData> list = new ArrayList<>();
+    ScheduleData data;
     private int pos;
-    private String base_date, base_time, dust_daytime;
+    private String base_date, base_time, dust_daytime, strMonth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,17 +79,60 @@ public class WeatherNMapActivity extends Activity {
 
         for (ScheduleData scheduleData : list) {
             if (Integer.parseInt(scheduleData.getStartH()) == pos) {
-                Date date = Calendar.getInstance().getTime();
-                SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-                base_date = format.format(date);
+                data = scheduleData;
                 base_time = String.format("%02d",pos);
-                dust_daytime = scheduleData.getStartYmd() + " " + base_time + ":00";
-                base_time = base_time.concat("00");
             }
         }
 
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat curDayFormat = new SimpleDateFormat("dd");
+        String strCurMonth = curMonthFormat.format(date);
+        String strCurDay = curDayFormat.format(date);
+
+        //상단 월
+        switch (strCurMonth) {
+            case "01" : strMonth = "Jan"; break;
+            case "02" : strMonth = "Feb"; break;
+            case "03" : strMonth = "Mar"; break;
+            case "04" : strMonth = "Apr"; break;
+            case "05" : strMonth = "May"; break;
+            case "06" : strMonth = "Jun"; break;
+            case "07" : strMonth = "Jul"; break;
+            case "08" : strMonth = "Aug"; break;
+            case "09" : strMonth = "Sep"; break;
+            case "10" : strMonth = "Oct"; break;
+            case "11" : strMonth = "Nov"; break;
+            case "12" : strMonth = "Dec"; break;
+        }
+
+        Date current = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(current);
+        int dayofWeekNumber = calendar.get(Calendar.DAY_OF_WEEK);
+        String weekday="SUN";
+
+        //상단 요일
+        switch (dayofWeekNumber){
+            case 1: weekday="Sunday";    break;
+            case 2: weekday="Monday";    break;
+            case 3: weekday="Tuesday";    break;
+            case 4: weekday="Wednesday";    break;
+            case 5: weekday="Thursday";    break;
+            case 6: weekday="Friday";    break;
+            case 7: weekday="Saturday";    break;
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        base_date = format.format(date);
+        dust_daytime = data.getStartYmd() + " " + base_time + ":00";
+        base_time = base_time.concat("00");
+
         //UI 객체 설정
         backButton = (ImageButton) findViewById(R.id.detail_back);
+        tvDay = (TextView) findViewById(R.id.detail_day);
+        tvEventName = (TextView) findViewById(R.id.event_name);
+        tvEventTime = (TextView) findViewById(R.id.event_time);
         tvTmp = (TextView) findViewById(R.id.weather_temperature);
         tvRain = (TextView) findViewById(R.id.weather_rainpercent);
         tvWind = (TextView) findViewById(R.id.weather_windspeed);
@@ -101,6 +145,10 @@ public class WeatherNMapActivity extends Activity {
                 finish();
             }
         });
+
+        tvDay.setText(weekday + ", " + strMonth + " " + strCurDay);
+        tvEventName.setText(data.getTitle());
+        tvEventTime.setText(data.getStartHms() + " - " + data.getEndHms());
 
         weatherService = WeatherRetrofitClient.getClient().create(WeatherService.class);
 
