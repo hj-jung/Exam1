@@ -17,6 +17,8 @@ import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,13 +30,16 @@ public class ScheduleEditActivity extends AppCompatActivity {
     Button put, del;
     private ScheduleService scheduleService;
     private String color, startY, endY, startH, endH;
-    private int CalendarID;
+    private int calendarID, pos;
     private static final String TAG = "SchedulePutActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduleedit);
+
+        Intent intent = getIntent();
+        pos = intent.getIntExtra("position",-1);
 
         scheduleName = (EditText) findViewById(R.id.schedule_edit_name);
         scheduleLocation = (EditText) findViewById(R.id.edit_location);
@@ -43,7 +48,6 @@ public class ScheduleEditActivity extends AppCompatActivity {
         //Retrofit 인스턴스 생성
         scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
 
-        /*
         //기존 일정 GET
         Call<List<Schedule>> call = scheduleService.today();
         call.enqueue(new Callback<List<Schedule>>() {
@@ -55,12 +59,17 @@ public class ScheduleEditActivity extends AppCompatActivity {
                 }
                 Log.d(TAG, "Schedule Response Success");
                 List<Schedule> scheduleResponse = response.body();
+                int i = 0;
                 for(Schedule schedule : scheduleResponse){
-                    color = schedule.getColor();
-                    scheduleName.setText(schedule.getTitle());
-                    scheduleLocation.setText(schedule.getLocation());
-                    scheduleContext.setText(schedule.getContext());
-                    System.out.println(schedule.getTitle());
+                    if (i == pos) {
+                        calendarID = schedule.getId();
+                        color = schedule.getColor();
+                        scheduleName.setText(schedule.getTitle());
+                        scheduleLocation.setText(schedule.getLocation());
+                        scheduleContext.setText(schedule.getContext());
+                        System.out.println(schedule.getTitle());
+                    }
+                    i++;
                 }
             }
 
@@ -69,7 +78,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
                 Log.d(TAG, t.getMessage());
             }
         });
-        */
+
 
         put = (Button) findViewById(R.id.btn_put);
         put.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +113,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
     //일정 DELETE
     public void delSchedule(){
-        Call<Schedule> call = scheduleService.deleteSchedule(CalendarID);
+        Call<Schedule> call = scheduleService.deleteSchedule(calendarID);
         call.enqueue(new Callback<Schedule>() {
             @Override
             public void onResponse(Call<Schedule> call, Response<Schedule> response) {

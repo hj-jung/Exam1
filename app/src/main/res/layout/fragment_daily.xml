@@ -49,21 +49,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7.2">
+        android:layout_weight="7.2" >
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/timelineView">
 
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.cookandroid.exam.Fragment.TimelineFragment" />
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.cookandroid.exam.Fragment.TimelineFragment" />
 
         </FrameLayout>
 
 
     </LinearLayout>
+
 
 </LinearLayout>

@@ -48,10 +48,9 @@ public class DailyFragment extends Fragment {
     private View view;
     private ListView listView;
     private TimelineAdapter adapter;
-    private List<TimelineItem> timelineItemList;
+    private ArrayList<TimelineItem> timelineItemList;
 
     ArrayList<ScheduleData> list = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

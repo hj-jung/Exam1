@@ -23,6 +23,8 @@ import com.cookandroid.exam.Retrofit.WeatherRetrofitClient;
 import com.cookandroid.exam.Util.ScheduleData;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,9 +51,9 @@ public class WeatherNMapActivity extends Activity {
     private DustService dustService;
     private List<com.cookandroid.exam.DTO.Dust.Item> dustItemList = new ArrayList<>();
 
-    private String rainPercent;
-    private String temperature;
-    private String windSpeed;
+    private String rainPercent = "-";
+    private String temperature = "-";
+    private String windSpeed = "-";
     private String weatherCode;
 
     private String dustValue, dustGrade;
@@ -59,7 +61,13 @@ public class WeatherNMapActivity extends Activity {
     private ArrayList<ScheduleData> list = new ArrayList<>();
     ScheduleData data;
     private int pos, dressTem;
-    private String base_date, base_time, dust_daytime, strMonth;
+    private String base_date = "20220530";
+    private String base_time = "0200";
+    private String dust_daytime = "2022-05-30 02:00";
+    private String strMonth = "May";
+
+    String posTime;
+    int timeH;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,11 +85,18 @@ public class WeatherNMapActivity extends Activity {
         //레이아웃 xml 지정
         setContentView(R.layout.activity_detail_page);
 
-        System.out.println(list);
-        for (ScheduleData scheduleData : list) {
-            if (Integer.parseInt(scheduleData.getStartH()) == pos) {
-                data = scheduleData;
-                base_time = String.format("%02d", pos);
+        if (list != null) {
+            for (ScheduleData scheduleData : list) {
+                posTime = scheduleData.getStartHms();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    LocalTime localTime= LocalTime.parse(posTime, formatter);
+                    timeH = Integer.valueOf(localTime.getHour());
+                    if (timeH == pos) {
+                        data = scheduleData;
+                        base_time = String.format("%02d", pos);
+                    }
+                }
             }
         }
 
@@ -164,7 +179,8 @@ public class WeatherNMapActivity extends Activity {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         base_date = format.format(date);
-        //dust_daytime = data.getStartYmd() + " " + base_time + ":00";
+        System.out.println("WeatherNMap 171 : " + data.getStartYmd());
+        dust_daytime = data.getStartYmd() + " " + base_time + ":00";
         base_time = base_time.concat("00");
 
         //UI 객체 설정
@@ -205,100 +221,103 @@ public class WeatherNMapActivity extends Activity {
             @Override
             public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
                 Result weatherResponse = response.body();
-                weatherItemList = weatherResponse.getResponse().getBody().getItems().getItem();
-                for (Item item : weatherItemList) {
-                    String str = item.getCategory();
+                String resultCode = weatherResponse.getResponse().getHeader().getResultCode();
+                if (resultCode.equals("00")) {
+                    weatherItemList = weatherResponse.getResponse().getBody().getItems().getItem();
+                    for (Item item : weatherItemList) {
+                        String str = item.getCategory();
 
-                    switch (str) {
-                        case "POP": {
-                            //rainPercent = Integer.parseInt(item.getObsrValue());
-                            rainPercent = item.getObsrValue();
-                            break;
-                        }
-                        case "PTY": {
-                            if (item.getObsrValue().equals("0")) {
-                                rainPercent = "0";
-                                weatherCode = item.getObsrValue();
-                            } else if (item.getObsrValue().equals("1")) rainPercent = "100";
-                            break;
-                        }
-                        case "WSD": {
-                            //windSpeed = Double.parseDouble(item.getObsrValue());
-                            windSpeed = item.getObsrValue();
-                            break;
-                        }
-                        case "T1H": {
-                            Double temDouble = Double.parseDouble(item.getObsrValue());
-                            int tem = (int) Math.round(temDouble);
-                            System.out.println(item.getCategory());
-                            System.out.println("T1H = " + tem);
-                            temperature = String.valueOf(tem);
-                            break;
-                        }
-                        case "TMP": {
-                            Double temDouble = Double.parseDouble(item.getObsrValue());
-                            int tem = (int) Math.round(temDouble);
-                            System.out.println(item.getCategory());
-                            System.out.println("TMP = " + tem);
-                            temperature = String.valueOf(tem);
-                            break;
+                        switch (str) {
+                            case "POP": {
+                                //rainPercent = Integer.parseInt(item.getObsrValue());
+                                rainPercent = item.getObsrValue();
+                                break;
+                            }
+                            case "PTY": {
+                                if (item.getObsrValue().equals("0")) {
+                                    rainPercent = "0";
+                                    weatherCode = item.getObsrValue();
+                                } else if (item.getObsrValue().equals("1")) rainPercent = "100";
+                                break;
+                            }
+                            case "WSD": {
+                                //windSpeed = Double.parseDouble(item.getObsrValue());
+                                windSpeed = item.getObsrValue();
+                                break;
+                            }
+                            case "T1H": {
+                                Double temDouble = Double.parseDouble(item.getObsrValue());
+                                int tem = (int) Math.round(temDouble);
+                                System.out.println(item.getCategory());
+                                System.out.println("T1H = " + tem);
+                                temperature = String.valueOf(tem);
+                                break;
+                            }
+                            case "TMP": {
+                                Double temDouble = Double.parseDouble(item.getObsrValue());
+                                int tem = (int) Math.round(temDouble);
+                                System.out.println(item.getCategory());
+                                System.out.println("TMP = " + tem);
+                                temperature = String.valueOf(tem);
+                                break;
+                            }
                         }
                     }
-                }
-                System.out.println(temperature);
-                System.out.println(rainPercent);
-                System.out.println(windSpeed);
+                    System.out.println(temperature);
+                    System.out.println(rainPercent);
+                    System.out.println(windSpeed);
 
-                switch (weatherCode) {
-                    case "0":
-                        weatherImg.setImageResource(R.drawable.weather_sunny);
-                }
+                    switch (weatherCode) {
+                        case "0":
+                            weatherImg.setImageResource(R.drawable.weather_sunny);
+                    }
 
-                tvTmp.setText(temperature);
-                tvRain.setText(rainPercent);
-                tvWind.setText(windSpeed);
+                    tvTmp.setText(temperature);
+                    tvRain.setText(rainPercent);
+                    tvWind.setText(windSpeed);
 
-                dressTem = Integer.parseInt(temperature);
+                    dressTem = Integer.parseInt(temperature);
 
-                if (dressTem >= 27) {
-                    tvRec.setText("나시티, 반바지, 민소매 원피스");
-                    dressImg1.setImageResource(R.drawable.dress_sleeveless);
-                    dressImg2.setImageResource(R.drawable.dress_shorts);
-                }
-                else if (dressTem >= 23 && dressTem <= 26) {
-                    tvRec.setText("반팔, 얇은 셔츠, 얇은 긴팔, 반바지, 면바지");
-                    dressImg1.setImageResource(R.drawable.dress_short_sleeve);
-                    dressImg2.setImageResource(R.drawable.dress_shirt);
-                }
-                else if (dressTem >= 20) {
-                    tvRec.setText("긴팔티, 가디건, 후드티, 면바지, 슬랙스, 스키니");
-                    dressImg1.setImageResource(R.drawable.dress_jean);
-                    dressImg2.setImageResource(R.drawable.dress_long_sleeve);
-                }
-                else if (dressTem >= 17) {
-                    tvRec.setText("니트, 가디건, 후드티, 맨투맨, 청바지, 슬랙스");
-                    dressImg1.setImageResource(R.drawable.dress_hoodie);
-                    dressImg2.setImageResource(R.drawable.dress_sleeve);
-                }
-                else if (dressTem >= 12) {
-                    tvRec.setText("자켓, 셔츠, 가디건, 간절기 야상");
-                    dressImg1.setImageResource(R.drawable.dress_jacket);
-                    dressImg2.setImageResource(R.drawable.dress_long_shirt);
-                }
-                else if (dressTem >= 10) {
-                    tvRec.setText("트렌치코트, 간절기 야상, 여러겹 껴입기");
-                    dressImg1.setImageResource(R.drawable.dress_trench);
-                    dressImg2.setImageResource(R.drawable.dress_knit);
-                }
-                else if (dressTem >= 6) {
-                    tvRec.setText("코트, 가죽자켓");
-                    dressImg1.setImageResource(R.drawable.dress_coat);
-                    dressImg2.setImageResource(R.drawable.dress_sweater_winter);
-                }
-                else {
-                    tvRec.setText("겨울 옷(야상, 패딩, 목도리 등)");
-                    dressImg1.setImageResource(R.drawable.dress_puffer_coat);
-                    dressImg2.setImageResource(R.drawable.dress_scarf);
+                    if (dressTem >= 27) {
+                        tvRec.setText("나시티, 반바지, 민소매 원피스");
+                        dressImg1.setImageResource(R.drawable.dress_sleeveless);
+                        dressImg2.setImageResource(R.drawable.dress_shorts);
+                    }
+                    else if (dressTem >= 23 && dressTem <= 26) {
+                        tvRec.setText("반팔, 얇은 셔츠, 얇은 긴팔, 반바지, 면바지");
+                        dressImg1.setImageResource(R.drawable.dress_short_sleeve);
+                        dressImg2.setImageResource(R.drawable.dress_shirt);
+                    }
+                    else if (dressTem >= 20) {
+                        tvRec.setText("긴팔티, 가디건, 후드티, 면바지, 슬랙스, 스키니");
+                        dressImg1.setImageResource(R.drawable.dress_jean);
+                        dressImg2.setImageResource(R.drawable.dress_long_sleeve);
+                    }
+                    else if (dressTem >= 17) {
+                        tvRec.setText("니트, 가디건, 후드티, 맨투맨, 청바지, 슬랙스");
+                        dressImg1.setImageResource(R.drawable.dress_hoodie);
+                        dressImg2.setImageResource(R.drawable.dress_sleeve);
+                    }
+                    else if (dressTem >= 12) {
+                        tvRec.setText("자켓, 셔츠, 가디건, 간절기 야상");
+                        dressImg1.setImageResource(R.drawable.dress_jacket);
+                        dressImg2.setImageResource(R.drawable.dress_long_shirt);
+                    }
+                    else if (dressTem >= 10) {
+                        tvRec.setText("트렌치코트, 간절기 야상, 여러겹 껴입기");
+                        dressImg1.setImageResource(R.drawable.dress_trench);
+                        dressImg2.setImageResource(R.drawable.dress_knit);
+                    }
+                    else if (dressTem >= 6) {
+                        tvRec.setText("코트, 가죽자켓");
+                        dressImg1.setImageResource(R.drawable.dress_coat);
+                        dressImg2.setImageResource(R.drawable.dress_sweater_winter);
+                    }
+                    else {
+                        tvRec.setText("겨울 옷(야상, 패딩, 목도리 등)");
+                        dressImg1.setImageResource(R.drawable.dress_puffer_coat);
+                        dressImg2.setImageResource(R.drawable.dress_scarf);
+                    }
                 }
             }
 

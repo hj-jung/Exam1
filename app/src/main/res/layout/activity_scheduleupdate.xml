@@ -188,7 +188,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="04:00PM"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:clickable="true" />
             </LinearLayout>
 
@@ -231,7 +231,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="05:00PM"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:clickable="true" />
             </LinearLayout>
 
