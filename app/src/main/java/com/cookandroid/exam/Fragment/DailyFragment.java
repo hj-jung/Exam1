@@ -2,46 +2,28 @@ package com.cookandroid.exam.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.cookandroid.exam.Activity.DeleteRoutineActivity;
-import com.cookandroid.exam.Activity.ScheduleCheckAcitivity;
-import com.cookandroid.exam.Activity.ScheduleInfoActivity;
 import com.cookandroid.exam.Activity.ScheduleUpdateActivity;
 import com.cookandroid.exam.Activity.WeatherNMapActivity;
 import com.cookandroid.exam.Adapter.TimelineAdapter;
-import com.cookandroid.exam.DTO.Schedule;
-import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Util.ScheduleData;
 import com.cookandroid.exam.Util.TimelineItem;
 
-import org.w3c.dom.Text;
-
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DailyFragment extends Fragment {
 
