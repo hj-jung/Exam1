@@ -10,13 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:orientation="horizontal"
         android:id="@+id/routine_fragment">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="8"
             android:id="@+id/routinetitle"
@@ -68,7 +68,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/black"
             android:text="@string/routine_achivement_rate"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -79,7 +79,6 @@
             android:text="0%"
             android:textSize="50sp"
             android:id="@+id/routine_rate" />
-
 
     </LinearLayout>
 

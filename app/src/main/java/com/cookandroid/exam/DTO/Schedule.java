@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Schedule {
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("color")
     @Expose
     private String color;
@@ -28,6 +31,14 @@ public class Schedule {
     @SerializedName("title")
     @Expose
     private String title;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getColor() {
         return color;

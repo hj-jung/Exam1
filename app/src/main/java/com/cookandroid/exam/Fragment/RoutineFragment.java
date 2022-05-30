@@ -80,6 +80,7 @@ public class RoutineFragment extends Fragment {
         });
 
         if (getArguments() != null) {
+            getAchieve();
             list = getArguments().getParcelableArrayList("routineList");
 
             recyclerView.setHasFixedSize(true);
@@ -102,6 +103,11 @@ public class RoutineFragment extends Fragment {
                     checkId = list.get(pos).routineId;
                     routineIsChecked = isChecked;
                     checkRoutine();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     getAchieve();
                 }
             });

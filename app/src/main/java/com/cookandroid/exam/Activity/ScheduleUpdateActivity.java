@@ -97,26 +97,9 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             curAmPm = "PM";
         }
         endHour = startHour + 1;
-        if (startHour < 10) {
-            if (curMinute < 10) {
-                eventStartTime.setText("0" + startHour + ":" + "0" + curMinute + " " + curAmPm);
-                eventEndTime.setText("0" + endHour + ":" + "0" + curMinute + " " + curAmPm);
-            }
-            else {
-                eventStartTime.setText("0" + startHour + ":" + curMinute + " " + curAmPm);
-                eventEndTime.setText("0" + endHour + ":" + curMinute + " " + curAmPm);
-            }
-        }
-        else {
-            if (curMinute < 10) {
-                eventStartTime.setText(startHour + ":" + "0" + curMinute + " " + curAmPm);
-                eventEndTime.setText(endHour + ":" + "0" + curMinute + " " + curAmPm);
-            }
-            else {
-                eventStartTime.setText(startHour + ":" + curMinute + " " + curAmPm);
-                eventEndTime.setText(endHour + ":" + curMinute + " " + curAmPm);
-            }
-        }
+
+        eventStartTime.setText(String.format("%02d", startHour) + ":" + String.format("%02d", curMinute) + curAmPm);
+        eventEndTime.setText(String.format("%02d", endHour) + ":" + String.format("%02d", curMinute) + curAmPm);
 
         //datepicker StartDay
         eventStartDay.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +108,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                 DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        eventStartDay.setText(year + "." + (monthOfYear+1) + "." + dayOfMonth);
+                        eventStartDay.setText(year + "." + String.format("%02d",(monthOfYear+1)) + "." + String.format("%02d",dayOfMonth));
                         String start_year = String.valueOf(year);
                         String start_month = String.valueOf(monthOfYear+1);
                         if(Integer.valueOf(start_month)<10) start_month="0"+start_month;
@@ -144,7 +127,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                 DatePickerDialog dialog = new DatePickerDialog(ScheduleUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        eventEndDay.setText(year + "." + (monthOfYear+1) + "." + dayOfMonth);
+                        eventEndDay.setText(year + "." + String.format("%02d",(monthOfYear+1)) + "." + String.format("%02d",dayOfMonth));
                         String end_year = String.valueOf(year);
                         String end_month = String.valueOf(monthOfYear+1);
                         if(Integer.valueOf(end_month)<10) end_month="0"+end_month;
@@ -180,22 +163,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                         String start_hour = String.valueOf(hourOfDay);
                         String start_min = String.valueOf(minute);
 
-                        if (startsHour < 10) {
-                            if (minute < 10) {
-                                eventStartTime.setText("0" + startsHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                eventStartTime.setText("0" + startsHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
-                        else {
-                            if (minute < 10) {
-                                eventStartTime.setText(startsHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                eventStartTime.setText(startsHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
+                        eventStartTime.setText(String.format("%02d", startsHour) + ":" + String.format("%02d", minute) + AM_PM);
                     }
                 }, curHour, curMinute, false);
                 dialog.setTitle("Alert Time");
@@ -227,24 +195,9 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                         String end_hour = String.valueOf(hourOfDay);
                         String end_min = String.valueOf(minute);
 
-                        if (endsHour < 10) {
-                            if (minute < 10) {
-                                eventEndTime.setText("0" + endsHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                eventEndTime.setText("0" + endsHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
-                        else {
-                            if (minute < 10) {
-                                eventEndTime.setText(endsHour + ":" + "0" + minute + " " + AM_PM);
-                            }
-                            else {
-                                eventEndTime.setText(endsHour + ":" + minute + " " + AM_PM);
-                            }
-                        }
+                        eventEndTime.setText(String.format("%02d", endsHour) + ":" + String.format("%02d", minute) + AM_PM);
                     }
-                }, curHour, curMinute, false);
+                }, curHour+1, curMinute, false);
                 dialog.setTitle("Alert Time");
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.show();

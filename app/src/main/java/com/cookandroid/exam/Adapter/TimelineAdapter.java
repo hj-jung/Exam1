@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.cookandroid.exam.Util.TimelineItem;
 import com.cookandroid.exam.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class TimelineAdapter extends BaseAdapter {
@@ -24,7 +27,6 @@ public class TimelineAdapter extends BaseAdapter {
     private int tListCnt = 0;
 
     public TimelineAdapter(){
-
     }
 
     @Override
@@ -82,17 +84,21 @@ public class TimelineAdapter extends BaseAdapter {
 
     public void addItem(String time, String ap, String title, String color, String timeEvent){
 
-        TimelineItem item = new TimelineItem();
+        if (time.equals("0")) timelineItemList.clear();
+        else {
+            TimelineItem item = new TimelineItem();
 
-        item.setTime(time);
-        item.setAP(ap);
-        item.setTitle(title);
-        item.setColor(color);
-        item.setTimeEvent(timeEvent);
+            item.setTime(time);
+            item.setAP(ap);
+            item.setTitle(title);
+            item.setColor(color);
+            item.setTimeEvent(timeEvent);
 
-        timelineItemList.add(item);
+            timelineItemList.add(item);
+        }
         tListCnt = timelineItemList.size();
         this.notifyDataSetChanged();
+
     }
 
 }

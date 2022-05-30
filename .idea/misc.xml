@@ -58,10 +58,17 @@
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/menu/btm_navi_bar.xml" value="0.15833333333333333" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_button_white.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_detail_page.xml" value="0.33" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_schedulecheck.xml" value="0.1" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleedit.xml" value="0.1408514492753623" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleinfo.xml" value="0.2463768115942029" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleupdate.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_daily.xml" value="0.1339918946301925" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_mypage.xml" value="0.12588652482269502" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_routine.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_daily_timeline.xml" value="0.1" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_location_list.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_schedule_listview.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/routine_listview_item.xml" value="0.1" />
       </map>
     </option>
   </component>

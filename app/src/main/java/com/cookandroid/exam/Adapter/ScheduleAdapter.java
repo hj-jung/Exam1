@@ -67,6 +67,7 @@ public class ScheduleAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context.getApplicationContext(), ScheduleEditActivity.class);
+                intent.putExtra("position", pos);
                 context.startActivity(intent);
             }
         });

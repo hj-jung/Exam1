@@ -225,7 +225,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:text="코트, 가죽자켓" />
+                        android:text="정보 없음"/>
 
                 </LinearLayout>
 
