@@ -1,6 +1,7 @@
 package com.cookandroid.exam.Fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,13 @@ import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.w3c.dom.Text;
 
@@ -43,7 +51,7 @@ public class RoutineFragment extends Fragment {
 
     RoutineService routineService;
 
-    TextView routineRate;
+    PieChart pieChart;
 
     private int deleteId, checkId;
     private boolean routineIsChecked;
@@ -59,7 +67,17 @@ public class RoutineFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
         ImageButton Routinebtn = (ImageButton) rootView.findViewById(R.id.addRoutine);
-        routineRate = (TextView) rootView.findViewById(R.id.routine_rate);
+        pieChart = (PieChart) rootView.findViewById(R.id.piechart);
+
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(0,0,0,0);
+
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setHoleColor(Color.BLACK);
+        pieChart.setTransparentCircleRadius(61f);
 
         Routinebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +134,18 @@ public class RoutineFragment extends Fragment {
             ft.detach(this).attach(this).commit();
 
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getAchieve();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return rootView;
     }
@@ -151,8 +181,37 @@ public class RoutineFragment extends Fragment {
                     return;
                 }
                 routineAchive = response.body();
-                if (routineAchive.equals("NaN")) routineRate.setText("등록된 루틴이 없습니다");
-                else routineRate.setText(routineAchive + "%");
+                ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
+
+                if (routineAchive.equals("NaN")) {
+                    System.out.println("here");
+                    yValues.add(new PieEntry(0f,"achieve"));
+                    yValues.add(new PieEntry(100f,"none"));
+                }
+                else {
+                    System.out.println("else here");
+                    yValues.add(new PieEntry((float) Double.parseDouble(routineAchive), "achieve"));
+                    yValues.add(new PieEntry(100 - (float) Double.parseDouble(routineAchive), "none"));
+                }
+
+                Description description = new Description();
+                description.setText("루틴 성취율  "); //라벨
+                description.setTextSize(15);
+                pieChart.setDescription(description);
+
+                PieDataSet dataSet = new PieDataSet(yValues,"");
+                dataSet.setSliceSpace(3f);
+                dataSet.setSelectionShift(5f);
+                dataSet.setColors(Color.parseColor("#FDF078"), Color.WHITE);
+
+                PieData data = new PieData((dataSet));
+                data.setValueTextSize(13f);
+                data.setValueTextColor(Color.BLACK);
+
+                pieChart.invalidate(); // 회전 및 터치 효과 사라짐
+                pieChart.setTouchEnabled(false);
+
+                pieChart.setData(data);
             }
 
             @Override

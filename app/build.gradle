@@ -51,4 +51,7 @@ dependencies {
 
     //KaKao Map API
     implementation files('libs/libDaumMapAndroid.jar')
+
+    //chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
