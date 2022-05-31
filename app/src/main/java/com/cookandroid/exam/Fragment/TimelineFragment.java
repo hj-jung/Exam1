@@ -4,33 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.cookandroid.exam.Activity.ScheduleInfoActivity;
-import com.cookandroid.exam.Activity.WeatherNMapActivity;
+import com.cookandroid.exam.Activity.DetailPageActivity;
 import com.cookandroid.exam.Adapter.TimelineAdapter;
-import com.cookandroid.exam.DTO.Schedule;
-import com.cookandroid.exam.Interface.ScheduleService;
-import com.cookandroid.exam.R;
-import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Util.ScheduleData;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class TimelineFragment extends ListFragment {
@@ -96,7 +81,7 @@ public class TimelineFragment extends ListFragment {
     //일정 클릭 이벤트 처리 -> 일정상세페이지로 이동
     @Override
     public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-        Intent intent = new Intent(getActivity(), WeatherNMapActivity.class);
+        Intent intent = new Intent(getActivity(), DetailPageActivity.class);
         intent.putExtra("scheduleList", scheduleDataArrayList);
         intent.putExtra("pos", position);
         System.out.println(position);

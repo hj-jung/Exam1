@@ -1,8 +1,7 @@
 package com.cookandroid.exam.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,19 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cookandroid.exam.Adapter.LocationAdapter;
 import com.cookandroid.exam.DTO.Location.Place;
 import com.cookandroid.exam.DTO.Location.ResultKeyword;
-import com.cookandroid.exam.DTO.Weather.Result;
 import com.cookandroid.exam.Interface.LocationService;
-import com.cookandroid.exam.Interface.WeatherService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Retrofit.LocationRetrofitClient;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
-import com.cookandroid.exam.Retrofit.WeatherRetrofitClient;
-import com.cookandroid.exam.Util.LocationItem;
+import com.google.android.material.textfield.TextInputEditText;
 
 import net.daum.android.map.MapView;
 import net.daum.mf.map.api.MapPoint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,17 +34,17 @@ public class LocationActivity extends AppCompatActivity {
 
     private EditText search;
     private TextView pagenum;
-    private Button btn_search, btn_prev, btn_next;
+    private Button btn_search, btn_select, btn_prev, btn_next;
     private MapView mapView;
 
-    private String keyword, name, road, address;
+    private String keyword, location;
     private int num;
     private RecyclerView recyclerView;
 
     private LocationService locationService;
     private LocationAdapter locationAdapter;
 
-    private ArrayList<LocationItem> locationItemArrayList = new ArrayList<>();
+    private ArrayList<Place> locationItemArrayList = new ArrayList<>();
 
     private String API_KEY = "8267284f26c823bdac89070cabe710bb";
 
@@ -62,6 +58,7 @@ public class LocationActivity extends AppCompatActivity {
         search = (EditText) findViewById(R.id.location_search);
         pagenum = (TextView) findViewById(R.id.pageNum);
         btn_search = (Button) findViewById(R.id.btn_search);
+        btn_select = (Button) findViewById(R.id.btn_select);
         btn_prev = (Button) findViewById(R.id.btn_prev);
         btn_next = (Button) findViewById(R.id.btn_next);
         mapView = (MapView) findViewById(R.id.mapView);
@@ -114,20 +111,39 @@ public class LocationActivity extends AppCompatActivity {
             }
         });
 
+        //장소 확정 시, location값 넘겨주기
+        btn_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location = search.getText().toString();
+                Intent intent = new Intent(LocationActivity.this, ScheduleUpdateActivity.class);
+                intent.putExtra("Location", location);
+                startActivity(intent);
+            }
+        });
+
     }
 
     //keyword 검색 함수
     private void searchKeyword(String keyword, int num){
+        locationItemArrayList.clear();
+        locationAdapter.clear();
+        locationAdapter.notifyDataSetChanged();
+
         LocationService locationService = RetrofitClient.getClient().create(LocationService.class);
         Call<ResultKeyword> call = locationService.getResultKeyword(API_KEY, keyword, 15);
         call.enqueue(new Callback<ResultKeyword>() {
             @Override
             public void onResponse(Call<ResultKeyword> call, Response<ResultKeyword> response) {
                 if(response.isSuccessful()){
-                    for(Place place : response.body().getDocuments()){
-                        addItemsAndMarkers(response.body());
+                    for(Place locationItem : response.body().getDocuments()){
+                        locationAdapter.addItem(locationItem);
                     }
+                    locationAdapter.notifyDataSetChanged();
                 }
+                //다음 버튼&이전 버튼 활성화
+                if(!response.body().getMeta().getIs_End())  btn_next.isEnabled();
+                if(num!=1)  btn_prev.isEnabled();
             }
 
             @Override
@@ -137,14 +153,5 @@ public class LocationActivity extends AppCompatActivity {
         });
     }
 
-    //검색 결과 처리 함수
-    private void addItemsAndMarkers(ResultKeyword resultKeyword){
-        //검색 결과 있음
-        if(resultKeyword!=null){
-            locationItemArrayList.clear();
-            //결과를 리사이클러뷰에 추가
-
-        }
-    }
 
 }
