@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.cookandroid.exam.Activity.ScheduleUpdateActivity;
-import com.cookandroid.exam.Activity.WeatherNMapActivity;
+import com.cookandroid.exam.Activity.DetailPageActivity;
 import com.cookandroid.exam.Adapter.TimelineAdapter;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Util.ScheduleData;
@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class DailyFragment extends Fragment {
@@ -45,7 +44,7 @@ public class DailyFragment extends Fragment {
         tempbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivityForResult(new Intent(getContext(), WeatherNMapActivity.class), 5);
+                getActivity().startActivityForResult(new Intent(getContext(), DetailPageActivity.class), 5);
             }
         });
 

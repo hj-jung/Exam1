@@ -43,7 +43,7 @@
         <activity
             android:name=".Activity.DeleteRoutineActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Activity.WeatherNMapActivity" />
+        <activity android:name=".Activity.DetailPageActivity" />
         <activity android:name=".Activity.LocationActivity"/>
 
         <meta-data android:name="com.kakao.sdk.AppKey"

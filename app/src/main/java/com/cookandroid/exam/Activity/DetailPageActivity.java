@@ -34,7 +34,7 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class WeatherNMapActivity extends Activity {
+public class DetailPageActivity extends Activity {
 
     private static final String TAG = "DetailPageActivity";
 

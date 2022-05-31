@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.cookandroid.exam.Activity.WeatherNMapActivity;
+import com.cookandroid.exam.Activity.DetailPageActivity;
 import com.cookandroid.exam.Adapter.TimelineAdapter;
 import com.cookandroid.exam.Util.ScheduleData;
 
@@ -81,7 +81,7 @@ public class TimelineFragment extends ListFragment {
     //일정 클릭 이벤트 처리 -> 일정상세페이지로 이동
     @Override
     public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-        Intent intent = new Intent(getActivity(), WeatherNMapActivity.class);
+        Intent intent = new Intent(getActivity(), DetailPageActivity.class);
         intent.putExtra("scheduleList", scheduleDataArrayList);
         intent.putExtra("pos", position);
         System.out.println(position);

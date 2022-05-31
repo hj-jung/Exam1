@@ -1,33 +1,28 @@
 package com.cookandroid.exam.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cookandroid.exam.DTO.Location.Place;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Util.LocationItem;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder>{
 
     private Context context;
-    private ArrayList<LocationItem> itemList;
+    private ArrayList<Place> itemList;
     private EditText editText;
     private RecyclerView recyclerView;
 
-    public LocationAdapter(ArrayList<LocationItem> itemList, Context context, EditText editText, RecyclerView recyclerView){
+    public LocationAdapter(ArrayList<Place> itemList, Context context, EditText editText, RecyclerView recyclerView){
         this.context = context;
         this.itemList = itemList;
         this.editText = editText;
@@ -39,6 +34,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return itemList.size();
     }
 
+    @Override
+    public int getItemViewType(int position){
+        return position;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,9 +48,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(LocationAdapter.ViewHolder holder, int position) {
-        holder.name.setText(itemList.get(position).getName());
-        holder.road.setText(itemList.get(position).getRoad());
-        holder.address.setText(itemList.get(position).getAddress());
+        holder.name.setText(itemList.get(position).getPlace_name());
+        holder.road.setText(itemList.get(position).getRoad_address_name());
+        holder.address.setText(itemList.get(position).getAddress_name());
     }
 
 
@@ -89,6 +89,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     public void clear() { itemList.clear(); }
 
-    public void addItem(LocationItem item) { itemList.add(item); }
+    public void addItem(Place item) { itemList.add(item); }
 
 }
