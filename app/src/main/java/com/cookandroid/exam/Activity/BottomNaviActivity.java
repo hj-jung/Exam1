@@ -216,7 +216,7 @@ public class BottomNaviActivity extends AppCompatActivity {
                             AMPM = "AM";
                         }
                     }
-                    scheduleData.add(new ScheduleData(schedule.getColor(), schedule.getContext(), schedule.getEndHms(), schedule.getLocation(), schedule.getStartHms(), schedule.getStartYmd(), startH, schedule.getTitle(), time, AMPM));
+                    scheduleData.add(new ScheduleData(schedule.getColor(), schedule.getContext(), schedule.getEndHms(), schedule.getLocation(), schedule.getStartHms(), schedule.getStartYmd(), startH, schedule.getTitle(), time, AMPM, schedule.getX(), schedule.getY()));
                 }
 
                 bundle.putParcelableArrayList("TodaySchedule", (ArrayList<? extends Parcelable>) scheduleData);

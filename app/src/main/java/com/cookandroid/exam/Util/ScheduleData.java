@@ -37,6 +37,12 @@ public class ScheduleData implements Parcelable {
     @SerializedName("AMPM")
     @Expose
     private String AMPM;
+    @SerializedName("x")
+    @Expose
+    private Double x;
+    @SerializedName("y")
+    @Expose
+    private Double y;
 
     protected ScheduleData(Parcel in) {
         color = in.readString();
@@ -53,6 +59,8 @@ public class ScheduleData implements Parcelable {
             time = in.readInt();
         }
         AMPM = in.readString();
+        x = in.readDouble();
+        y = in.readDouble();
     }
 
     @Override
@@ -72,6 +80,8 @@ public class ScheduleData implements Parcelable {
             dest.writeInt(time);
         }
         dest.writeString(AMPM);
+        dest.writeDouble(x);
+        dest.writeDouble(y);
     }
 
     @Override
@@ -155,8 +165,23 @@ public class ScheduleData implements Parcelable {
         this.AMPM = AMPM;
     }
 
+    public Double getX() {
+        return x;
+    }
 
-    public ScheduleData(String color, String context, String endHms, String location, String startHms, String startYmd, String startH, String title, Integer time, String AMPM){
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public Double getY() {
+        return y;
+    }
+
+    public void setY(Double y) {
+        this.y = y;
+    }
+
+    public ScheduleData(String color, String context, String endHms, String location, String startHms, String startYmd, String startH, String title, Integer time, String AMPM, Double x, Double y){
         this.color = color;
         this.context = context;
         this.endHms = endHms;
@@ -167,5 +192,7 @@ public class ScheduleData implements Parcelable {
         this.title = title;
         this.time = time;
         this.AMPM = AMPM;
+        this.x = x;
+        this.y = y;
     }
 }

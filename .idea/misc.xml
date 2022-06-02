@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_detail_page.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_edit_mypage.xml" value="0.109375" />
-        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_location.xml" value="0.1" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_location.xml" value="0.375" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_login.xml" value="0.14375" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_register.xml" value="0.14375" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_schedulecheck.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleedit.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleinfl.xml" value="0.24947916666666667" />
@@ -56,20 +58,15 @@
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/layout/item_header.xml" value="0.4" />
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/layout/routine_add_dialog.xml" value="0.23521505376344087" />
         <entry key="..\:/CookAndroid/Project/exam/app/src/main/res/menu/btm_navi_bar.xml" value="0.15833333333333333" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border_shadow.xml" value="0.1275" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_border_shadow_background.xml" value="0.1275" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/drawable/round_button_white.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_detail_page.xml" value="0.33" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_register.xml" value="0.2703804347826087" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_schedulecheck.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleedit.xml" value="0.1408514492753623" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleinfo.xml" value="0.2463768115942029" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_scheduleupdate.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/activity_setcharacter.xml" value="0.17755825734549138" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_daily.xml" value="0.1339918946301925" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_mypage.xml" value="0.12588652482269502" />
-        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_routine.xml" value="0.16" />
+        <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/fragment_routine.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_daily_timeline.xml" value="0.1" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_location_list.xml" value="0.19429347826086957" />
         <entry key="..\:/Users/ksyy0/Desktop/Exam1-master/Exam1-master/app/src/main/res/layout/item_schedule_listview.xml" value="0.19429347826086957" />

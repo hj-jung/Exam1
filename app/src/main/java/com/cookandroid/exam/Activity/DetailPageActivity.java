@@ -5,22 +5,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.cookandroid.exam.DTO.Dust.PmInfo;
+import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.DTO.Weather.Item;
 import com.cookandroid.exam.DTO.Weather.Result;
 import com.cookandroid.exam.Interface.DustService;
+import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.Interface.WeatherService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.DustRetrofitClient;
+import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Retrofit.WeatherRetrofitClient;
 import com.cookandroid.exam.Util.ScheduleData;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -41,9 +51,13 @@ public class DetailPageActivity extends Activity {
     private TextView tvDay, tvEventName, tvEventTime, tvTmp, tvRain, tvWind, tvDust, tvRec;
     private ImageView weatherImg, dressImg1, dressImg2;
     private ImageButton backButton;
+    private Button KakaoMapBtn;
+    private MapView mapView;
+    private LinearLayout mapViewContainer;
 
     private String MyKey = "3QkdRZx/R+OBMH+5QoKu7iRbyDkdjaO0nMixw6RktnNL74/9rWajdRkCmtRfYxxYrWv8OABBzFaEY5h6WqwJFA==";
     private String DustKey = "+WSXT9nqJHijeDm0+DfSdKPLPcMLKnfHaJ6XU7N2hq0VkI3x+NM7Yc4Bgbkbok08RCFQEIgd0W/LpiVOg2j3Ow==";
+    private final String packageName = "net.daum.android.map";
 
     private WeatherService weatherService;
     private List<Item> weatherItemList = new ArrayList<>();
@@ -65,6 +79,7 @@ public class DetailPageActivity extends Activity {
     private String base_time = "0200";
     private String dust_daytime = "2022-05-30 02:00";
     private String strMonth = "May";
+    private MapPoint BASE_LOCATION;
 
     String posTime;
     int timeH;
@@ -79,6 +94,7 @@ public class DetailPageActivity extends Activity {
             pos = intent.getIntExtra("pos", -1);
             pos = pos + 1;
         }
+
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -204,12 +220,13 @@ public class DetailPageActivity extends Activity {
             }
         });
 
+        //상단 날짜 및 이벤트 이름 설정
         tvDay.setText(weekday + ", " + strMonth + " " + strCurDay);
         tvEventName.setText(data.getTitle());
         tvEventTime.setText(data.getStartHms() + " - " + data.getEndHms());
 
+        //날씨 API
         weatherService = WeatherRetrofitClient.getClient().create(WeatherService.class);
-
         weatherService.getWeather(MyKey,
                 "1",
                 "10",
@@ -327,7 +344,7 @@ public class DetailPageActivity extends Activity {
             }
         });
 
-
+        //미세먼지 API
         dustService = DustRetrofitClient.getClient().create(DustService.class);
 
         dustService.getDust("용산구", "json", "daily", 1, 10, DustKey).enqueue(new Callback<PmInfo>() {
@@ -367,7 +384,31 @@ public class DetailPageActivity extends Activity {
             }
         });
 
+        //카카오맵 API + 마커
+        //여기에 LocationActivity에서 장소 선택 시에 받아온 x,y(경도,위도값) 넣어줘야함 - 우선 서울역으로 설정
+        BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.553836, 126.969652);
+
+        mapView = new MapView(this);
+        mapViewContainer = (LinearLayout) findViewById(R.id.detail_mapView);
+        mapViewContainer.addView(mapView);
+        mapView.setMapCenterPoint(BASE_LOCATION,true);
+
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("Event Location");
+        marker.setTag(0);
+        marker.setMapPoint(BASE_LOCATION);
+        marker.setMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        mapView.addPOIItem(marker);
+
+        //카카오맵 앱으로 이동
+        KakaoMapBtn = (Button) findViewById(R.id.detail_kakaomap);
+        Intent intentmap = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        KakaoMapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailPageActivity.this.startActivity(intentmap);
+            }
+        });
     }
-
-
 }
