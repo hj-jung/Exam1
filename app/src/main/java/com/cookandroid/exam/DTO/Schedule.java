@@ -36,10 +36,10 @@ public class Schedule {
     private String title;
     @SerializedName("x")
     @Expose
-    private Integer x;
+    private Double x;
     @SerializedName("y")
     @Expose
-    private Integer y;
+    private Double y;
 
     public Integer getId() {
         return id;
@@ -105,24 +105,15 @@ public class Schedule {
         this.title = title;
     }
 
-    public Integer getX() {
-        return x;
-    }
+    public Double getX() { return x; }
 
-    public void setX(Integer x) {
-        this.x = x;
-    }
+    public void setX(Double x) { this.x = x; }
 
-    public Integer getY() {
-        return y;
-    }
+    public Double getY() { return y; }
 
-    public void setY(Integer y) {
-        this.y = y;
-    }
+    public void setY(Double y) { this.y = y; }
 
-
-    public Schedule(String color, String context, String endHms, String endYmd, String location, String startHms, String startYmd, Integer user_id, String title, Integer x, Integer y){
+    public Schedule(String color, String context, String endHms, String endYmd, String location, String startHms, String startYmd, Integer user_id, String title, Double x, Double y){
         this.color = color;
         this.context = context;
         this.endHms = endHms;

@@ -43,6 +43,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
     private String color, startY, endY;
     private LocalTime startHms, endHms;
     private int user_id;
+    private Double x, y;
 
     private static final String TAG = "ScheduleUpdateActivity";
 
@@ -288,11 +289,16 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         scheduleContext = (EditText) findViewById(R.id.context);
 
         schedule_name = scheduleName.getText().toString();
-        schedule_location = scheduleLocation.getText().toString();
         schedule_context = scheduleContext.getText().toString();
 
-        System.out.println("=============================userID==========" + user_id);
-        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, user_id, schedule_name, 0, 0);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        x = bundle.getDouble("x");
+        y = bundle.getDouble("y");
+        schedule_location = bundle.getString("Location");
+
+        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, user_id, schedule_name, x, y);
+
 
         Call<Schedule> call = scheduleService.addSchedule(schedule);
         call.enqueue(new Callback<Schedule>() {

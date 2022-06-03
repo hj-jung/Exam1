@@ -42,7 +42,6 @@ public class CalendarAdapter extends RecyclerView.Adapter {
     public CalendarAdapter(List<Object> calendarList, int user_id){
         mCalendarList = calendarList;
         this.user_id = user_id;
-        System.out.println("recyclerview===" + user_id);
     }
 
     public void setCalendarList(List<Object> calendarList){

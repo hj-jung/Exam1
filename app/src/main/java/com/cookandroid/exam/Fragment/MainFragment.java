@@ -41,7 +41,6 @@ public class MainFragment extends Fragment {
 
         if (getArguments() != null) {
             user_id = getArguments().getInt("userID");
-            System.out.println("===Main===" + user_id);
         }
         initView(view);
         initSet();
