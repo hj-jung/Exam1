@@ -37,9 +37,12 @@ public class CalendarAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<Object> mCalendarList;
+    private int user_id;
 
-    public CalendarAdapter(List<Object> calendarList){
+    public CalendarAdapter(List<Object> calendarList, int user_id){
         mCalendarList = calendarList;
+        this.user_id = user_id;
+        System.out.println("recyclerview===" + user_id);
     }
 
     public void setCalendarList(List<Object> calendarList){
@@ -193,6 +196,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                     if(pos != RecyclerView.NO_POSITION){
                         intent.putExtra("key", key);
                         intent.putExtra("int", pos);
+                        intent.putExtra("userID", user_id);
                         context.startActivity(intent);
                     }
                 }

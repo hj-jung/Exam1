@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class MainFragment extends Fragment {
-    public int mCenterPosition;
+    public int mCenterPosition, user_id;
     private long mCurrentTime;
     public ArrayList<Object> mCalendarList = new ArrayList<>();
 
@@ -38,6 +38,11 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = (ViewGroup)inflater.inflate(R.layout.fragment_main, container, false);
+
+        if (getArguments() != null) {
+            user_id = getArguments().getInt("userID");
+            System.out.println("===Main===" + user_id);
+        }
         initView(view);
         initSet();
         setRecycler();
@@ -66,7 +71,7 @@ public class MainFragment extends Fragment {
         }
 
         manager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
-        mAdapter = new CalendarAdapter(mCalendarList);
+        mAdapter = new CalendarAdapter(mCalendarList, user_id);
         mAdapter.setCalendarList(mCalendarList);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);

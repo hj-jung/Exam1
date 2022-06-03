@@ -24,11 +24,12 @@ import retrofit2.Response;
 public class LoginActivity extends Activity {
     private static final String TAG = "LoginActivity";
 
-    String email, password, userId;
+    String email, password;
     Button btn_login, btn_register_page;
     EditText loginemail, loginpassword;
 
     private UserService userService;
+    private int userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,17 +71,17 @@ public class LoginActivity extends Activity {
 
         UserLogin userLogin = new UserLogin(email, password);
 
-        Call<String> call = userService.login(userLogin);
-        call.enqueue(new Callback<String>() {
+        Call<Integer> call = userService.login(userLogin);
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, String.valueOf(response.code()));
                     Toast.makeText(getApplicationContext(), "회원 정보 없음", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 userId = response.body();
-                if (userId.equals("0")) Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if (userId == 0) Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 else {
                     intent.putExtra("userID", userId);
                     startActivity(intent);
@@ -88,7 +89,7 @@ public class LoginActivity extends Activity {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });

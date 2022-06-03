@@ -24,11 +24,12 @@ import retrofit2.Response;
 public class RegisterActivity extends Activity {
     private static final String TAG = "RegisterActivity";
 
-    String email, name, password, userId;
+    String email, name, password;
     Button btn_join, btn_login_page;
     EditText joinemail, joinname, joinpassword;
 
     private UserService userService;
+    private int userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,21 +70,21 @@ public class RegisterActivity extends Activity {
 
         Register register= new Register(email, name, password);
 
-        Call<String> call = userService.register(register);
-        call.enqueue(new Callback<String>() {
+        Call<Integer> call = userService.register(register);
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, String.valueOf(response.code()));
                     return;
                 }
                 userId = response.body();
-                if (userId.equals("0")) Toast.makeText(getApplicationContext(), "이미 존재하는 회원입니다.", Toast.LENGTH_SHORT).show();
+                if (userId == 0) Toast.makeText(getApplicationContext(), "이미 존재하는 회원입니다.", Toast.LENGTH_SHORT).show();
                 else login();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });
@@ -101,17 +102,17 @@ public class RegisterActivity extends Activity {
 
         UserLogin userLogin = new UserLogin(email, password);
 
-        Call<String> call = userService.login(userLogin);
-        call.enqueue(new Callback<String>() {
+        Call<Integer> call = userService.login(userLogin);
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, String.valueOf(response.code()));
                     Toast.makeText(getApplicationContext(), "회원 정보 없음", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 userId = response.body();
-                if (userId.equals("0")) Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if (userId == 0) Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 else {
                     intent.putExtra("userID", userId);
                     startActivity(intent);
@@ -119,7 +120,7 @@ public class RegisterActivity extends Activity {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });

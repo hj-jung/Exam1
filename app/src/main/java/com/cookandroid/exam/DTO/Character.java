@@ -14,6 +14,9 @@ public class Character {
     @SerializedName("quote")
     @Expose
     private String quote;
+    @SerializedName("user_id")
+    @Expose
+    private Integer user_id;
 
     public Integer getId() {
         return id;
@@ -22,6 +25,7 @@ public class Character {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -29,13 +33,24 @@ public class Character {
     public String getQuote() {
         return quote;
     }
+
     public void setQuote(String quote) {
         this.quote = quote;
     }
 
-    public Character(String name, String quote) {
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public Character(String name, String quote, Integer user_id) {
         this.name = name;
         this.quote = quote;
+        this.user_id = user_id;
     }
 
 }

@@ -42,6 +42,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
     private ScheduleService scheduleService;
     private String color, startY, endY;
     private LocalTime startHms, endHms;
+    private int user_id;
 
     private static final String TAG = "ScheduleUpdateActivity";
 
@@ -49,6 +50,9 @@ public class ScheduleUpdateActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduleupdate);
+
+        Intent intent = getIntent();
+        user_id = intent.getIntExtra("userID", -1);
 
         //이전 화면 돌아가기
         Button cancel = (Button) findViewById(R.id.btn_cancel);
@@ -113,7 +117,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                         String start_month = String.valueOf(monthOfYear+1);
                         if(Integer.valueOf(start_month)<10) start_month="0"+start_month;
                         String start_day = String.valueOf(dayOfMonth);
-                        startY = start_year.concat("-"+start_month+"-"+start_day);
+                        startY = start_year.concat("-"+start_month+"-"+String.format("%02d", dayOfMonth));
                     }
                 }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth)-1, Integer.parseInt(strCurDay));
                 dialog.show();
@@ -132,7 +136,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                         String end_month = String.valueOf(monthOfYear+1);
                         if(Integer.valueOf(end_month)<10) end_month="0"+end_month;
                         String end_day = String.valueOf(dayOfMonth);
-                        endY = end_year.concat("-"+end_month+"-"+end_day);
+                        endY = end_year.concat("-"+end_month+"-"+String.format("%02d", dayOfMonth));
                     }
                 }, Integer.parseInt(strCurYear), Integer.parseInt(strCurMonth)-1, Integer.parseInt(strCurDay));
                 dialog.show();
@@ -287,8 +291,8 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         schedule_location = scheduleLocation.getText().toString();
         schedule_context = scheduleContext.getText().toString();
 
-
-        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, schedule_name);
+        System.out.println("=============================userID==========" + user_id);
+        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, user_id, schedule_name, 0, 0);
 
         Call<Schedule> call = scheduleService.addSchedule(schedule);
         call.enqueue(new Callback<Schedule>() {

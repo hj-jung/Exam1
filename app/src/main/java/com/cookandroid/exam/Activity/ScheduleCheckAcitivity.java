@@ -35,6 +35,7 @@ public class ScheduleCheckAcitivity extends Activity {
     String today, color, title, time;
     private static final String TAG = "ScheduleCheckActivity";
 
+    private int user_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,22 +43,22 @@ public class ScheduleCheckAcitivity extends Activity {
         setContentView(R.layout.activity_schedulecheck);
         Intent intent = getIntent();
         int daypos = intent.getIntExtra("int", -1);
+        user_id = intent.getIntExtra("userID", -1);
+        System.out.println(daypos);
 
         //상단 해당 날짜로 설정
         day = (TextView) findViewById(R.id.day);
         today = "2022-05-26";
 
-       if (daypos == 10328) today = "2022-05-01";
-        else if (daypos > 10328 & daypos < 10360) {
-            int dayNum = daypos - 10328 + 1;
-            String.format("%02d", dayNum);
-            today = "2022-05-" + dayNum;
+       if (daypos == 10292) today = "2022-05-01";
+        else if (daypos > 10292 & daypos < 10322) {
+            int dayNum = daypos - 10292 + 1;
+            today = "2022-05-" + String.format("%02d", dayNum);
         }
-        else if (daypos == 10363) today = "2022-06-01";
-        else if (daypos > 10363 & daypos < 10393) {
-            int dayNum = daypos - 10363 + 1;
-            String.format("%02d", dayNum);
-            today = "2022-06-" + dayNum;
+        else if (daypos == 10327) today = "2022-06-01";
+        else if (daypos > 10327 & daypos < 10357) {
+            int dayNum = daypos - 10327 + 1;
+            today = "2022-06-" + String.format("%02d", dayNum);
         }
 
         day.setText(today);
@@ -67,13 +68,13 @@ public class ScheduleCheckAcitivity extends Activity {
         scheduleItems = new ArrayList<ScheduleItem>();
 
         //Adapter 생성
-        adapter = new ScheduleAdapter(getApplicationContext(), scheduleItems);
+        adapter = new ScheduleAdapter(getApplicationContext(), scheduleItems, user_id);
         schedule_list.setAdapter(adapter);
 
         //해당 날짜 일정 GET
         //Retrofit 인터페이스 객체 구현
         ScheduleService scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
-        Call<List<Schedule>> call = scheduleService.date(today);
+        Call<List<Schedule>> call = scheduleService.date(user_id, today);
         call.enqueue(new Callback<List<Schedule>>() {
             @Override
             public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
@@ -109,6 +110,7 @@ public class ScheduleCheckAcitivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ScheduleUpdateActivity.class);
+                intent.putExtra("userID", user_id);
                 startActivity(intent);
             }
         });

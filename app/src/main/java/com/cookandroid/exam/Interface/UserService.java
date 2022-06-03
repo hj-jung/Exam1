@@ -10,8 +10,8 @@ import retrofit2.http.POST;
 public interface UserService {
 
     @POST("/user")
-    Call<String> register(@Body Register register);
+    Call<Integer> register(@Body Register register);
 
     @POST("/login")
-    Call<String> login(@Body UserLogin userLogin);
+    Call<Integer> login(@Body UserLogin userLogin);
 }

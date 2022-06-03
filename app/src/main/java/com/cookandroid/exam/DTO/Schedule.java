@@ -28,9 +28,18 @@ public class Schedule {
     @SerializedName("startYmd")
     @Expose
     private String startYmd;
+    @SerializedName("user_id")
+    @Expose
+    private Integer user_id;
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("x")
+    @Expose
+    private Integer x;
+    @SerializedName("y")
+    @Expose
+    private Integer y;
 
     public Integer getId() {
         return id;
@@ -80,6 +89,14 @@ public class Schedule {
 
     public void setStartYmd(String startYmd) { this.startYmd = startYmd; }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -88,8 +105,24 @@ public class Schedule {
         this.title = title;
     }
 
+    public Integer getX() {
+        return x;
+    }
 
-    public Schedule(String color, String context, String endHms, String endYmd, String location, String startHms, String startYmd, String title){
+    public void setX(Integer x) {
+        this.x = x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+    public void setY(Integer y) {
+        this.y = y;
+    }
+
+
+    public Schedule(String color, String context, String endHms, String endYmd, String location, String startHms, String startYmd, Integer user_id, String title, Integer x, Integer y){
         this.color = color;
         this.context = context;
         this.endHms = endHms;
@@ -98,7 +131,10 @@ public class Schedule {
         this.startYmd = startYmd;
         this.startHms = startHms;
         this.endYmd = endYmd;
+        this.user_id = user_id;
         this.title = title;
+        this.x = x;
+        this.y = y;
     }
 }
 

@@ -33,6 +33,7 @@ public class SetCharacterActivity extends AppCompatActivity {
     String name, intro;
     Button btn_start;
     EditText chName, message;
+    private int user_id;
 
     private CharacterService characterService;
 
@@ -41,6 +42,10 @@ public class SetCharacterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setcharacter);
         getHashKey();
+        Intent data = getIntent();
+        if (data != null) {
+            user_id = data.getIntExtra("userID", -1);
+        }
 
         //닉네임, 한줄소개입력
         chName=(EditText)findViewById(R.id.chName);
@@ -72,7 +77,7 @@ public class SetCharacterActivity extends AppCompatActivity {
         name=chName.getText().toString();
         intro=message.getText().toString();
 
-        Character character = new Character(name, intro);
+        Character character = new Character(name, intro, user_id);
 
         Call<Character> call = characterService.addCharacter(character);
         call.enqueue(new Callback<Character>() {
@@ -84,6 +89,7 @@ public class SetCharacterActivity extends AppCompatActivity {
                 }
                 Character characterResponse = response.body();
                 intent.putExtra("characterID", characterResponse.getId());
+                intent.putExtra("userID", user_id);
                 startActivity(intent);
             }
 

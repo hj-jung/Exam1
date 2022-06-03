@@ -30,6 +30,7 @@ public class DailyFragment extends Fragment {
     private ListView listView;
     private TimelineAdapter adapter;
     private ArrayList<TimelineItem> timelineItemList;
+    private int user_id;
 
     ArrayList<ScheduleData> list = new ArrayList<>();
 
@@ -40,6 +41,10 @@ public class DailyFragment extends Fragment {
         ImageButton tempbtn = (ImageButton) view.findViewById(R.id.weather_page_go);
         ImageButton plus = (ImageButton) view.findViewById(R.id.daily_plus);
         TextView day = (TextView) view.findViewById(R.id.day);
+
+        if (getArguments() != null) {
+            user_id = getArguments().getInt("userID", -1);
+        }
 
         tempbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,7 @@ public class DailyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ScheduleUpdateActivity.class); //fragment라서 activity intent와는 다른 방식
+                intent.putExtra("userID", user_id);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
             }

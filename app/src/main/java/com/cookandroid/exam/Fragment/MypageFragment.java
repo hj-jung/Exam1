@@ -26,7 +26,7 @@ import com.cookandroid.exam.Util.ActivityResultEvent;
 
 public class MypageFragment extends Fragment {
 
-    private int characterID;
+    private int characterID, user_id;
 
     @Nullable
     @Override
@@ -42,6 +42,7 @@ public class MypageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EditMypageActivity.class);
                 intent.putExtra("id", characterID);
+                intent.putExtra("userID", user_id);
                 getActivity().startActivityForResult(intent, 2);
             }
         });
@@ -50,6 +51,7 @@ public class MypageFragment extends Fragment {
             String name = getArguments().getString("name");
             String message = getArguments().getString("message");
             characterID = getArguments().getInt("id");
+            user_id = getArguments().getInt("userID");
 
             System.out.println("name = " + name);
             System.out.println("message = " + message);
