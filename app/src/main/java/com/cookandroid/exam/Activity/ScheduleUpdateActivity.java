@@ -39,6 +39,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
 
     EditText scheduleName, scheduleLocation, scheduleContext;
     Button col1, col2, col3, col4, col5, col6;
+    Button searchLocation;
     private ScheduleService scheduleService;
     private String color, startY, endY;
     private LocalTime startHms, endHms;
@@ -254,17 +255,15 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             }
         });
 
-
         //-> Location클릭 시 장소 검색 페이지로 이동
-        scheduleLocation = (EditText) findViewById(R.id.location);
-        scheduleLocation.setOnClickListener(new View.OnClickListener() {
+        searchLocation = (Button) findViewById(R.id.btn_search_location);
+        searchLocation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
                 startActivity(intent);
             }
         });
-
 
         //Retrofit 인스턴스 생성
         scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
@@ -295,7 +294,8 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         Bundle bundle = intent.getExtras();
         x = bundle.getDouble("x");
         y = bundle.getDouble("y");
-        schedule_location = bundle.getString("Location");
+        //schedule_location = bundle.getString("Location");
+        schedule_location = "장소";
 
         Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, user_id, schedule_name, x, y);
 

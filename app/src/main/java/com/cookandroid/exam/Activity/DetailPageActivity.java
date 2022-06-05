@@ -193,11 +193,12 @@ public class DetailPageActivity extends Activity {
                 break;
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+/*        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         base_date = format.format(date);
         System.out.println("WeatherNMap 171 : " + data.getStartYmd());
         dust_daytime = data.getStartYmd() + " " + base_time + ":00";
         base_time = base_time.concat("00");
+ */
 
         //UI 객체 설정
         backButton = (ImageButton) findViewById(R.id.detail_back);
@@ -222,8 +223,9 @@ public class DetailPageActivity extends Activity {
 
         //상단 날짜 및 이벤트 이름 설정
         tvDay.setText(weekday + ", " + strMonth + " " + strCurDay);
-        tvEventName.setText(data.getTitle());
+    /*    tvEventName.setText(data.getTitle());
         tvEventTime.setText(data.getStartHms() + " - " + data.getEndHms());
+     */
 
         //날씨 API
         weatherService = WeatherRetrofitClient.getClient().create(WeatherService.class);

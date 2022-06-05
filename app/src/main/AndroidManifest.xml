@@ -52,7 +52,7 @@
         <activity android:name=".Activity.LocationActivity"/>
 
         <meta-data android:name="com.kakao.sdk.AppKey"
-            android:value="8267284f26c823bdac89070cabe710bb"/>
+            android:value="49e16f9381459f81cc14847f10ce66a3"/>
 
     </application>
 
