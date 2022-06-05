@@ -43,6 +43,9 @@ public class Routine {
     @SerializedName("wednesday")
     @Expose
     private Integer wednesday;
+    @SerializedName("user_id")
+    @Expose
+    private Integer user_id;
 
     public Integer getId() {
         return id;
@@ -140,7 +143,15 @@ public class Routine {
         this.routineTime = routineTime;
     }
 
-    public Routine(Boolean achieve, String context, int friday, int monday, String name, String routineTime, int saturday, int sunday, int thursday, int tuesday, int wednesday) {
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public Routine(Boolean achieve, String context, int friday, int monday, String name, String routineTime, int saturday, int sunday, int thursday, int tuesday, int wednesday, int user_id) {
         this.achieve = achieve;
         this.context = context;
         this.friday = friday;
@@ -152,6 +163,7 @@ public class Routine {
         this.thursday = thursday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
+        this.user_id = user_id;
     }
 
 }

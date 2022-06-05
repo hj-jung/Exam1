@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cookandroid.exam.DTO.Location.Place;
+import com.cookandroid.exam.DTO.Location.Document;
 import com.cookandroid.exam.R;
 
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ import java.util.ArrayList;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder>{
 
     private Context context;
-    private ArrayList<Place> itemList;
+    private ArrayList<Document> itemList;
     private EditText editText;
     private RecyclerView recyclerView;
 
-    public LocationAdapter(ArrayList<Place> itemList, Context context, EditText editText, RecyclerView recyclerView){
+    public LocationAdapter(ArrayList<Document> itemList, Context context, EditText editText, RecyclerView recyclerView){
         this.context = context;
         this.itemList = itemList;
         this.editText = editText;
@@ -48,9 +48,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(LocationAdapter.ViewHolder holder, int position) {
-        holder.name.setText(itemList.get(position).getPlace_name());
-        holder.road.setText(itemList.get(position).getRoad_address_name());
-        holder.address.setText(itemList.get(position).getAddress_name());
+        holder.name.setText(itemList.get(position).getPlaceName());
+        holder.road.setText(itemList.get(position).getRoadAddressName());
+        holder.address.setText(itemList.get(position).getAddressName());
     }
 
 
@@ -89,6 +89,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     public void clear() { itemList.clear(); }
 
-    public void addItem(Place item) { itemList.add(item); }
+    public void addItem(Document item) { itemList.add(item); }
 
 }

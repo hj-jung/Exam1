@@ -53,7 +53,7 @@ public class RoutineFragment extends Fragment {
 
     PieChart pieChart;
 
-    private int deleteId, checkId;
+    private int deleteId, checkId, user_id;
     private boolean routineIsChecked;
 
     private String routineAchive = "NaN";
@@ -82,11 +82,13 @@ public class RoutineFragment extends Fragment {
         Routinebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getActivity(), AddRoutineActivity.class);
+                Intent intent = new Intent(getActivity(), AddRoutineActivity.class);
+                intent.putExtra("userID", user_id);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                getActivity().startActivityForResult(new Intent(getContext(), AddRoutineActivity.class), 3);
+                getActivity().startActivityForResult(intent, 3);
                 if (getArguments() != null) {
                     list = getArguments().getParcelableArrayList("routineList");
+                    user_id = getArguments().getInt("userID");
                     recyclerView.setHasFixedSize(true);
                     adapter = new RoutineListAdapter(getActivity(), list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -100,6 +102,7 @@ public class RoutineFragment extends Fragment {
         if (getArguments() != null) {
             getAchieve();
             list = getArguments().getParcelableArrayList("routineList");
+            user_id = getArguments().getInt("userID");
 
             recyclerView.setHasFixedSize(true);
             adapter = new RoutineListAdapter(getActivity(), list);
@@ -172,7 +175,7 @@ public class RoutineFragment extends Fragment {
     }
 
     private void getAchieve() {
-        Call<String> call = routineService.getAchieve();
+        Call<String> call = routineService.getAchieve(user_id);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

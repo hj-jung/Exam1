@@ -53,7 +53,7 @@ public class AddRoutineActivity extends Activity {
     int fri = 0;
     int sat = 0;
 
-    private int routineID;
+    private int routineID, user_id;
 
     private int curHour2;
     private String strCurMinute;
@@ -68,6 +68,9 @@ public class AddRoutineActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        user_id = intent.getIntExtra("userID", -1);
 
         //다이얼로그 팝업창 검정색 배경 없애기
         getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
@@ -251,7 +254,7 @@ public class AddRoutineActivity extends Activity {
         routineContent = (EditText) findViewById(R.id.routine_context);
         String routine_name = routineName.getText().toString();
         String routine_content = routineContent.getText().toString();
-        Routine routine = new Routine(false, routine_content, fri, mon, routine_name, routineLocal.toString(), sat, sun, thu, tue, wed);
+        Routine routine = new Routine(false, routine_content, fri, mon, routine_name, routineLocal.toString(), sat, sun, thu, tue, wed, user_id);
 
         Call<Routine> call = routineService.addRoutine(routine);
         call.enqueue(new Callback<Routine>() {

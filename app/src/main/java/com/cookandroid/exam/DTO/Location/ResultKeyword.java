@@ -8,16 +8,16 @@ import java.util.List;
 public class ResultKeyword {
     @SerializedName("Documents")
     @Expose
-    private List<Place> Documents;
+    private List<Document> Documents;
     @SerializedName("meta")
     @Expose
     private PlaceMeta meta;
 
-    public List<Place> getDocuments() {
+    public List<Document> getDocuments() {
         return Documents;
     }
 
-    public void setDocuments(List<Place> documents) {
+    public void setDocuments(List<Document> documents) {
         Documents = documents;
     }
 

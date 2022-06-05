@@ -1,7 +1,6 @@
 package com.cookandroid.exam.Interface;
 
 import com.cookandroid.exam.DTO.Character;
-import com.cookandroid.exam.DTO.GetCharacter;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

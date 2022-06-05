@@ -4,43 +4,55 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PlaceMeta {
-    @SerializedName("total_count")
+    @SerializedName("is_end")
     @Expose
-    private int total_count;
+    private Boolean isEnd;
     @SerializedName("pageable_count")
     @Expose
-    private int pabeable_count;
-    @SerializedName("is_End")
+    private Integer pageableCount;
+    @SerializedName("same_name")
     @Expose
-    private boolean is_End;
+    private SameName sameName;
+    @SerializedName("total_count")
+    @Expose
+    private Integer totalCount;
 
-    public int getTotal_count() {
-        return total_count;
+    public Boolean getIsEnd() {
+        return isEnd;
     }
 
-    public void setTotal_count(int total_count) {
-        this.total_count = total_count;
+    public void setIsEnd(Boolean isEnd) {
+        this.isEnd = isEnd;
     }
 
-    public int getPabeable_count() {
-        return pabeable_count;
+    public Integer getPageableCount() {
+        return pageableCount;
     }
 
-    public void setPabeable_count(int pabeable_count) {
-        this.pabeable_count = pabeable_count;
+    public void setPageableCount(Integer pageableCount) {
+        this.pageableCount = pageableCount;
     }
 
-    public boolean getIs_End() {
-        return is_End;
+    public SameName getSameName() {
+        return sameName;
     }
 
-    public void setIs_End(boolean is_End) {
-        this.is_End = is_End;
+    public void setSameName(SameName sameName) {
+        this.sameName = sameName;
     }
 
-    public PlaceMeta(int total_count, int pabeable_count, boolean is_End){
-        this.total_count = total_count;
-        this.pabeable_count = pabeable_count;
-        this.is_End = is_End;
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public PlaceMeta(SameName same_name, int total_count, int pabeable_count, boolean is_End){
+        this.sameName = same_name;
+        this.totalCount = total_count;
+        this.pageableCount = pabeable_count;
+        this.isEnd = is_End;
     }
 }
