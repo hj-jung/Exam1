@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 public interface CharacterService {
 
     @GET("/character/{id}")
-    Call<GetCharacter> getCharacter(@Path("id") int id);
+    Call<Character> getCharacter(@Path("id") int id);
 
     @POST("/character")
     Call<Character> addCharacter(@Body Character character);

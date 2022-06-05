@@ -18,10 +18,11 @@ import com.cookandroid.exam.DTO.Location.ResultKeyword;
 import com.cookandroid.exam.Interface.LocationService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
+import com.cookandroid.exam.Util.LocationItem;
 import com.google.android.material.textfield.TextInputEditText;
 
-import net.daum.android.map.MapView;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class LocationActivity extends AppCompatActivity {
     private MapView mapView;
 
     private String keyword, location;
+    private Double x, y;
     private int num;
     private RecyclerView recyclerView;
 
@@ -46,7 +48,7 @@ public class LocationActivity extends AppCompatActivity {
 
     private ArrayList<Place> locationItemArrayList = new ArrayList<>();
 
-    private String API_KEY = "8267284f26c823bdac89070cabe710bb";
+    private String API_KEY = "KakaoAK 8267284f26c823bdac89070cabe710bb";
 
     final static String TAG = "LocationActivity";
 
@@ -118,6 +120,8 @@ public class LocationActivity extends AppCompatActivity {
                 location = search.getText().toString();
                 Intent intent = new Intent(LocationActivity.this, ScheduleUpdateActivity.class);
                 intent.putExtra("Location", location);
+                intent.putExtra("x", x);
+                intent.putExtra("y", y);
                 startActivity(intent);
             }
         });
@@ -138,6 +142,8 @@ public class LocationActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     for(Place locationItem : response.body().getDocuments()){
                         locationAdapter.addItem(locationItem);
+                        x = Double.valueOf(locationItem.getX());
+                        y = Double.valueOf(locationItem.getY());
                     }
                     locationAdapter.notifyDataSetChanged();
                 }

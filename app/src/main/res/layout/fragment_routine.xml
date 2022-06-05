@@ -56,29 +56,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="2"
         android:layout_margin="10dp"
-        android:background="@drawable/round_border_shadow"
+        android:background="@drawable/round_border_shadow_background"
         android:orientation="vertical">
 
-        <TextView
+        <com.github.mikephil.charting.charts.PieChart
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:text="@string/routine_achivement_rate"
-            android:textSize="18sp"/>
+            android:id="@+id/piechart" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:text="0%"
-            android:textSize="50sp"
-            android:id="@+id/routine_rate" />
 
     </LinearLayout>
 

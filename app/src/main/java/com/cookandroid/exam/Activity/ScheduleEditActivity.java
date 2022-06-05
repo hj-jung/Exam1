@@ -30,7 +30,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
     Button put, del;
     private ScheduleService scheduleService;
     private String color, startY, endY, startH, endH;
-    private int calendarID, pos;
+    private int calendarID, pos, user_id;
     private static final String TAG = "SchedulePutActivity";
 
     @Override
@@ -40,6 +40,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         pos = intent.getIntExtra("position",-1);
+        user_id = intent.getIntExtra("userID", -1);
 
         scheduleName = (EditText) findViewById(R.id.schedule_edit_name);
         scheduleLocation = (EditText) findViewById(R.id.edit_location);
@@ -49,7 +50,7 @@ public class ScheduleEditActivity extends AppCompatActivity {
         scheduleService = RetrofitClient.getClient().create(ScheduleService.class);
 
         //기존 일정 GET
-        Call<List<Schedule>> call = scheduleService.today();
+        Call<List<Schedule>> call = scheduleService.today(user_id);
         call.enqueue(new Callback<List<Schedule>>() {
             @Override
             public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {

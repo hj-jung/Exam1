@@ -34,7 +34,7 @@ public class EditMypageActivity extends Activity {
 
     private CharacterService characterService;
 
-    private int characterID;
+    private int characterID, user_id;
 
     //private FragmentManager fm = FragmentManager();
 
@@ -44,6 +44,7 @@ public class EditMypageActivity extends Activity {
 
         Intent intent = getIntent();
         characterID = intent.getIntExtra("id", 0);
+        user_id = intent.getIntExtra("userID", -1);
         System.out.println("EditMyPage id = " + characterID);
 
         //다이얼로그 팝업창 검정색 배경 없애기
@@ -110,7 +111,7 @@ public class EditMypageActivity extends Activity {
         String inputName = editName.getText().toString(); //editName에 입력한 문자열을 얻어온다.
         String inputMessage = editMessage.getText().toString(); //editMessgae에 입력한 문자열을 얻어온다.
 
-        Character character = new Character(inputName, inputMessage);
+        Character character = new Character(inputName, inputMessage, user_id);
 
         Call<Character> call = characterService.updateCharacter(characterID, character);
         call.enqueue(new Callback<Character>() {

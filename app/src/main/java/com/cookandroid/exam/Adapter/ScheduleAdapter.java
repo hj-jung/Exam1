@@ -22,10 +22,12 @@ public class ScheduleAdapter extends BaseAdapter {
 
     private Context context;
     private List<ScheduleItem> scheduleItems;
+    private int user_id;
 
-    public ScheduleAdapter(Context context, List<ScheduleItem> scheduleItems){
+    public ScheduleAdapter(Context context, List<ScheduleItem> scheduleItems, Integer user_id){
         this.context = context;
         this.scheduleItems = scheduleItems;
+        this.user_id = user_id;
     }
 
     @Override
@@ -53,12 +55,12 @@ public class ScheduleAdapter extends BaseAdapter {
 
         System.out.println("먕"+scheduleItem.getColor());
 
-        if(scheduleItem.getColor()=="RED")  color.setBackgroundColor(Color.RED);
-        if(scheduleItem.getColor()=="ORANGE")  color.setBackgroundColor(Color.parseColor("#F0CA00"));
-        if(scheduleItem.getColor()=="GREEN")  color.setBackgroundColor(Color.GREEN);
-        if(scheduleItem.getColor()=="BLUE")  color.setBackgroundColor(Color.BLUE);
-        if(scheduleItem.getColor()=="PURPLE")  color.setBackgroundColor(Color.parseColor("#E200CC"));
-        if(scheduleItem.getColor()=="BLACK")  color.setBackgroundColor(Color.BLACK);
+        if(scheduleItem.getColor().equals("RED"))  color.setBackgroundColor(Color.RED);
+        if(scheduleItem.getColor().equals("ORANGE"))  color.setBackgroundColor(Color.parseColor("#F0CA00"));
+        if(scheduleItem.getColor().equals("GREEN"))  color.setBackgroundColor(Color.GREEN);
+        if(scheduleItem.getColor().equals("BLUE"))  color.setBackgroundColor(Color.BLUE);
+        if(scheduleItem.getColor().equals("PURPLE"))  color.setBackgroundColor(Color.parseColor("#E200CC"));
+        if(scheduleItem.getColor().equals("BLACK"))  color.setBackgroundColor(Color.BLACK);
         title.setText(scheduleItem.getTitle());
         time.setText(scheduleItem.getTime());
 
@@ -68,6 +70,7 @@ public class ScheduleAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context.getApplicationContext(), ScheduleEditActivity.class);
                 intent.putExtra("position", pos);
+                intent.putExtra("userID", user_id);
                 context.startActivity(intent);
             }
         });

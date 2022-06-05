@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Exam">
         <activity
-            android:name=".Activity.SetCharacterActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.SetCharacterActivity" />
         <activity android:name=".Activity.BottomNaviActivity" />
         <activity
             android:name=".Activity.ScheduleCheckAcitivity"
@@ -43,7 +45,10 @@
         <activity
             android:name=".Activity.DeleteRoutineActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Activity.DetailPageActivity" />
+        <activity
+            android:name=".Activity.DetailPageActivity"
+            android:exported="true">
+        </activity>
         <activity android:name=".Activity.LocationActivity"/>
 
         <meta-data android:name="com.kakao.sdk.AppKey"
