@@ -6,6 +6,11 @@
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_detail_page.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_edit_mypage.xml" value="0.109375" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_location.xml" value="0.375" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_login.xml" value="0.14375" />
+        <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_register.xml" value="0.14375" />
+>>>>>>> 2500d5c8be0fbfcc0e2daf7ba7ee5da722abcc39
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_schedulecheck.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleedit.xml" value="0.24947916666666667" />
         <entry key="..\:/CookAndroid/Project/SongE/app/src/main/res/layout/activity_scheduleinfl.xml" value="0.24947916666666667" />
