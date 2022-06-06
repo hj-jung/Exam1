@@ -75,9 +75,9 @@ public class DetailPageActivity extends Activity {
     private ArrayList<ScheduleData> list = new ArrayList<>();
     ScheduleData data;
     private int pos, dressTem;
-    private String base_date = "20220530";
+    private String base_date = "20220606";
     private String base_time = "0200";
-    private String dust_daytime = "2022-05-30 02:00";
+    private String dust_daytime = "2022-06-06 02:00";
     private String strMonth = "May";
     private MapPoint BASE_LOCATION;
 
