@@ -149,7 +149,7 @@ public class BottomNaviActivity extends AppCompatActivity {
     }
 
     private void getRoutine() {
-        Call<List<Routine>> call = routineService.getRoutine();
+        Call<List<Routine>> call = routineService.getRoutine(user_id);
         call.enqueue(new Callback<List<Routine>>() {
             @Override
             public void onResponse(Call<List<Routine>> call, Response<List<Routine>> response) {

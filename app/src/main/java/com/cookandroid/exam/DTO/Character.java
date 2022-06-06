@@ -38,7 +38,6 @@ public class Character {
         this.quote = quote;
     }
 
-
     public Integer getUser_id() {
         return user_id;
     }

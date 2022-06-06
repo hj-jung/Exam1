@@ -13,13 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookandroid.exam.Adapter.LocationAdapter;
-import com.cookandroid.exam.DTO.Location.Place;
+import com.cookandroid.exam.DTO.Location.Document;
 import com.cookandroid.exam.DTO.Location.ResultKeyword;
 import com.cookandroid.exam.Interface.LocationService;
 import com.cookandroid.exam.R;
-import com.cookandroid.exam.Retrofit.RetrofitClient;
-import com.cookandroid.exam.Util.LocationItem;
-import com.google.android.material.textfield.TextInputEditText;
+import com.cookandroid.exam.Retrofit.LocationRetrofitClient;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -46,7 +44,7 @@ public class LocationActivity extends AppCompatActivity {
     private LocationService locationService;
     private LocationAdapter locationAdapter;
 
-    private ArrayList<Place> locationItemArrayList = new ArrayList<>();
+    private ArrayList<Document> locationItemArrayList = new ArrayList<>();
 
     private String API_KEY = "KakaoAK 8267284f26c823bdac89070cabe710bb";
 
@@ -92,7 +90,7 @@ public class LocationActivity extends AppCompatActivity {
                 searchKeyword(keyword, num);
             }
         });
-
+/*
         //리사이클러뷰 이전 페이지 버튼
         btn_prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +110,7 @@ public class LocationActivity extends AppCompatActivity {
                 searchKeyword(keyword, num);
             }
         });
-
+*/
         //장소 확정 시, location값 넘겨주기
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,13 +132,15 @@ public class LocationActivity extends AppCompatActivity {
         locationAdapter.clear();
         locationAdapter.notifyDataSetChanged();
 
-        LocationService locationService = RetrofitClient.getClient().create(LocationService.class);
-        Call<ResultKeyword> call = locationService.getResultKeyword(API_KEY, keyword, 15);
+        LocationService locationService = LocationRetrofitClient.getClient().create(LocationService.class);
+        Call<ResultKeyword> call = locationService.getResultKeyword(API_KEY, keyword, 1);
         call.enqueue(new Callback<ResultKeyword>() {
             @Override
             public void onResponse(Call<ResultKeyword> call, Response<ResultKeyword> response) {
-                if (response.isSuccessful()) {
-                    for (Place locationItem : response.body().getDocuments()) {
+                if(response.isSuccessful()){
+                    ResultKeyword resultKeyword = response.body();
+                    List<Document> documentList = resultKeyword.getDocuments();
+                    for(Document locationItem : documentList){
                         locationAdapter.addItem(locationItem);
                         x = Double.valueOf(locationItem.getX());
                         y = Double.valueOf(locationItem.getY());
@@ -148,8 +148,8 @@ public class LocationActivity extends AppCompatActivity {
                     locationAdapter.notifyDataSetChanged();
                 }
                 //다음 버튼&이전 버튼 활성화
-                if (!response.body().getMeta().getIs_End()) btn_next.isEnabled();
-                if (num != 1) btn_prev.isEnabled();
+                if(!response.body().getMeta().getIsEnd())  btn_next.isEnabled();
+                if(num!=1)  btn_prev.isEnabled();
             }
 
             @Override

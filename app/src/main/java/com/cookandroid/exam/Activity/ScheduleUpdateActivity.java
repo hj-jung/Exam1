@@ -297,7 +297,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         //schedule_location = bundle.getString("Location");
         schedule_location = "장소";
 
-        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, schedule_location, startHms.toString(), startY, user_id, schedule_name, x, y);
+        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, "", startHms.toString(), startY, user_id, schedule_name, x, y);
 
 
         Call<Schedule> call = scheduleService.addSchedule(schedule);
