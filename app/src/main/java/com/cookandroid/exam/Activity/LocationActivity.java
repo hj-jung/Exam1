@@ -129,7 +129,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     //keyword 검색 함수
-    private void searchKeyword(String keyword, int num){
+    private void searchKeyword(String keyword, int num) {
         locationItemArrayList.clear();
         locationAdapter.clear();
         locationAdapter.notifyDataSetChanged();
@@ -139,8 +139,8 @@ public class LocationActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResultKeyword>() {
             @Override
             public void onResponse(Call<ResultKeyword> call, Response<ResultKeyword> response) {
-                if(response.isSuccessful()){
-                    for(Place locationItem : response.body().getDocuments()){
+                if (response.isSuccessful()) {
+                    for (Place locationItem : response.body().getDocuments()) {
                         locationAdapter.addItem(locationItem);
                         x = Double.valueOf(locationItem.getX());
                         y = Double.valueOf(locationItem.getY());
@@ -148,8 +148,8 @@ public class LocationActivity extends AppCompatActivity {
                     locationAdapter.notifyDataSetChanged();
                 }
                 //다음 버튼&이전 버튼 활성화
-                if(!response.body().getMeta().getIs_End())  btn_next.isEnabled();
-                if(num!=1)  btn_prev.isEnabled();
+                if (!response.body().getMeta().getIs_End()) btn_next.isEnabled();
+                if (num != 1) btn_prev.isEnabled();
             }
 
             @Override
@@ -158,6 +158,4 @@ public class LocationActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
