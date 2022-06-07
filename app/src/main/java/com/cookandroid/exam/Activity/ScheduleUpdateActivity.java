@@ -22,6 +22,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.Fragment.MainFragment;
+import com.cookandroid.exam.Fragment.MypageFragment;
+import com.cookandroid.exam.Fragment.RoutineFragment;
 import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.RetrofitClient;
@@ -41,7 +43,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
     Button col1, col2, col3, col4, col5, col6;
     Button searchLocation;
     private ScheduleService scheduleService;
-    private String color, startY, endY;
+    private String color, startY, endY, locationName, locationX, locationY;
     private LocalTime startHms, endHms;
     private int user_id;
     private Double x, y;
@@ -264,7 +266,7 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
                 intent.putExtra("location", scheduleLocation.getText().toString());
-                startActivity(intent);
+                startActivityForResult(intent, 5);
             }
         });
 
@@ -283,6 +285,21 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("tag", "===requestCode===" + requestCode);
+        if (requestCode == 5) {
+            if (data != null) {
+                locationName = data.getStringExtra("locationName");
+                locationX = data.getStringExtra("locationX");
+                locationY = data.getStringExtra("locationY");
+
+                System.out.println("======" + locationName+locationX+locationY);
+            }
+        }
+    }
+
     //일정 POST
     private void addSchedule(){
         String schedule_name, schedule_location, schedule_context;
@@ -293,14 +310,16 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         schedule_name = scheduleName.getText().toString();
         schedule_context = scheduleContext.getText().toString();
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        x = bundle.getDouble("x");
-        y = bundle.getDouble("y");
+        ///Intent intent = getIntent();
+        //Bundle bundle = intent.getExtras();
+        //x = bundle.getDouble("x");
+        //y = bundle.getDouble("y");
         //schedule_location = bundle.getString("Location");
         //schedule_location = "장소";
+        x = Double.parseDouble(locationX);
+        y = Double.parseDouble(locationY);
 
-        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, "", startHms.toString(), startY, user_id, schedule_name, 0.0, 0.0);
+        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, locationName, startHms.toString(), startY, user_id, schedule_name, x, y);
 
 
         Call<Schedule> call = scheduleService.addSchedule(schedule);

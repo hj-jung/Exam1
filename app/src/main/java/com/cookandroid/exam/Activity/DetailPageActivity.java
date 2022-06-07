@@ -80,6 +80,7 @@ public class DetailPageActivity extends Activity {
     private String dust_daytime = "2022-06-06 02:00";
     private String strMonth = "May";
     private MapPoint BASE_LOCATION;
+    private double x, y;
 
     String posTime;
     int timeH;
@@ -116,6 +117,11 @@ public class DetailPageActivity extends Activity {
                 }
             }
         }
+
+        //장소 x,y
+        x = data.getX();
+        y = data.getY();
+        System.out.println("=====================================================" + x + " " + y);
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM");
@@ -388,7 +394,14 @@ public class DetailPageActivity extends Activity {
 
         //카카오맵 API + 마커
         //여기에 LocationActivity에서 장소 선택 시에 받아온 x,y(경도,위도값) 넣어줘야함 - 우선 서울역으로 설정
-        BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.553836, 126.969652);
+        //BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.553836, 126.969652);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        BASE_LOCATION = MapPoint.mapPointWithGeoCoord(x, y);
 
         mapView = new MapView(this);
         mapViewContainer = (LinearLayout) findViewById(R.id.detail_mapView);
