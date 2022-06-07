@@ -6,19 +6,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ResultKeyword {
-    @SerializedName("Documents")
+    @SerializedName("documents")
     @Expose
-    private List<Document> Documents;
+    private List<Document> documents = null;
     @SerializedName("meta")
     @Expose
     private PlaceMeta meta;
 
     public List<Document> getDocuments() {
-        return Documents;
+        return documents;
     }
 
     public void setDocuments(List<Document> documents) {
-        Documents = documents;
+        this.documents = documents;
     }
 
     public PlaceMeta getMeta() {

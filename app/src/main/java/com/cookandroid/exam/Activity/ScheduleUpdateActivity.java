@@ -255,12 +255,15 @@ public class ScheduleUpdateActivity extends FragmentActivity {
             }
         });
 
+        scheduleLocation = (EditText) findViewById(R.id.location);
+
         //-> Location클릭 시 장소 검색 페이지로 이동
         searchLocation = (Button) findViewById(R.id.btn_search_location);
         searchLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
+                intent.putExtra("location", scheduleLocation.getText().toString());
                 startActivity(intent);
             }
         });
@@ -295,9 +298,9 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         x = bundle.getDouble("x");
         y = bundle.getDouble("y");
         //schedule_location = bundle.getString("Location");
-        schedule_location = "장소";
+        //schedule_location = "장소";
 
-        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, "", startHms.toString(), startY, user_id, schedule_name, x, y);
+        Schedule schedule = new Schedule(color, schedule_context, endHms.toString() , endY, "", startHms.toString(), startY, user_id, schedule_name, 0.0, 0.0);
 
 
         Call<Schedule> call = scheduleService.addSchedule(schedule);

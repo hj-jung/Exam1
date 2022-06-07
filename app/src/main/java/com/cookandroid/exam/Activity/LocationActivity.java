@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookandroid.exam.Adapter.LocationAdapter;
 import com.cookandroid.exam.DTO.Location.Document;
+import com.cookandroid.exam.DTO.Location.PlaceMeta;
 import com.cookandroid.exam.DTO.Location.ResultKeyword;
 import com.cookandroid.exam.Interface.LocationService;
 import com.cookandroid.exam.R;
@@ -51,6 +52,7 @@ public class LocationActivity extends AppCompatActivity {
     private LocationAdapter locationAdapter;
 
     private ArrayList<Document> locationItemArrayList = new ArrayList<>();
+    private List<Document> documentList = new ArrayList<>();
 
     private String API_KEY = "KakaoAK 8267284f26c823bdac89070cabe710bb";
 
@@ -61,14 +63,16 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        Intent intent = getIntent();
+        String schedulelocation = intent.getStringExtra("location");
+
         search = (EditText) findViewById(R.id.location_search);
-        pagenum = (TextView) findViewById(R.id.pageNum);
         btn_search = (Button) findViewById(R.id.btn_search);
         btn_select = (Button) findViewById(R.id.btn_select);
-        btn_prev = (Button) findViewById(R.id.btn_prev);
-        btn_next = (Button) findViewById(R.id.btn_next);
         mapView = (MapView) findViewById(R.id.mapView);
         recyclerView = (RecyclerView) findViewById(R.id.location_list);
+
+        search.setText(schedulelocation);
 
         //Adapter 생성
         locationAdapter = new LocationAdapter(locationItemArrayList, getApplicationContext(), search, recyclerView);
@@ -108,27 +112,7 @@ public class LocationActivity extends AppCompatActivity {
                 searchKeyword(keyword, num);
             }
         });
-/*
-        //리사이클러뷰 이전 페이지 버튼
-        btn_prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                num--;
-                pagenum.setText(String.valueOf(num));
-                searchKeyword(keyword, num);
-            }
-        });
 
-        //리사이클러뷰 다음 페이지 버튼
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                num++;
-                pagenum.setText(String.valueOf(num));
-                searchKeyword(keyword, num);
-            }
-        });
-*/
         //장소 확정 시, location값 넘겨주기
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,23 +135,21 @@ public class LocationActivity extends AppCompatActivity {
         locationAdapter.notifyDataSetChanged();
 
         LocationService locationService = LocationRetrofitClient.getClient().create(LocationService.class);
-        Call<ResultKeyword> call = locationService.getResultKeyword(API_KEY, keyword, 1);
+        Call<ResultKeyword> call = locationService.getResultKeyword(API_KEY, keyword, 10);
         call.enqueue(new Callback<ResultKeyword>() {
             @Override
             public void onResponse(Call<ResultKeyword> call, Response<ResultKeyword> response) {
                 if(response.isSuccessful()){
                     ResultKeyword resultKeyword = response.body();
-                    List<Document> documentList = resultKeyword.getDocuments();
+                    documentList = resultKeyword.getDocuments();
                     for(Document locationItem : documentList){
                         locationAdapter.addItem(locationItem);
                         x = Double.valueOf(locationItem.getX());
                         y = Double.valueOf(locationItem.getY());
                     }
                     locationAdapter.notifyDataSetChanged();
+
                 }
-                //다음 버튼&이전 버튼 활성화
-                if(!response.body().getMeta().getIsEnd())  btn_next.isEnabled();
-                if(num!=1)  btn_prev.isEnabled();
             }
 
             @Override
