@@ -25,6 +25,7 @@ import com.cookandroid.exam.DTO.Location.ResultKeyword;
 import com.cookandroid.exam.Interface.LocationService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.LocationRetrofitClient;
+import com.cookandroid.exam.Util.LocationItem;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -100,6 +101,13 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int pos) {
                 MapPoint mapPoint;
+                Document locationItem= locationItemArrayList.get(pos);
+                Intent resultIntent = new Intent(getApplicationContext(), ScheduleUpdateActivity.class);
+                resultIntent.putExtra("locationName", locationItem.getPlaceName());
+                resultIntent.putExtra("locationX", locationItem.getX());
+                resultIntent.putExtra("locationY", locationItem.getY());
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
 
