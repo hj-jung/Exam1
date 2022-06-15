@@ -58,7 +58,7 @@ public class BottomNaviActivity extends AppCompatActivity {
 
 
     private int time;
-    private String color, title, startH, AMPM;
+    private String color, title, startH, AMPM, strLocalTime;
 
 
     @Override
@@ -149,6 +149,7 @@ public class BottomNaviActivity extends AppCompatActivity {
     }
 
     private void getRoutine() {
+
         Call<List<Routine>> call = routineService.getRoutine(user_id);
         call.enqueue(new Callback<List<Routine>>() {
             @Override
@@ -168,10 +169,11 @@ public class BottomNaviActivity extends AppCompatActivity {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
                         LocalTime localTime= LocalTime.parse(routineStrTime, formatter);
-                        System.out.println(localTime);
+                        strLocalTime = localTime.format(DateTimeFormatter.ofPattern("a hh:mm"));
+                        System.out.println(strLocalTime);
                     }
 
-                    routineDataArrayList.add(new RoutineData(routine.getId(), routine.getName(), routine.getRoutineTime(), routine.getContext(), routine.getAchieve()));
+                    routineDataArrayList.add(new RoutineData(routine.getId(), routine.getName(), strLocalTime, routine.getContext(), routine.getAchieve()));
                 }
 
                 bundle.putParcelableArrayList("routineList", (ArrayList<? extends Parcelable>) routineDataArrayList);

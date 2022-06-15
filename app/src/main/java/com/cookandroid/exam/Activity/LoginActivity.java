@@ -47,6 +47,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 login();
+                //startActivity(new Intent(getApplicationContext(), BottomNaviActivity.class));
             }
         });
 

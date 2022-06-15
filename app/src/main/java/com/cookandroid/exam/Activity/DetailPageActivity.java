@@ -352,6 +352,7 @@ public class DetailPageActivity extends Activity {
             }
         });
 
+
         //미세먼지 API
         dustService = DustRetrofitClient.getClient().create(DustService.class);
 
@@ -392,6 +393,8 @@ public class DetailPageActivity extends Activity {
             }
         });
 
+
+
         //카카오맵 API + 마커
         //여기에 LocationActivity에서 장소 선택 시에 받아온 x,y(경도,위도값) 넣어줘야함 - 우선 서울역으로 설정
         //BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.553836, 126.969652);
@@ -401,7 +404,8 @@ public class DetailPageActivity extends Activity {
             e.printStackTrace();
         }
 
-        BASE_LOCATION = MapPoint.mapPointWithGeoCoord(x, y);
+        BASE_LOCATION = MapPoint.mapPointWithGeoCoord(y, x);
+        //BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.546438, 126.964725);
 
         mapView = new MapView(this);
         mapViewContainer = (LinearLayout) findViewById(R.id.detail_mapView);
