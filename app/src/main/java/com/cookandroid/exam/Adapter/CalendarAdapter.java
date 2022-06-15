@@ -62,12 +62,18 @@ public class CalendarAdapter extends RecyclerView.Adapter {
         //else    return DAY_TYPE;
         //일요일 빨간날 표시
         else    {
-            if((position - sun)%7==0)   {
-                int a = (position-sun) % 7;
-                Log.d(TAG, Integer.toString(position));
-                Log.d(TAG, Integer.toString(sun));
-                return DAY_RED_TYPE;
+            int a=1;
+            System.out.println(position);
+            if((position>=10292)&&(position<10327)){
+                a = (position+5) % 7;
             }
+            else if((position>=10327)&&(position<10363)){
+                a = (position+1) % 7;
+            }
+            else if(position>=10363){
+                a = (position+2) % 7;
+            }
+            if(a==0)    return DAY_RED_TYPE;
             return DAY_TYPE;
         }
     }
