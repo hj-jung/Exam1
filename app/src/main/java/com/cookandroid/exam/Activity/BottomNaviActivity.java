@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Base64;
@@ -32,6 +33,10 @@ import com.cookandroid.exam.DTO.Routine;
 import com.cookandroid.exam.Util.RoutineAchive;
 import com.cookandroid.exam.Util.RoutineData;
 import com.cookandroid.exam.Util.ScheduleData;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.security.MessageDigest;
@@ -57,10 +62,14 @@ public class BottomNaviActivity extends AppCompatActivity {
 
     private int characterid, user_id;
 
+    private String characterName, characterQuote;
+
+    private String routineAchive = "NaN";
 
     private int time;
     private String color, title, startH, AMPM, strLocalTime;
 
+    Bundle myPagebundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +115,12 @@ public class BottomNaviActivity extends AppCompatActivity {
                         ft.replace(R.id.btmnavi_frame, new RoutineFragment()).commit(); break;
                     case R.id.tab_mypage:
                         getCharacter();
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        getAchieve();
                         ft.replace(R.id.btmnavi_frame, new MypageFragment()).commit(); break;
                 }
                 return true;
@@ -130,18 +145,14 @@ public class BottomNaviActivity extends AppCompatActivity {
 
                 Log.d("TAG", characterResponse.getName());
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("id",characterid);
-                bundle.putString("name", characterResponse.getName());
-                bundle.putString("message", characterResponse.getQuote());
-                bundle.putInt("userID", user_id);
+                characterName = characterResponse.getName();
+                characterQuote = characterResponse.getQuote();
 
-                MypageFragment mypageFragment = new MypageFragment();
-                mypageFragment.setArguments(bundle);
-                fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
-
+                myPagebundle.putInt("id",characterid);
+                myPagebundle.putString("name", characterName);
+                myPagebundle.putString("message", characterQuote);
+                myPagebundle.putInt("userID", user_id);
             }
-
             @Override
             public void onFailure(Call<Character> call, Throwable t) {
                 Log.d("getCharacter=", t.getMessage());
@@ -246,6 +257,30 @@ public class BottomNaviActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Schedule>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+            }
+        });
+    }
+
+    private void getAchieve() {
+        Call<String> call = routineService.getAchieve(user_id);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("TAG", String.valueOf(response.code()));
+                    return;
+                }
+                routineAchive = response.body();
+                myPagebundle.putString("routineAchive", routineAchive);
+                MypageFragment mypageFragment = new MypageFragment();
+                mypageFragment.setArguments(myPagebundle);
+
+                fm.beginTransaction().replace(R.id.btmnavi_frame, mypageFragment).commit();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.d("TAG", t.getMessage());
             }
         });

@@ -49,4 +49,10 @@
         <!-- 취소/확인버튼 색상 -->
         <item name="android:textColor">@color/marigold_yellow</item>
     </style>
+
+    <!--스플래시 스크린 -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
 </resources>
