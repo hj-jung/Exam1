@@ -1,7 +1,14 @@
 package com.cookandroid.exam.Activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +19,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.cookandroid.exam.DTO.Dust.PmInfo;
 import com.cookandroid.exam.DTO.Schedule;
@@ -32,6 +41,7 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -68,8 +78,9 @@ public class DetailPageActivity extends Activity {
     private String rainPercent = "-";
     private String temperature = "-";
     private String windSpeed = "-";
-    private String weatherCode;
+    private String weatherCode = "0";
 
+    private String dustAddress = "용산구";
     private String dustValue, dustGrade;
 
     private ArrayList<ScheduleData> list = new ArrayList<>();
@@ -80,7 +91,7 @@ public class DetailPageActivity extends Activity {
     private String dust_daytime = "2022-06-06 02:00";
     private String strMonth = "May";
     private MapPoint BASE_LOCATION;
-    private double x, y;
+    private double x, y, curLat, curLon;
 
     String posTime;
     int timeH;
@@ -108,7 +119,7 @@ public class DetailPageActivity extends Activity {
                 posTime = scheduleData.getStartHms();
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    LocalTime localTime= LocalTime.parse(posTime, formatter);
+                    LocalTime localTime = LocalTime.parse(posTime, formatter);
                     timeH = Integer.valueOf(localTime.getHour());
                     if (timeH == pos) {
                         data = scheduleData;
@@ -117,11 +128,46 @@ public class DetailPageActivity extends Activity {
                 }
             }
         }
+        //현재 위치 받아오기
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        curLat = loc_Current.getLatitude();
+        curLon = loc_Current.getLongitude();
+        System.out.println("=====================================================" + curLat + " " + curLon);
 
         //장소 x,y
         x = data.getX();
         y = data.getY();
         System.out.println("=====================================================" + x + " " + y);
+
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> gList = null;
+        try {
+            gList = geocoder.getFromLocation(y, x, 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("====TAG=====", "setMaskLocation");
+        }
+        if (gList != null) {
+            System.out.println(gList.size());
+            if (gList.size() == 0) {
+                Toast.makeText(getApplicationContext(), "해당 위치에서 검색된 주소정보가 없습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Address address = gList.get(0);
+                dustAddress = address.getSubLocality();
+                System.out.println("==========" + dustAddress);
+            }
+        }
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM");
@@ -254,7 +300,6 @@ public class DetailPageActivity extends Activity {
 
                         switch (str) {
                             case "POP": {
-                                //rainPercent = Integer.parseInt(item.getObsrValue());
                                 rainPercent = item.getObsrValue();
                                 break;
                             }
@@ -262,11 +307,15 @@ public class DetailPageActivity extends Activity {
                                 if (item.getObsrValue().equals("0")) {
                                     rainPercent = "0";
                                     weatherCode = item.getObsrValue();
-                                } else if (item.getObsrValue().equals("1")) rainPercent = "100";
+                                }
+                                else if (item.getObsrValue().equals("1")) {
+                                    rainPercent = "100";
+                                    weatherCode = item.getObsrValue();
+                                }
+                                else weatherCode = item.getObsrValue();
                                 break;
                             }
                             case "WSD": {
-                                //windSpeed = Double.parseDouble(item.getObsrValue());
                                 windSpeed = item.getObsrValue();
                                 break;
                             }
@@ -295,6 +344,12 @@ public class DetailPageActivity extends Activity {
                     switch (weatherCode) {
                         case "0":
                             weatherImg.setImageResource(R.drawable.weather_sunny);
+                            break;
+                        case "1":
+                            weatherImg.setImageResource(R.drawable.weather_rainyday);
+                            break;
+                        case "3":
+                            weatherImg.setImageResource(R.drawable.weather_snowy);
                     }
 
                     tvTmp.setText(temperature);
@@ -356,7 +411,7 @@ public class DetailPageActivity extends Activity {
         //미세먼지 API
         dustService = DustRetrofitClient.getClient().create(DustService.class);
 
-        dustService.getDust("용산구", "json", "daily", 1, 10, DustKey).enqueue(new Callback<PmInfo>() {
+        dustService.getDust(dustAddress, "json", "daily", 1, 10, DustKey).enqueue(new Callback<PmInfo>() {
             @Override
             public void onResponse(Call<PmInfo> call, retrofit2.Response<PmInfo> response) {
                 PmInfo dustResponse = response.body();

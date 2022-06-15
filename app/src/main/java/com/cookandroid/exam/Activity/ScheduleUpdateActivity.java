@@ -310,12 +310,6 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         schedule_name = scheduleName.getText().toString();
         schedule_context = scheduleContext.getText().toString();
 
-        ///Intent intent = getIntent();
-        //Bundle bundle = intent.getExtras();
-        //x = bundle.getDouble("x");
-        //y = bundle.getDouble("y");
-        //schedule_location = bundle.getString("Location");
-        //schedule_location = "장소";
         x = Double.parseDouble(locationX);
         y = Double.parseDouble(locationY);
 
