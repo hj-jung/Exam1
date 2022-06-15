@@ -295,6 +295,9 @@ public class ScheduleUpdateActivity extends FragmentActivity {
                 locationX = data.getStringExtra("locationX");
                 locationY = data.getStringExtra("locationY");
 
+                EditText editLocationName = (EditText) findViewById(R.id.location);
+                editLocationName.setText(locationName);
+
                 System.out.println("======" + locationName+locationX+locationY);
             }
         }

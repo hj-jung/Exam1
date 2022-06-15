@@ -81,7 +81,7 @@ public class DetailPageActivity extends Activity {
     private String weatherCode = "0";
 
     private String dustAddress = "용산구";
-    private String dustValue, dustGrade;
+    private String dustValue, dustGrade, eventTime;
 
     private ArrayList<ScheduleData> list = new ArrayList<>();
     ScheduleData data;
@@ -288,7 +288,17 @@ public class DetailPageActivity extends Activity {
         //상단 날짜 및 이벤트 이름 설정
         tvDay.setText(weekday + ", " + strMonth + " " + strCurDay);
         tvEventName.setText(data.getTitle());
-        tvEventTime.setText(data.getStartHms() + " - " + data.getEndHms());
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalTime localStartTime= LocalTime.parse(data.getStartHms(), formatter);
+            String eventStart = localStartTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
+            LocalTime localEndTime= LocalTime.parse(data.getEndHms(), formatter);
+            String eventEnd = localEndTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
+            eventTime = eventStart + " - " + eventEnd;
+        }
+
+        tvEventTime.setText(eventTime);
 
         //날씨 API
         weatherService = WeatherRetrofitClient.getClient().create(WeatherService.class);
