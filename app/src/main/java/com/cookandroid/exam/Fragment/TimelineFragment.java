@@ -15,7 +15,10 @@ import com.cookandroid.exam.Activity.DetailPageActivity;
 import com.cookandroid.exam.Adapter.TimelineAdapter;
 import com.cookandroid.exam.Util.ScheduleData;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class TimelineFragment extends ListFragment {
@@ -28,7 +31,7 @@ public class TimelineFragment extends ListFragment {
     private ArrayList<ScheduleData> scheduleDataArrayList = new ArrayList<>();
 
     private int time;
-    private String color, title, eventTime, AMPM, startH;
+    private String color, title, eventTime, AMPM, startH, eventStart, eventEnd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +45,14 @@ public class TimelineFragment extends ListFragment {
             for (ScheduleData scheduleData : scheduleDataArrayList) {
                 time = scheduleData.getTime();
                 startH = scheduleData.getStartH();
-                eventTime = scheduleData.getStartHms() + " - " + scheduleData.getEndHms();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    LocalTime localStartTime= LocalTime.parse(scheduleData.getStartHms(), formatter);
+                    eventStart = localStartTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
+                    LocalTime localEndTime= LocalTime.parse(scheduleData.getEndHms(), formatter);
+                    eventEnd = localEndTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
+                }
+                eventTime = eventStart + " - " + eventEnd;
                 color = scheduleData.getColor();
                 title = scheduleData.getTitle();
                 AMPM = scheduleData.getAMPM();
