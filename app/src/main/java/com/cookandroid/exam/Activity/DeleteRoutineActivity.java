@@ -36,7 +36,7 @@ public class DeleteRoutineActivity extends Activity {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activiey_delete_routine);
+        setContentView(R.layout.activity_delete_routine);
 
         routineService = RetrofitClient.getClient().create(RoutineService.class);
 

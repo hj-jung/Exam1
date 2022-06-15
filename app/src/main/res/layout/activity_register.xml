@@ -21,7 +21,7 @@
         android:layout_width="245dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="email" />
+        android:hint="id" />
 
     <EditText
         android:id="@+id/join_password"
