@@ -41,6 +41,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +59,7 @@ public class BottomNaviActivity extends AppCompatActivity {
 
 
     private int time;
-    private String color, title, startH, AMPM;
+    private String color, title, startH, AMPM, strLocalTime;
 
 
     @Override
@@ -116,7 +117,7 @@ public class BottomNaviActivity extends AppCompatActivity {
     }
 
     private void getCharacter() {
-        Call<Character> call = characterService.getCharacter(characterid);
+        Call<Character> call = characterService.getCharacter(user_id);
         call.enqueue(new Callback<Character>() {
             @Override
             public void onResponse(Call<Character> call, Response<Character> response) {
@@ -149,6 +150,7 @@ public class BottomNaviActivity extends AppCompatActivity {
     }
 
     private void getRoutine() {
+
         Call<List<Routine>> call = routineService.getRoutine(user_id);
         call.enqueue(new Callback<List<Routine>>() {
             @Override
@@ -168,10 +170,11 @@ public class BottomNaviActivity extends AppCompatActivity {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
                         LocalTime localTime= LocalTime.parse(routineStrTime, formatter);
-                        System.out.println(localTime);
+                        strLocalTime = localTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
+                        System.out.println(strLocalTime);
                     }
 
-                    routineDataArrayList.add(new RoutineData(routine.getId(), routine.getName(), routine.getRoutineTime(), routine.getContext(), routine.getAchieve()));
+                    routineDataArrayList.add(new RoutineData(routine.getId(), routine.getName(), strLocalTime, routine.getContext(), routine.getAchieve()));
                 }
 
                 bundle.putParcelableArrayList("routineList", (ArrayList<? extends Parcelable>) routineDataArrayList);
