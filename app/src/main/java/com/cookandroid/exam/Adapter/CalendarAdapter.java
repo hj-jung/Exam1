@@ -59,8 +59,8 @@ public class CalendarAdapter extends RecyclerView.Adapter {
             return EMPTY_TYPE;
         }
         else if(item instanceof Long) return HEADER_TYPE;
-        else    return DAY_TYPE;
-        /*일요일 빨간날 표시
+        //else    return DAY_TYPE;
+        //일요일 빨간날 표시
         else    {
             if((position - sun)%7==0)   {
                 int a = (position-sun) % 7;
@@ -69,7 +69,7 @@ public class CalendarAdapter extends RecyclerView.Adapter {
                 return DAY_RED_TYPE;
             }
             return DAY_TYPE;
-        }*/
+        }
     }
 
     //ViewHolder 생성
@@ -218,6 +218,23 @@ public class CalendarAdapter extends RecyclerView.Adapter {
         public DayRedViewHolder(@NonNull View itemView) {
             super(itemView);
             initView(itemView);
+
+            //리사이클러뷰 아이템 선택
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Log.d("위치확인",""+mCalendarList.get(pos).getClass().toString());
+                    Intent intent = new Intent(context, ScheduleCheckAcitivity.class);
+                    String key = mCalendarList.get(pos).getClass().toString();
+                    if(pos != RecyclerView.NO_POSITION){
+                        intent.putExtra("key", key);
+                        intent.putExtra("int", pos);
+                        intent.putExtra("userID", user_id);
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
         public void initView(View v){
             itemRedDay=(TextView) v.findViewById(R.id.item_red_day);
