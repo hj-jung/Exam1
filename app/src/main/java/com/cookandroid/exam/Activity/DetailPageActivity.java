@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,15 +26,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.cookandroid.exam.DTO.Dust.PmInfo;
-import com.cookandroid.exam.DTO.Schedule;
 import com.cookandroid.exam.DTO.Weather.Item;
 import com.cookandroid.exam.DTO.Weather.Result;
 import com.cookandroid.exam.Interface.DustService;
-import com.cookandroid.exam.Interface.ScheduleService;
 import com.cookandroid.exam.Interface.WeatherService;
 import com.cookandroid.exam.R;
 import com.cookandroid.exam.Retrofit.DustRetrofitClient;
-import com.cookandroid.exam.Retrofit.RetrofitClient;
 import com.cookandroid.exam.Retrofit.WeatherRetrofitClient;
 import com.cookandroid.exam.Util.ScheduleData;
 
@@ -69,6 +67,8 @@ public class DetailPageActivity extends Activity {
     private String DustKey = "+WSXT9nqJHijeDm0+DfSdKPLPcMLKnfHaJ6XU7N2hq0VkI3x+NM7Yc4Bgbkbok08RCFQEIgd0W/LpiVOg2j3Ow==";
     private final String packageName = "net.daum.android.map";
 
+    public static int TO_GRID = 0;
+
     private WeatherService weatherService;
     private List<Item> weatherItemList = new ArrayList<>();
 
@@ -88,6 +88,8 @@ public class DetailPageActivity extends Activity {
     private int pos, dressTem;
     private String base_date = "20220606";
     private String base_time = "0200";
+    private String nx = "60";
+    private String ny = "127";
     private String dust_daytime = "2022-06-06 02:00";
     private String strMonth = "May";
     private MapPoint BASE_LOCATION;
@@ -95,6 +97,8 @@ public class DetailPageActivity extends Activity {
 
     String posTime;
     int timeH;
+
+    String urlScheme = "kakaomap://route?sp=37.537229,127.005515&ep=37.4979502,127.0276368&by=PUBLICTRANSIT";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,22 +154,29 @@ public class DetailPageActivity extends Activity {
         y = data.getY();
         System.out.println("=====================================================" + x + " " + y);
 
+        urlScheme = "kakaomap://route?sp=" + curLat + "," + curLon + "&ep=" + y + "," + x + "&by=PUBLICTRANSIT";
+        System.out.println(urlScheme);
+
+        LatXLngY gridInfo = convertGRID_GPS(TO_GRID, y, x);
+        nx = Integer.toString((int) Math.round(gridInfo.x));
+        ny = Integer.toString((int) Math.round(gridInfo.y));
+
+        System.out.println("=====" + nx + ", " + ny);
+
         Geocoder geocoder = new Geocoder(this);
         List<Address> gList = null;
         try {
-            gList = geocoder.getFromLocation(y, x, 0);
+            gList = geocoder.getFromLocation(y, x, 1);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("====TAG=====", "setMaskLocation");
         }
         if (gList != null) {
-            System.out.println(gList.size());
             if (gList.size() == 0) {
                 Toast.makeText(getApplicationContext(), "해당 위치에서 검색된 주소정보가 없습니다.", Toast.LENGTH_SHORT).show();
             } else {
                 Address address = gList.get(0);
                 dustAddress = address.getSubLocality();
-                System.out.println("==========" + dustAddress);
             }
         }
 
@@ -287,8 +298,8 @@ public class DetailPageActivity extends Activity {
                 "JSON",
                 base_date,
                 base_time,
-                "60",
-                "126").enqueue(new Callback<Result>() {
+                nx,
+                ny).enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
                 Result weatherResponse = response.body();
@@ -307,12 +318,10 @@ public class DetailPageActivity extends Activity {
                                 if (item.getObsrValue().equals("0")) {
                                     rainPercent = "0";
                                     weatherCode = item.getObsrValue();
-                                }
-                                else if (item.getObsrValue().equals("1")) {
+                                } else if (item.getObsrValue().equals("1")) {
                                     rainPercent = "100";
                                     weatherCode = item.getObsrValue();
-                                }
-                                else weatherCode = item.getObsrValue();
+                                } else weatherCode = item.getObsrValue();
                                 break;
                             }
                             case "WSD": {
@@ -362,38 +371,31 @@ public class DetailPageActivity extends Activity {
                         tvRec.setText("나시티, 반바지, 민소매 원피스");
                         dressImg1.setImageResource(R.drawable.dress_sleeveless);
                         dressImg2.setImageResource(R.drawable.dress_shorts);
-                    }
-                    else if (dressTem >= 23 && dressTem <= 26) {
+                    } else if (dressTem >= 23 && dressTem <= 26) {
                         tvRec.setText("반팔, 얇은 셔츠, 얇은 긴팔, 반바지, 면바지");
                         dressImg1.setImageResource(R.drawable.dress_short_sleeve);
                         dressImg2.setImageResource(R.drawable.dress_shirt);
-                    }
-                    else if (dressTem >= 20) {
+                    } else if (dressTem >= 20) {
                         tvRec.setText("긴팔티, 가디건, 후드티, 면바지, 슬랙스, 스키니");
                         dressImg1.setImageResource(R.drawable.dress_jean);
                         dressImg2.setImageResource(R.drawable.dress_long_sleeve);
-                    }
-                    else if (dressTem >= 17) {
+                    } else if (dressTem >= 17) {
                         tvRec.setText("니트, 가디건, 후드티, 맨투맨, 청바지, 슬랙스");
                         dressImg1.setImageResource(R.drawable.dress_hoodie);
                         dressImg2.setImageResource(R.drawable.dress_sleeve);
-                    }
-                    else if (dressTem >= 12) {
+                    } else if (dressTem >= 12) {
                         tvRec.setText("자켓, 셔츠, 가디건, 간절기 야상");
                         dressImg1.setImageResource(R.drawable.dress_jacket);
                         dressImg2.setImageResource(R.drawable.dress_long_shirt);
-                    }
-                    else if (dressTem >= 10) {
+                    } else if (dressTem >= 10) {
                         tvRec.setText("트렌치코트, 간절기 야상, 여러겹 껴입기");
                         dressImg1.setImageResource(R.drawable.dress_trench);
                         dressImg2.setImageResource(R.drawable.dress_knit);
-                    }
-                    else if (dressTem >= 6) {
+                    } else if (dressTem >= 6) {
                         tvRec.setText("코트, 가죽자켓");
                         dressImg1.setImageResource(R.drawable.dress_coat);
                         dressImg2.setImageResource(R.drawable.dress_sweater_winter);
-                    }
-                    else {
+                    } else {
                         tvRec.setText("겨울 옷(야상, 패딩, 목도리 등)");
                         dressImg1.setImageResource(R.drawable.dress_puffer_coat);
                         dressImg2.setImageResource(R.drawable.dress_scarf);
@@ -449,7 +451,6 @@ public class DetailPageActivity extends Activity {
         });
 
 
-
         //카카오맵 API + 마커
         //여기에 LocationActivity에서 장소 선택 시에 받아온 x,y(경도,위도값) 넣어줘야함 - 우선 서울역으로 설정
         //BASE_LOCATION = MapPoint.mapPointWithGeoCoord(37.553836, 126.969652);
@@ -465,7 +466,7 @@ public class DetailPageActivity extends Activity {
         mapView = new MapView(this);
         mapViewContainer = (LinearLayout) findViewById(R.id.detail_mapView);
         mapViewContainer.addView(mapView);
-        mapView.setMapCenterPoint(BASE_LOCATION,true);
+        mapView.setMapCenterPoint(BASE_LOCATION, true);
 
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("Event Location");
@@ -477,12 +478,103 @@ public class DetailPageActivity extends Activity {
 
         //카카오맵 앱으로 이동
         KakaoMapBtn = (Button) findViewById(R.id.detail_kakaomap);
-        Intent intentmap = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        //Intent intentmap = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent intentmap = new Intent();
+        intentmap.setData(Uri.parse(urlScheme));
         KakaoMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DetailPageActivity.this.startActivity(intentmap);
+                startActivity(intentmap);
+                //DetailPageActivity.this.startActivity(intentmap);
             }
         });
+    }
+
+
+    private LatXLngY convertGRID_GPS(int mode, double lat_X, double lng_Y )
+    {
+        double RE = 6371.00877; // 지구 반경(km)
+        double GRID = 5.0; // 격자 간격(km)
+        double SLAT1 = 30.0; // 투영 위도1(degree)
+        double SLAT2 = 60.0; // 투영 위도2(degree)
+        double OLON = 126.0; // 기준점 경도(degree)
+        double OLAT = 38.0; // 기준점 위도(degree)
+        double XO = 43; // 기준점 X좌표(GRID)
+        double YO = 136; // 기1준점 Y좌표(GRID)
+
+        //
+        // LCC DFS 좌표변환 ( code : "TO_GRID"(위경도->좌표, lat_X:위도,  lng_Y:경도), "TO_GPS"(좌표->위경도,  lat_X:x, lng_Y:y) )
+        //
+
+
+        double DEGRAD = Math.PI / 180.0;
+        double RADDEG = 180.0 / Math.PI;
+
+        double re = RE / GRID;
+        double slat1 = SLAT1 * DEGRAD;
+        double slat2 = SLAT2 * DEGRAD;
+        double olon = OLON * DEGRAD;
+        double olat = OLAT * DEGRAD;
+
+        double sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+        double sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+        double ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+        ro = re * sf / Math.pow(ro, sn);
+        LatXLngY rs = new LatXLngY();
+
+        if (mode == TO_GRID) {
+            rs.lat = lat_X;
+            rs.lng = lng_Y;
+            double ra = Math.tan(Math.PI * 0.25 + (lat_X) * DEGRAD * 0.5);
+            ra = re * sf / Math.pow(ra, sn);
+            double theta = lng_Y * DEGRAD - olon;
+            if (theta > Math.PI) theta -= 2.0 * Math.PI;
+            if (theta < -Math.PI) theta += 2.0 * Math.PI;
+            theta *= sn;
+            rs.x = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+            rs.y = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+        }
+        else {
+            rs.x = lat_X;
+            rs.y = lng_Y;
+            double xn = lat_X - XO;
+            double yn = ro - lng_Y + YO;
+            double ra = Math.sqrt(xn * xn + yn * yn);
+            if (sn < 0.0) {
+                ra = -ra;
+            }
+            double alat = Math.pow((re * sf / ra), (1.0 / sn));
+            alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
+
+            double theta = 0.0;
+            if (Math.abs(xn) <= 0.0) {
+                theta = 0.0;
+            }
+            else {
+                if (Math.abs(yn) <= 0.0) {
+                    theta = Math.PI * 0.5;
+                    if (xn < 0.0) {
+                        theta = -theta;
+                    }
+                }
+                else theta = Math.atan2(xn, yn);
+            }
+            double alon = theta / sn + olon;
+            rs.lat = alat * RADDEG;
+            rs.lng = alon * RADDEG;
+        }
+        return rs;
+    }
+
+    class LatXLngY
+    {
+        public double lat;
+        public double lng;
+
+        public double x;
+        public double y;
+
     }
 }
