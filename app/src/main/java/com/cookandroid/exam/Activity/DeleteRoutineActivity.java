@@ -30,6 +30,8 @@ public class DeleteRoutineActivity extends Activity {
     TextView deleteRoutineName;
     Button canclebtn, deletebtn;
 
+    private String deleteName;
+
     private RoutineService routineService;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class DeleteRoutineActivity extends Activity {
         Intent intent = getIntent();
         if (intent != null) {
             deleteID = intent.getIntExtra("deleteID", 0);
+            deleteName = intent.getStringExtra("deleteRoutineName");
+            deleteRoutineName.setText(deleteName);
             System.out.println(deleteID);
         }
         System.out.println("deleteActivity deleteId = " + deleteID);

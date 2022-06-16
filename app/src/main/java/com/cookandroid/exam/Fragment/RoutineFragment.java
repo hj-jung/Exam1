@@ -115,6 +115,7 @@ public class RoutineFragment extends Fragment {
                     Intent intent = new Intent(getContext(), DeleteRoutineActivity.class);
                     deleteId = list.get(pos).routineId;
                     intent.putExtra("deleteID", deleteId);
+                    intent.putExtra("deleteRoutineName", list.get(pos).routineName);
                     getActivity().startActivityForResult(intent, 4);
 
                 }

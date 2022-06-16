@@ -85,14 +85,6 @@ public class EditMypageActivity extends Activity {
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String inputName = editName.getText().toString(); //editName에 입력한 문자열을 얻어온다.
-                String inputMessage = editMessage.getText().toString(); //editMessgae에 입력한 문자열을 얻어온다.
-
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("name", inputName);
-                returnIntent.putExtra("message", inputMessage);
-                setResult(Activity.RESULT_OK, returnIntent);*/
-
                 updateCharacter();
                 finish();
             }

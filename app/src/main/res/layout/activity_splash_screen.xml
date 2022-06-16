@@ -7,13 +7,13 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="170dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MySonge"
-        android:textSize="70sp"
+        android:textSize="60sp"
         android:textAlignment="center"
         android:textColor="@color/marigold_yellow"/>
 

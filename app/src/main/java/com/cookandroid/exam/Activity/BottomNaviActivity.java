@@ -148,7 +148,7 @@ public class BottomNaviActivity extends AppCompatActivity {
                 characterName = characterResponse.getName();
                 characterQuote = characterResponse.getQuote();
 
-                myPagebundle.putInt("id",characterid);
+                myPagebundle.putInt("id",characterResponse.getId());
                 myPagebundle.putString("name", characterName);
                 myPagebundle.putString("message", characterQuote);
                 myPagebundle.putInt("userID", user_id);
