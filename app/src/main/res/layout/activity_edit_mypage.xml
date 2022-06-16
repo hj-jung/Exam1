@@ -23,6 +23,7 @@
             android:id="@+id/mypage_cancle"
             android:background="#00ffffff"
             android:text="CANCEL"
+            android:fontFamily="@font/font"
             android:textSize="15sp"
             android:textColor="#FF0000" />
 
@@ -40,6 +41,7 @@
             android:id="@+id/mypage_edit"
             android:background="#00ffffff"
             android:text="EDIT"
+            android:fontFamily="@font/font"
             android:textSize="15sp"
             android:textColor="@color/black" />
 
@@ -58,7 +60,8 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25sp"
-            android:text="Edit Your SONGe" />
+            android:text="Edit Your SONGe"
+            android:fontFamily="@font/font"/>
 
         <View
             android:layout_width="0dp"
@@ -73,6 +76,7 @@
             android:layout_marginTop="23dp"
             android:ems="10"
             android:hint="Name"
+            android:fontFamily="@font/font"
             android:inputType="textPersonName"
             android:minHeight="40dp"
             android:drawableRight="@drawable/ic_baseline_person_24"/>
@@ -85,6 +89,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:ems="10"
+            android:fontFamily="@font/font"
             android:hint="@string/edit_message1"
             android:inputType="textPersonName"
             android:minHeight="48dp"
