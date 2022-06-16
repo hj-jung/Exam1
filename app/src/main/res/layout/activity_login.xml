@@ -7,19 +7,19 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="120dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="70sp"
+        android:textSize="50sp"
         android:textAlignment="center"
         android:textColor="@color/marigold_yellow"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="80dp" />
+        android:layout_height="90dp" />
 
     <EditText
         android:id="@+id/login_email"
@@ -42,6 +42,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_start"
+        android:textSize="15sp"
         android:text="Login" />
 
     <Button

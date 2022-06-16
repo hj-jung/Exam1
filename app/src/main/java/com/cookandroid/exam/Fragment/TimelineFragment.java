@@ -73,9 +73,9 @@ public class TimelineFragment extends ListFragment {
                 }
                 else {
                     if (i > 12) {
-                        adapter.addItem(String.valueOf(i - 12), "PM", "", "WHITE", "");
+                        adapter.addItem(String.format("%02d",(i - 12)), "PM", "", "WHITE", "");
                     } else {
-                        adapter.addItem(String.valueOf(i), "AM", "", "WHITE", "");
+                        adapter.addItem(String.format("%02d",i), "AM", "", "WHITE", "");
                     }
                 }
             }

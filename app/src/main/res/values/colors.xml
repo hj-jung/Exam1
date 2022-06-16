@@ -8,6 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dialogColor">#A6333333</color>
-    <color name="pale_yellow">#FFFFFCDE</color>
+    <color name="pale_yellow">#FFFCDE</color>
     <color name="marigold_yellow">#FDF078</color>
+    <color name="red6">#FA7683</color>
+    <color name="orange4">#FDB483</color>
+    <color name="yellow1">#FDF17C</color>
+    <color name="green3">#7CEB70</color>
+    <color name="blue3">#A4DAFE</color>
+    <color name="violet3">#DFCAFE</color>
 </resources>

@@ -55,6 +55,4 @@ public class TimelineItem {
         return this.colorStr;
     }
 
-
-
 }

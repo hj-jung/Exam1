@@ -31,7 +31,7 @@
             android:paddingTop="4dp"
             android:text="Cancel"
             android:textColor="#FF0606"
-            android:textSize="16dp"
+            android:textSize="15sp"
             android:typeface="monospace"
             tools:ignore="TouchTargetSizeCheck" />
 
@@ -48,7 +48,7 @@
 
             android:text="Add"
             android:textColor="#000000"
-            android:textSize="16dp"
+            android:textSize="15sp"
             android:typeface="monospace"
             tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
@@ -81,7 +81,7 @@
                 android:ems="10"
                 android:hint="Event Name"
                 android:inputType="textPersonName"
-                android:textSize="30dp" />
+                android:textSize="25sp" />
 
             <LinearLayout
                 android:id="@+id/colors"
@@ -95,42 +95,42 @@
                     android:id="@+id/color1"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:background="#FF0606"/>
+                    android:background="@color/red6"/>
 
                 <Button
                     android:id="@+id/color2"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
-                    android:background="#F0CA00"/>
+                    android:background="@color/orange4"/>
 
                 <Button
                     android:id="@+id/color3"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
-                    android:background="#66CC00"/>
+                    android:background="@color/yellow1"/>
 
                 <Button
                     android:id="@+id/color4"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
-                    android:background="#0038FF"/>
+                    android:background="@color/green3"/>
 
                 <Button
                     android:id="@+id/color5"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
-                    android:background="#E200CC"/>
+                    android:background="@color/blue3"/>
 
                 <Button
                     android:id="@+id/color6"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
-                    android:background="#000000" />
+                    android:background="@color/violet3" />
             </LinearLayout>
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.8"
                 android:gravity="center_vertical"
-                android:textSize="17dp"
+                android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="Time Setting" />
 
@@ -162,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="28dp"
+                    android:textSize="20sp"
                     android:text="Starts"/>
 
                 <TextView
@@ -175,7 +175,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="2022.05.03"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:clickable="true" />
 
                 <TextView
@@ -188,7 +188,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="04:00PM"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:clickable="true" />
             </LinearLayout>
 
@@ -205,7 +205,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textSize="28dp"
+                    android:textSize="20sp"
                     android:text="Ends"/>
 
                 <TextView
@@ -218,7 +218,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="2022.05.03"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:clickable="true" />
 
                 <TextView
@@ -231,7 +231,7 @@
                     android:textColor="@color/black"
                     android:background="@drawable/round_border_yellow_box"
                     android:text="05:00PM"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:clickable="true" />
             </LinearLayout>
 
@@ -247,7 +247,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.8"
                 android:gravity="center_vertical"
-                android:textSize="17dp"
+                android:textSize="20sp"
                 android:textColor="#000000"
                 android:text=" At Where?" />
 
@@ -271,7 +271,7 @@
                     android:ems="10"
                     android:background="@null"
                     android:inputType="textPersonName"
-                    android:textSize="28dp"
+                    android:textSize="20sp"
                     android:hint="Location" />
 
                 <Button
@@ -281,7 +281,8 @@
                     android:layout_weight="2.5"
                     android:layout_margin="3dp"
                     android:background="@color/pale_yellow"
-                    android:text="장소찾기" />
+                    android:text="장소찾기"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -303,7 +304,7 @@
                 android:paddingTop="3dp"
                 android:paddingLeft="3dp"
                 android:gravity="left"
-                android:textSize="28dp"
+                android:textSize="20sp"
                 android:hint="Context" />
         </LinearLayout>
 

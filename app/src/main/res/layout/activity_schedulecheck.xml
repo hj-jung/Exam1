@@ -23,7 +23,7 @@
             android:paddingLeft="33dp"
             android:paddingTop="15dp"
             android:text="SUNDAY, "
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#454545"/>
     </LinearLayout>
@@ -47,13 +47,17 @@
 
             <ImageButton
                 android:id="@+id/plus"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="5dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_plus" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
 
         </FrameLayout>

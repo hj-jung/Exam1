@@ -9,8 +9,9 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="Time"
-        android:textSize="10dp"
+        android:textSize="11sp"
         android:textColor="@color/black" />
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" A/P"
-        android:textSize="10dp"
+        android:textSize="11sp"
         android:textColor="@color/black" />
 
     <LinearLayout
@@ -36,6 +37,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:text="ScheduleTitle"
+            android:textSize="13sp"
             android:textColor="@color/white"/>
 
         <TextView
@@ -45,6 +47,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:text="ScheduleTime"
+            android:textSize="13sp"
             android:textColor="@color/white"/>
 
     </LinearLayout>

@@ -198,11 +198,6 @@ public class RoutineFragment extends Fragment {
                     yValues.add(new PieEntry(100 - (float) Double.parseDouble(routineAchive), "none"));
                 }
 
-                Description description = new Description();
-                description.setText("루틴 성취율  "); //라벨
-                description.setTextSize(15);
-                pieChart.setDescription(description);
-
                 PieDataSet dataSet = new PieDataSet(yValues,"");
                 dataSet.setSliceSpace(3f);
                 dataSet.setSelectionShift(5f);

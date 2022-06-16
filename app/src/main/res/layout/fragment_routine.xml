@@ -10,8 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.2"
+        android:layout_weight="1"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
         android:id="@+id/routine_fragment">
 
         <TextView
@@ -23,13 +25,12 @@
             android:text="For your \nsuccessful day"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="25sp"/>
+            android:textSize="20sp"/>
 
         <ImageButton
             android:id="@+id/addRoutine"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:background="#00ffffff"
@@ -42,7 +43,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="4.5"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -52,6 +53,16 @@
             android:overScrollMode="never" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:text="루틴 성취율"
+        android:gravity="bottom"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

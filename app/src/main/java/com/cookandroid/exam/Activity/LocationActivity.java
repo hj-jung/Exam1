@@ -69,7 +69,6 @@ public class LocationActivity extends AppCompatActivity {
 
         search = (EditText) findViewById(R.id.location_search);
         btn_search = (Button) findViewById(R.id.btn_search);
-        btn_select = (Button) findViewById(R.id.btn_select);
         mapView = (MapView) findViewById(R.id.mapView);
         recyclerView = (RecyclerView) findViewById(R.id.location_list);
 
@@ -120,7 +119,7 @@ public class LocationActivity extends AppCompatActivity {
                 searchKeyword(keyword, num);
             }
         });
-
+/*
         //장소 확정 시, location값 넘겨주기
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +132,8 @@ public class LocationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+ */
 
     }
 

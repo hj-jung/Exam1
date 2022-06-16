@@ -235,25 +235,25 @@ public class ScheduleUpdateActivity extends FragmentActivity {
         col3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                color = "GREEN";
+                color = "YELLOW";
             }
         });
         col4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                color = "BLUE";
+                color = "GREEN";
             }
         });
         col5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                color = "PURPLE";
+                color = "BLUE";
             }
         });
         col6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                color = "BLACK";
+                color = "PURPLE";
             }
         });
 

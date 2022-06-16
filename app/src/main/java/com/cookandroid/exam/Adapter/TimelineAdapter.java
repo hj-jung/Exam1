@@ -57,12 +57,12 @@ public class TimelineAdapter extends BaseAdapter {
         apTextView.setText(timelineItem.getAP());
 
         switch (timelineItem.getColor()) {
-            case ("RED") : timelineevent.setBackgroundColor(Color.RED); break;
-            case ("ORANGE") : timelineevent.setBackgroundColor(Color.parseColor("#F0CA00")); break;
-            case ("GREEN") : timelineevent.setBackgroundColor(Color.GREEN); break;
-            case ("BLUE") : timelineevent.setBackgroundColor(Color.BLUE); break;
-            case ("PURPLE") : timelineevent.setBackgroundColor(Color.parseColor("#E200CC")); break;
-            case ("BLACK") : timelineevent.setBackgroundColor(Color.BLACK); break;
+            case ("RED") : timelineevent.setBackgroundColor(Color.parseColor("#FA7683")); break;
+            case ("ORANGE") : timelineevent.setBackgroundColor(Color.parseColor("#FDB483")); break;
+            case ("YELLOW") : timelineevent.setBackgroundColor(Color.parseColor("#FDF17C")); break;
+            case ("GREEN") : timelineevent.setBackgroundColor(Color.parseColor("#7CEB70")); break;
+            case ("BLUE") : timelineevent.setBackgroundColor(Color.parseColor("#A4DAFE")); break;
+            case ("PURPLE") : timelineevent.setBackgroundColor(Color.parseColor("#DFCAFE")); break;
             case ("WHITE") : timelineevent.setBackgroundColor(Color.WHITE); break;
         }
 

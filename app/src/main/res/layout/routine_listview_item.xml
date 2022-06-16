@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="00:00 AM"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/routine_list_name"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Routine Name"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
 
     </LinearLayout>

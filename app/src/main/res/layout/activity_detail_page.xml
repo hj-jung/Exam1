@@ -17,7 +17,7 @@
             android:id="@+id/detail_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginRight="20dp"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
             android:background="#00ffffff" />
 
@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No Event"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"/>
 
@@ -47,15 +48,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event name"
-            android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:textColor="@color/black"
+            android:textSize="23sp"/>
 
         <TextView
             android:id="@+id/event_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Time"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,6 +91,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:layout_margin="3dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <LinearLayout
@@ -97,21 +100,21 @@
                         android:layout_weight="2.5"
                         android:layout_marginRight="10dp"
                         android:orientation="horizontal"
-                        android:gravity="center_horizontal" >
+                        android:gravity="center" >
 
                         <TextView
                             android:id="@+id/weather_temperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="-"
-                            android:textStyle="bold"
-                            android:textSize="33sp" />
+                            android:textColor="@color/black"
+                            android:textSize="30sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="℃"
-                            android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -121,35 +124,37 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
+                        android:gravity="center_vertical"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="강수확률 "
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/weather_rainpercent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="-"
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="%"
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -157,29 +162,30 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="바람 "
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/weather_windspeed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="-"
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="m/s"
-                                android:textStyle="bold"
-                                android:textSize="11sp" />
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -190,22 +196,48 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="4.5"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="미세먼지 "
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/weather_dust"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textStyle="bold"
-                            android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="미세먼지 "
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/weather_dust"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" "
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -222,7 +254,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
                         android:text="착장 추천 : " />
 
                     <TextView
@@ -230,7 +263,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
                         android:text="정보 없음"/>
 
                 </LinearLayout>
@@ -277,6 +311,7 @@
         android:layout_weight="1.5"
         android:background="@color/pale_yellow"
         android:textStyle="bold"
+        android:textSize="15sp"
         android:text="카카오맵으로 이동!" />
 
 </LinearLayout>

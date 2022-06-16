@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="S"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="#FF0606"
             android:textFontWeight="200"/>
 
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="M"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:textFontWeight="200" />
 
@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="T"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:textFontWeight="200"/>
 
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="W"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="@color/black"/>
 
         <TextView
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:text="T"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:fontWeight="100"/>
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="F"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:textFontWeight="100"/>
 
@@ -105,7 +105,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="S"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:textFontWeight="100" />
     </LinearLayout>

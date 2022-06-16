@@ -55,12 +55,12 @@ public class ScheduleAdapter extends BaseAdapter {
 
         System.out.println("먕"+scheduleItem.getColor());
 
-        if(scheduleItem.getColor().equals("RED"))  color.setBackgroundColor(Color.RED);
-        if(scheduleItem.getColor().equals("ORANGE"))  color.setBackgroundColor(Color.parseColor("#F0CA00"));
-        if(scheduleItem.getColor().equals("GREEN"))  color.setBackgroundColor(Color.GREEN);
-        if(scheduleItem.getColor().equals("BLUE"))  color.setBackgroundColor(Color.BLUE);
-        if(scheduleItem.getColor().equals("PURPLE"))  color.setBackgroundColor(Color.parseColor("#E200CC"));
-        if(scheduleItem.getColor().equals("BLACK"))  color.setBackgroundColor(Color.BLACK);
+        if(scheduleItem.getColor().equals("RED"))  color.setBackgroundColor(Color.parseColor("#FA7683"));
+        if(scheduleItem.getColor().equals("ORANGE"))  color.setBackgroundColor(Color.parseColor("#FDB483"));
+        if(scheduleItem.getColor().equals("YELLOW"))  color.setBackgroundColor(Color.parseColor("#FDF17C"));
+        if(scheduleItem.getColor().equals("GREEN"))  color.setBackgroundColor(Color.parseColor("#7CEB70"));
+        if(scheduleItem.getColor().equals("BLUE"))  color.setBackgroundColor(Color.parseColor("#A4DAFE"));
+        if(scheduleItem.getColor().equals("PURPLE"))  color.setBackgroundColor(Color.parseColor("#DFCAFE"));
         title.setText(scheduleItem.getTitle());
         time.setText(scheduleItem.getTime());
 

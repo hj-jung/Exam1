@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <Button
@@ -21,8 +22,8 @@
             android:layout_gravity="left"
             android:id="@+id/mypage_cancle"
             android:background="#00ffffff"
-            android:text="cancle"
-            android:textSize="20sp"
+            android:text="CANCEL"
+            android:textSize="15sp"
             android:textColor="#FF0000" />
 
         <View
@@ -38,8 +39,8 @@
             android:layout_gravity="right"
             android:id="@+id/mypage_edit"
             android:background="#00ffffff"
-            android:text="Edit"
-            android:textSize="20sp"
+            android:text="EDIT"
+            android:textSize="15sp"
             android:textColor="@color/black" />
 
     </LinearLayout>
@@ -56,7 +57,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="25sp"
             android:text="Edit Your SONGe" />
 
         <View

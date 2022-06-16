@@ -237,11 +237,11 @@ public class BottomNaviActivity extends AppCompatActivity {
                         LocalTime localTime= LocalTime.parse(startTime, formatter);
                         time = Integer.valueOf(localTime.getHour());
                         if(localTime.getHour()>12){
-                            startH = String.valueOf(localTime.getHour()-12);
+                            startH = String.format("%02d",(localTime.getHour()-12));
                             AMPM = "PM";
                         }
                         else{
-                            startH = String.valueOf(localTime.getHour());
+                            startH = String.format("%02d",(localTime.getHour()));
                             AMPM = "AM";
                         }
                     }

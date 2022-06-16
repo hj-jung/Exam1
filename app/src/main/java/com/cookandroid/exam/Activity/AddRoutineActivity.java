@@ -90,13 +90,13 @@ public class AddRoutineActivity extends Activity {
         int pointHeight = point.y; //세로
 
         int width = (int) (pointWidth * 1.0); //Display 가로 사이즈 100%
-        int height = (int) (pointHeight * 0.9); //Display 세로 사이즈 90%
+        int height = (int) (pointHeight * 0.8); //Display 세로 사이즈 75%
 
         getWindow().getAttributes().width = width; //가로 크기
         getWindow().getAttributes().height = height; //세로 크기
         getWindow().getAttributes().gravity = Gravity.BOTTOM; //위치 아래로 설정
 
-        Button cancelbtn = (Button) findViewById(R.id.routine_add_cancle);
+        Button cancelbtn = (Button) findViewById(R.id.routine_add_cancel);
         cancelbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
